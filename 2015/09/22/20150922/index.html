@@ -18,19 +18,9 @@
 
 
 
+	<meta name="keywords" content="Java,Spider," />
 
-    <meta name="keywords" content="Hexo,next" />
-
-
-
-
-
-    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.0" />
-
-
-
-
-  <title> Reading List // 无声处 </title>
+  <title> [HttpClient] java.io.EOFException // 无声处 </title>
 </head>
 
 <body>
@@ -119,7 +109,7 @@
           
           
             
-              Reading List
+              [HttpClient] java.io.EOFException
             
           
         </h1>
@@ -128,11 +118,22 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-05-06
+            发表于 2015-09-22
           
         </span>
 
         
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/Troubleshooting/">Troubleshooting</a>
+
+                
+                
+
+              
+            </span>
           
         
 
@@ -140,8 +141,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/05/06/Reading-List/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/06/Reading-List/"></span>
+            <a href="/2015/09/22/20150922/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/22/20150922/"></span>
             </a>
           </span>
           
@@ -156,7 +157,24 @@
         
 
         
-          
+          <h3 id="Backgroud">Backgroud</h3><p>计划爬一些网站数据, 请求部分使用<a href="http://www.apache.org/" target="_blank" rel="external">Apache</a>的<a href="http://hc.apache.org/" target="_blank" rel="external">HttpClient</a>, 版本为<a href="http://hc.apache.org/httpcomponents-client-4.3.x/download.html" target="_blank" rel="external">4.3.3</a>. </p>
+<h3 id="Description">Description</h3><p>访问url <a href="http://www.autohome.com.cn/grade/carhtml/A.html" target="_blank" rel="external"><em>http://www.autohome.com.cn/grade/carhtml/A.html</em></a> 的时候返回200正常, CloseableHttpResponse也正常.</p>
+<p>使用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IOUtils.toString(httpResponse.getEntity().getContent(), charset);</span><br></pre></td></tr></table></figure>
+<p>获取http请求返回的内容时报如下Exception:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">java<span class="class">.io</span><span class="class">.EOFException</span></span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUByte</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">264</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUShort</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">254</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUInt</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">246</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readTrailer</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">218</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.read</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">118</span>)</span><br><span class="line">	at org<span class="class">.apache</span><span class="class">.http</span><span class="class">.client</span><span class="class">.entity</span><span class="class">.LazyDecompressingInputStream</span><span class="class">.read</span>(LazyDecompressingInputStream<span class="class">.java</span>:<span class="number">74</span>)</span><br><span class="line">	at sun<span class="class">.nio</span><span class="class">.cs</span><span class="class">.StreamDecoder</span><span class="class">.readBytes</span>(StreamDecoder<span class="class">.java</span>:<span class="number">283</span>)</span><br><span class="line">	at sun<span class="class">.nio</span><span class="class">.cs</span><span class="class">.StreamDecoder</span><span class="class">.implRead</span>(StreamDecoder<span class="class">.java</span>:<span class="number">325</span>)</span><br></pre></td></tr></table></figure>
+<p>使用java原生net包时候正常返回：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL realUrl = new URL(&#34;http://www.autohome.com.cn/grade/carhtml/A.html&#34;);&#10;URLConnection connection = realUrl.openConnection();&#10;connection.connect();&#10;in = new BufferedReader(new InputStreamReader(connection.getInputStream(), &#34;gb2312&#34;));&#10;String line;&#10;while ((line = in.readLine()) != null) &#123;&#10;    result += line;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>使用python请求正常返回：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding=utf-8 -*-&#10;&#10;import requests&#10;import sys&#10;reload(sys)&#10;sys.setdefaultencoding(&#34;utf-8&#34;)&#10;&#10;class spider(object):&#10;    def __init__(self):&#10;        print u&#39;start to grab...&#39;&#10;&#10;    def getsource(self, url):&#10;        html = requests.get(url)&#10;        return html.text&#10;&#10;if __name__ == &#39;__main__&#39;:&#10;    url = &#39;http://www.autohome.com.cn/grade/carhtml/Z.html&#39;&#10;    carSpider = spider()&#10;    html = carSpider.getsource(url)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Solution">Solution</h3><p>基本确定是由于请求默认返回gzip压缩过的内容, 而HttpClient的GZIPInputStream在处理流的时候意外到达末尾. </p>
+<p>跟踪代码发现HttpClient对于gzip压缩内容返回的是GzipDecompressingEntity.</p>
+<p>尝试添加请求头 <strong>“Accept-Encoding: <em>/</em>“</strong> 改变返回内容压缩方式, 返回的是BasicHttpEntity, 同时能被争取读出.</p>
+<p>基本算是一个替代解决方案, 但其实没有找到最终原因. 此网站应该是一个特例, 如有空应熟悉gzip算法并跟进HttpClient源码看看.</p>
+<p>希望有高手赐教.</p>
+<h3 id="Reference">Reference</h3><ul>
+<li><a href="http://www.devnote.cn/article/152.html" target="_blank" rel="external">Httpclient gzip操作异常java.io.EOFException</a></li>
+</ul>
+
         
       </div>
     
@@ -164,18 +182,28 @@
     
       <div class="post-footer">
         
+          <div class="post-tags">
+            
+              <a href="/tags/Java/">
+                #Java
+              </a>
+            
+              <a href="/tags/Spider/">
+                #Spider
+              </a>
+            
+          </div>
+        
 
         
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/05/14/CentOS6.5下Java环境配置/">CentOS6.5下Java环境配置</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/02/26/warning-LF-will-be-replaced-by-CRLF/">warning: LF will be replaced by CRLF</a>
+                <a href="/2015/05/14/CentOS6.5下Java环境配置/">CentOS6.5下Java环境配置</a>
               
             </div>
           </div>
@@ -192,8 +220,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/05/06/Reading-List/"
-             data-title="Reading List" data-url="http://hsqlu.github.io/2015/05/06/Reading-List/">
+        <div class="ds-thread" data-thread-key="2015/09/22/20150922/"
+             data-title="[HttpClient] java.io.EOFException" data-url="http://hsqlu.github.io/2015/09/22/20150922/">
         </div>
 
       
@@ -266,7 +294,7 @@
         <div class="post-toc">
           
           
-            <p class="post-toc-empty">此文章未包含目录</p>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Backgroud"><span class="nav-number">1.</span> <span class="nav-text">Backgroud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>

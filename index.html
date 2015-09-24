@@ -122,6 +122,136 @@
           
           
             
+              <a class="post-title-link" href="/2015/09/24/20150923/">
+                Linux下Nginx安装与配置
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          
+            发表于 2015-09-24
+          
+        </span>
+
+        
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/Hello-World/">Hello World</a>
+
+                
+                
+
+              
+            </span>
+          
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/09/24/20150923/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/24/20150923/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          
+            <p>Nginx依赖了g++、gcc、openssl-devel、pcre-devel和zlib-devel, 所有安装Nginx前要确保安装了上述包.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel&#10;```  &#10;&#10; - &#19979;&#36733;[Nginx](http://nginx.org/download/)&#10; &#10;```!bash&#10;    wget http://nginx.org/download/nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解压</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nginx-1.8.0&#10;./configure --prefix=/usr/local/nginx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>make 编译 &amp; 安装</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make&#10;make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常用操作 </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t &#26597;&#30475;&#37197;&#32622;&#20449;&#24687;&#26159;&#21542;&#27491;&#30830;)&#10; pkill -9 nginx&#10;/usr/local/nginx/sbin/nginx -s  reload</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nginx -s <em>signal</em><ul>
+<li>stop — fast shutdown</li>
+<li>quit — graceful shutdown</li>
+<li>reload — reloading the configuration file</li>
+<li>reopen — reopening the log files</li>
+</ul>
+</li>
+</ul>
+<h3 id="Reference">Reference</h3><ul>
+<li><a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="external">Nginx - Beginners Guide</a></li>
+</ul>
+
+          
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/">
+                #Linux
+              </a>
+            
+              <a href="/tags/Server/">
+                #Server
+              </a>
+            
+              <a href="/tags/Web/">
+                #Web
+              </a>
+            
+          </div>
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </div>
+    
+  </div>
+
+
+  
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/09/22/20150922/">
                 [HttpClient] java.io.EOFException
               </a>
@@ -666,11 +796,11 @@
       <p class="site-description motion-element"></p>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </div>
         <div class="site-state-item site-state-tags">
-            <span class="site-state-item-count">5</span>
+            <span class="site-state-item-count">7</span>
             <span class="site-state-item-name">标签</span>
         </div>
         <div class="site-state-item site-state-pages">

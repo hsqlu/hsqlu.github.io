@@ -18,9 +18,9 @@
 
 
 
-	<meta name="keywords" content="Java,Spider," />
+	<meta name="keywords" content="Linux,Server,Web," />
 
-  <title> [HttpClient] java.io.EOFException // 无声处 </title>
+  <title> Linux下Nginx安装与配置 // 无声处 </title>
 </head>
 
 <body>
@@ -109,7 +109,7 @@
           
           
             
-              [HttpClient] java.io.EOFException
+              Linux下Nginx安装与配置
             
           
         </h1>
@@ -118,7 +118,7 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-09-22
+            发表于 2015-09-24
           
         </span>
 
@@ -127,7 +127,7 @@
             <span class="post-category">
               &nbsp; | &nbsp; 分类于
               
-                <a href="/categories/Troubleshooting/">Troubleshooting</a>
+                <a href="/categories/Hello-World/">Hello World</a>
 
                 
                 
@@ -141,8 +141,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/09/22/20150922/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/22/20150922/"></span>
+            <a href="/2015/09/24/20150923/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/24/20150923/"></span>
             </a>
           </span>
           
@@ -157,22 +157,35 @@
         
 
         
-          <h3 id="Backgroud">Backgroud</h3><p>计划爬一些网站数据, 请求部分使用<a href="http://www.apache.org/" target="_blank" rel="external">Apache</a>的<a href="http://hc.apache.org/" target="_blank" rel="external">HttpClient</a>, 版本为<a href="http://hc.apache.org/httpcomponents-client-4.3.x/download.html" target="_blank" rel="external">4.3.3</a>. </p>
-<h3 id="Description">Description</h3><p>访问url <a href="http://www.autohome.com.cn/grade/carhtml/A.html" target="_blank" rel="external"><em>http://www.autohome.com.cn/grade/carhtml/A.html</em></a> 的时候返回200正常, CloseableHttpResponse也正常.</p>
-<p>使用</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IOUtils.toString(httpResponse.getEntity().getContent(), charset);</span><br></pre></td></tr></table></figure>
-<p>获取http请求返回的内容时报如下Exception:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">java<span class="class">.io</span><span class="class">.EOFException</span></span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUByte</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">264</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUShort</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">254</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUInt</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">246</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readTrailer</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">218</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.read</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">118</span>)</span><br><span class="line">	at org<span class="class">.apache</span><span class="class">.http</span><span class="class">.client</span><span class="class">.entity</span><span class="class">.LazyDecompressingInputStream</span><span class="class">.read</span>(LazyDecompressingInputStream<span class="class">.java</span>:<span class="number">74</span>)</span><br><span class="line">	at sun<span class="class">.nio</span><span class="class">.cs</span><span class="class">.StreamDecoder</span><span class="class">.readBytes</span>(StreamDecoder<span class="class">.java</span>:<span class="number">283</span>)</span><br><span class="line">	at sun<span class="class">.nio</span><span class="class">.cs</span><span class="class">.StreamDecoder</span><span class="class">.implRead</span>(StreamDecoder<span class="class">.java</span>:<span class="number">325</span>)</span><br></pre></td></tr></table></figure>
-<p>使用java原生net包时候正常返回：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL realUrl = new URL(&#34;http://www.autohome.com.cn/grade/carhtml/A.html&#34;);&#10;URLConnection connection = realUrl.openConnection();&#10;connection.connect();&#10;in = new BufferedReader(new InputStreamReader(connection.getInputStream(), &#34;gb2312&#34;));&#10;String line;&#10;while ((line = in.readLine()) != null) &#123;&#10;    result += line;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>使用python请求正常返回：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding=utf-8 -*-&#10;&#10;import requests&#10;import sys&#10;reload(sys)&#10;sys.setdefaultencoding(&#34;utf-8&#34;)&#10;&#10;class spider(object):&#10;    def __init__(self):&#10;        print u&#39;start to grab...&#39;&#10;&#10;    def getsource(self, url):&#10;        html = requests.get(url)&#10;        return html.text&#10;&#10;if __name__ == &#39;__main__&#39;:&#10;    url = &#39;http://www.autohome.com.cn/grade/carhtml/Z.html&#39;&#10;    carSpider = spider()&#10;    html = carSpider.getsource(url)</span><br></pre></td></tr></table></figure></p>
-<h3 id="Solution">Solution</h3><p>基本确定是由于请求默认返回gzip压缩过的内容, 而HttpClient的GZIPInputStream在处理流的时候意外到达末尾. </p>
-<p>跟踪代码发现HttpClient对于gzip压缩内容返回的是GzipDecompressingEntity.</p>
-<p>尝试添加请求头 <strong>“Accept-Encoding: <em>/</em>“</strong> 改变返回内容压缩方式, 返回的是BasicHttpEntity, 同时能被争取读出.</p>
-<p>基本算是一个替代解决方案, 但其实没有找到最终原因. 此网站应该是一个特例, 如有空应熟悉gzip算法并跟进HttpClient源码看看.</p>
-<p>希望有高手赐教.</p>
+          <p>Nginx依赖了g++、gcc、openssl-devel、pcre-devel和zlib-devel, 所有安装Nginx前要确保安装了上述包.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel&#10;```  &#10;&#10; - &#19979;&#36733;[Nginx](http://nginx.org/download/)&#10; &#10;```!bash&#10;    wget http://nginx.org/download/nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解压</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nginx-1.8.0&#10;./configure --prefix=/usr/local/nginx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>make 编译 &amp; 安装</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make&#10;make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常用操作 </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t &#26597;&#30475;&#37197;&#32622;&#20449;&#24687;&#26159;&#21542;&#27491;&#30830;)&#10; pkill -9 nginx&#10;/usr/local/nginx/sbin/nginx -s  reload</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nginx -s <em>signal</em><ul>
+<li>stop — fast shutdown</li>
+<li>quit — graceful shutdown</li>
+<li>reload — reloading the configuration file</li>
+<li>reopen — reopening the log files</li>
+</ul>
+</li>
+</ul>
 <h3 id="Reference">Reference</h3><ul>
-<li><a href="http://www.devnote.cn/article/152.html" target="_blank" rel="external">Httpclient gzip操作异常java.io.EOFException</a></li>
+<li><a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="external">Nginx - Beginners Guide</a></li>
 </ul>
 
         
@@ -184,12 +197,16 @@
         
           <div class="post-tags">
             
-              <a href="/tags/Java/">
-                #Java
+              <a href="/tags/Linux/">
+                #Linux
               </a>
             
-              <a href="/tags/Spider/">
-                #Spider
+              <a href="/tags/Server/">
+                #Server
+              </a>
+            
+              <a href="/tags/Web/">
+                #Web
               </a>
             
           </div>
@@ -199,13 +216,11 @@
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/09/24/20150923/">Linux下Nginx安装与配置</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/05/14/CentOS6.5下Java环境配置/">CentOS6.5下Java环境配置</a>
+                <a href="/2015/09/22/20150922/">[HttpClient] java.io.EOFException</a>
               
             </div>
           </div>
@@ -222,8 +237,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/09/22/20150922/"
-             data-title="[HttpClient] java.io.EOFException" data-url="http://hsqlu.github.io/2015/09/22/20150922/">
+        <div class="ds-thread" data-thread-key="2015/09/24/20150923/"
+             data-title="Linux下Nginx安装与配置" data-url="http://hsqlu.github.io/2015/09/24/20150923/">
         </div>
 
       
@@ -296,7 +311,7 @@
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Backgroud"><span class="nav-number">1.</span> <span class="nav-text">Backgroud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">1.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>

@@ -174,25 +174,25 @@
         
           
             <p>Nginx依赖了g++、gcc、openssl-devel、pcre-devel和zlib-devel, 所有安装Nginx前要确保安装了上述包.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel&#10;```  &#10;&#10; - &#19979;&#36733;[Nginx](http://nginx.org/download/)&#10; &#10;```!bash&#10;    wget http://nginx.org/download/nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
+<pre><code>yum -y <span class="keyword">install</span> zlib zlib-devel openssl openssl-devel pcre pcre-devel
+</code></pre><ul>
+<li><p>下载<a href="http://nginx.org/download/" target="_blank" rel="external">Nginx</a></p>
+<p> wget <a href="http://nginx.org/download/nginx-1.8.0.tar.gz" target="_blank" rel="external">http://nginx.org/download/nginx-1.8.0.tar.gz</a></p>
+</li>
+<li><p>解压</p>
+<p> tar -zxvf nginx-1.8.0.tar.gz</p>
+</li>
+<li><p>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</p>
+<p> cd nginx-1.8.0<br> ./configure —prefix=/usr/local/nginx</p>
+</li>
+<li><p>make 编译 &amp; 安装</p>
+<p> make<br> make install</p>
+</li>
+<li><p>常用操作 </p>
+<p> /usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t 查看配置信息是否正确)<br>  pkill -9 nginx<br> /usr/local/nginx/sbin/nginx -s  reload </p>
+</li>
+<li><p>nginx -s <em>signal</em></p>
 <ul>
-<li>解压</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
-<ul>
-<li>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nginx-1.8.0&#10;./configure --prefix=/usr/local/nginx</span><br></pre></td></tr></table></figure>
-<ul>
-<li>make 编译 &amp; 安装</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make&#10;make install</span><br></pre></td></tr></table></figure>
-<ul>
-<li>常用操作 </li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t &#26597;&#30475;&#37197;&#32622;&#20449;&#24687;&#26159;&#21542;&#27491;&#30830;)&#10; pkill -9 nginx&#10;/usr/local/nginx/sbin/nginx -s  reload</span><br></pre></td></tr></table></figure>
-<ul>
-<li>nginx -s <em>signal</em><ul>
 <li>stop — fast shutdown</li>
 <li>quit — graceful shutdown</li>
 <li>reload — reloading the configuration file</li>
@@ -308,10 +308,11 @@
 <p>使用</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IOUtils.toString(httpResponse.getEntity().getContent(), charset);</span><br></pre></td></tr></table></figure>
 <p>获取http请求返回的内容时报如下Exception:</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">java<span class="class">.io</span><span class="class">.EOFException</span></span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUByte</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">264</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUShort</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">254</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readUInt</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">246</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.readTrailer</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">218</span>)</span><br><span class="line">	at java<span class="class">.util</span><span class="class">.zip</span><span class="class">.GZIPInputStream</span><span class="class">.read</span>(GZIPInputStream<span class="class">.java</span>:<span class="number">118</span>)</span><br><span class="line">	at org<span class="class">.apache</span><span class="class">.http</span><span class="class">.client</span><span class="class">.entity</span><span class="class">.LazyDecompressingInputStream</span><span class="class">.read</span>(LazyDecompressingInputStream<span class="class">.java</span>:<span class="number">74</span>)</span><br><span class="line">	at sun<span class="class">.nio</span><span class="class">.cs</span><span class="class">.StreamDecoder</span><span class="class">.readBytes</span>(StreamDecoder<span class="class">.java</span>:<span class="number">283</span>)</span><br><span class="line">	at sun<span class="class">.nio</span><span class="class">.cs</span><span class="class">.StreamDecoder</span><span class="class">.implRead</span>(StreamDecoder<span class="class">.java</span>:<span class="number">325</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.io.EOFException&#10;&#9;at java.util.zip.GZIPInputStream.readUByte(GZIPInputStream.java:264)&#10;&#9;at java.util.zip.GZIPInputStream.readUShort(GZIPInputStream.java:254)&#10;&#9;at java.util.zip.GZIPInputStream.readUInt(GZIPInputStream.java:246)&#10;&#9;at java.util.zip.GZIPInputStream.readTrailer(GZIPInputStream.java:218)&#10;&#9;at java.util.zip.GZIPInputStream.read(GZIPInputStream.java:118)&#10;&#9;at org.apache.http.client.entity.LazyDecompressingInputStream.read(LazyDecompressingInputStream.java:74)&#10;&#9;at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:283)&#10;&#9;at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:325)</span><br></pre></td></tr></table></figure>
 <p>使用java原生net包时候正常返回：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL realUrl = new URL(&#34;http://www.autohome.com.cn/grade/carhtml/A.html&#34;);&#10;URLConnection connection = realUrl.openConnection();&#10;connection.connect();&#10;in = new BufferedReader(new InputStreamReader(connection.getInputStream(), &#34;gb2312&#34;));&#10;String line;&#10;while ((line = in.readLine()) != null) &#123;&#10;    result += line;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>使用python请求正常返回：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding=utf-8 -*-&#10;&#10;import requests&#10;import sys&#10;reload(sys)&#10;sys.setdefaultencoding(&#34;utf-8&#34;)&#10;&#10;class spider(object):&#10;    def __init__(self):&#10;        print u&#39;start to grab...&#39;&#10;&#10;    def getsource(self, url):&#10;        html = requests.get(url)&#10;        return html.text&#10;&#10;if __name__ == &#39;__main__&#39;:&#10;    url = &#39;http://www.autohome.com.cn/grade/carhtml/Z.html&#39;&#10;    carSpider = spider()&#10;    html = carSpider.getsource(url)</span><br></pre></td></tr></table></figure></p>
+<p>使用python请求正常返回：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding=utf-8 -*-&#10;&#10;import requests&#10;import sys&#10;reload(sys)&#10;sys.setdefaultencoding(&#34;utf-8&#34;)&#10;&#10;class spider(object):&#10;    def __init__(self):&#10;        print u&#39;start to grab...&#39;&#10;&#10;    def getsource(self, url):&#10;        html = requests.get(url)&#10;        return html.text&#10;&#10;if __name__ == &#39;__main__&#39;:&#10;    url = &#39;http://www.autohome.com.cn/grade/carhtml/Z.html&#39;&#10;    carSpider = spider()&#10;    html = carSpider.getsource(url)</span><br></pre></td></tr></table></figure>
 <h3 id="Solution">Solution</h3><p>基本确定是由于请求默认返回gzip压缩过的内容, 而HttpClient的GZIPInputStream在处理流的时候意外到达末尾. </p>
 <p>跟踪代码发现HttpClient对于gzip压缩内容返回的是GzipDecompressingEntity.</p>
 <p>尝试添加请求头 <strong>“Accept-Encoding: <em>/</em>“</strong> 改变返回内容压缩方式, 返回的是BasicHttpEntity, 同时能被争取读出.</p>

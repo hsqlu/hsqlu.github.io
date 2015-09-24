@@ -158,25 +158,25 @@
 
         
           <p>Nginx依赖了g++、gcc、openssl-devel、pcre-devel和zlib-devel, 所有安装Nginx前要确保安装了上述包.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel&#10;```  &#10;&#10; - &#19979;&#36733;[Nginx](http://nginx.org/download/)&#10; &#10;```!bash&#10;    wget http://nginx.org/download/nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
+<pre><code>yum -y <span class="keyword">install</span> zlib zlib-devel openssl openssl-devel pcre pcre-devel
+</code></pre><ul>
+<li><p>下载<a href="http://nginx.org/download/" target="_blank" rel="external">Nginx</a></p>
+<p> wget <a href="http://nginx.org/download/nginx-1.8.0.tar.gz" target="_blank" rel="external">http://nginx.org/download/nginx-1.8.0.tar.gz</a></p>
+</li>
+<li><p>解压</p>
+<p> tar -zxvf nginx-1.8.0.tar.gz</p>
+</li>
+<li><p>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</p>
+<p> cd nginx-1.8.0<br> ./configure —prefix=/usr/local/nginx</p>
+</li>
+<li><p>make 编译 &amp; 安装</p>
+<p> make<br> make install</p>
+</li>
+<li><p>常用操作 </p>
+<p> /usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t 查看配置信息是否正确)<br>  pkill -9 nginx<br> /usr/local/nginx/sbin/nginx -s  reload </p>
+</li>
+<li><p>nginx -s <em>signal</em></p>
 <ul>
-<li>解压</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx-1.8.0.tar.gz</span><br></pre></td></tr></table></figure>
-<ul>
-<li>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nginx-1.8.0&#10;./configure --prefix=/usr/local/nginx</span><br></pre></td></tr></table></figure>
-<ul>
-<li>make 编译 &amp; 安装</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make&#10;make install</span><br></pre></td></tr></table></figure>
-<ul>
-<li>常用操作 </li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t &#26597;&#30475;&#37197;&#32622;&#20449;&#24687;&#26159;&#21542;&#27491;&#30830;)&#10; pkill -9 nginx&#10;/usr/local/nginx/sbin/nginx -s  reload</span><br></pre></td></tr></table></figure>
-<ul>
-<li>nginx -s <em>signal</em><ul>
 <li>stop — fast shutdown</li>
 <li>quit — graceful shutdown</li>
 <li>reload — reloading the configuration file</li>

@@ -157,23 +157,27 @@
         
 
         
-          <p>Nginx依赖了g++、gcc、openssl-devel、pcre-devel和zlib-devel, 所有安装Nginx前要确保安装了上述包.</p>
-<pre><code>yum -y <span class="keyword">install</span> zlib zlib-devel openssl openssl-devel pcre pcre-devel
-</code></pre><ul>
+          <ul>
+<li>Nginx依赖了g++、gcc、openssl-devel、pcre-devel和zlib-devel, 所有安装Nginx前要确保安装了上述包.</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> zlib zlib-devel openssl openssl-devel pcre pcre-devel</span><br></pre></td></tr></table></figure>
+<ul>
 <li><p>下载<a href="http://nginx.org/download/" target="_blank" rel="external">Nginx</a></p>
-<p> wget <a href="http://nginx.org/download/nginx-1.8.0.tar.gz" target="_blank" rel="external">http://nginx.org/download/nginx-1.8.0.tar.gz</a></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="string">http:</span><span class="comment">//nginx.org/download/nginx-1.8.0.tar.gz</span></span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<ul>
 <li><p>解压</p>
-<p> tar -zxvf nginx-1.8.0.tar.gz</p>
+<p>  tar -zxvf nginx-1.8.0.tar.gz</p>
 </li>
 <li><p>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</p>
-<p> cd nginx-1.8.0<br> ./configure —prefix=/usr/local/nginx</p>
+<p>  cd nginx-1.8.0<br>  ./configure —prefix=/usr/local/nginx</p>
 </li>
 <li><p>make 编译 &amp; 安装</p>
-<p> make<br> make install</p>
+<p>  make<br>  make install</p>
 </li>
 <li><p>常用操作 </p>
-<p> /usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t 查看配置信息是否正确)<br>  pkill -9 nginx<br> /usr/local/nginx/sbin/nginx -s  reload </p>
+<p>  /usr/nginx/sbin/nginx (/usr/nginx/sbin/nginx -t 查看配置信息是否正确)<br>  pkill -9 nginx<br>  /usr/local/nginx/sbin/nginx -s  reload </p>
 </li>
 <li><p>nginx -s <em>signal</em></p>
 <ul>
@@ -215,6 +219,8 @@
         
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/09/24/20150925/">迟到的蜜月</a>
               
             </div>
 
@@ -281,15 +287,15 @@
       <p class="site-description motion-element"></p>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </div>
         <div class="site-state-item site-state-tags">
-            <span class="site-state-item-count">7</span>
+            <span class="site-state-item-count">8</span>
             <span class="site-state-item-name">标签</span>
         </div>
         <div class="site-state-item site-state-pages">
-            <span class="site-state-item-count">2</span>
+            <span class="site-state-item-count">3</span>
             <span class="site-state-item-name">页面</span>
         </div>
       </div>

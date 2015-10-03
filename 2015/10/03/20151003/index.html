@@ -18,19 +18,9 @@
 
 
 
+	<meta name="keywords" content="Troubleshooting," />
 
-    <meta name="keywords" content="Hexo,next" />
-
-
-
-
-
-    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.0" />
-
-
-
-
-  <title> warning: LF will be replaced by CRLF // 无声处 </title>
+  <title> 浏览器被hao123劫持 // 无声处 </title>
 </head>
 
 <body>
@@ -119,7 +109,7 @@
           
           
             
-              warning: LF will be replaced by CRLF
+              浏览器被hao123劫持
             
           
         </h1>
@@ -128,11 +118,22 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-02-26
+            发表于 2015-10-03
           
         </span>
 
         
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/OS/">OS</a>
+
+                
+                
+
+              
+            </span>
           
         
 
@@ -140,8 +141,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/02/26/warning-LF-will-be-replaced-by-CRLF/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/26/warning-LF-will-be-replaced-by-CRLF/"></span>
+            <a href="/2015/10/03/20151003/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/03/20151003/"></span>
             </a>
           </span>
           
@@ -156,10 +157,30 @@
         
 
         
-          <p>windows中的换行符为 CRLF， 而在linux下的换行符为LF，所以在执行add . 时出现提示，解决办法：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf <span class="class">.git</span>  <span class="comment">// 删除.git</span></span><br><span class="line">$ git config --global core<span class="class">.autocrlf</span> false  <span class="comment">//禁用自动转换</span></span><br></pre></td></tr></table></figure>
-<p>然后重新执行：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>git init  </span><br><span class="line"><span class="variable">$ </span>git add .</span><br></pre></td></tr></table></figure>
+          <p>生产电脑最近加了个固体硬盘，心想Win10可以免费升级了就装了个盗版的Win7专业版。提升激活的时候网上下载了一个工具，结果激活完了浏览器就被hao123劫持了。而且不是直接用[hao123.com]这个域名劫持，而是用[hao.qquu8.com]然后再跳转到[hao123.com]，真是费劲心机。想尽各种办法今天晚上才算基本解决，不知道有没有后遗症。</p>
+<ul>
+<li><p>首先在桌面和开始菜单里查看所有IE、Chrome浏览器快捷方式属性，把目标栏里的[<a href="http://hao.qquu8.com]删掉。" target="_blank" rel="external">http://hao.qquu8.com]删掉。</a></p>
+</li>
+<li><p>进入C:\Users\你的用户名\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch文件夹，同样是查看IE和Chrome的属性，然后把其中的[<a href="http://hao.qquu8.com]删掉。" target="_blank" rel="external">http://hao.qquu8.com]删掉。</a></p>
+</li>
+<li><p>打开注册表，依次定位到：</p>
+<ul>
+<li><p>HKEY_CURRENT_USER\Software\Policies\Microsoft</p>
+<p>展开Microsoft，查看其下是否包含子项 Internet Explorer 若有，删除（右击Internet Explorer，选择“删除”）。</p>
+<p>然后再依次定位到以下3个注册表项。单击Main，查看右边细节窗口中[Default_Page_URL]值和[Start Page]值是否有异常。如果被修改了，请根据自己的需要改回（右击键值，选择“修改”进行更改）。</p>
+</li>
+<li><p>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\Main</p>
+</li>
+<li>HKEY_ LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main</li>
+<li>HKEY_USERS\Default\Software\Microsoft\Internet Explorer\Main</li>
+</ul>
+</li>
+<li><p>将系统设置为“显示隐藏的文件、文件夹”，然后在C:\Windows目录下找到OEM文件（或文件夹），将他们删除。<br>  <img src="/img/oem.png" alt="我的OEM文件夹"></p>
+</li>
+<li><p>以上这些操作都是我在参看附录的解决办法。之前改了注册表，删了目标栏的地址，重启之后还是会有这种情况。但是又看不出什么特别启动项来做这些更改操作，所有我怀疑最后一步删除的OEM文件就是这个劫持木马的根源。被这种大公司的流氓软件搞定如此崩溃真的很痛心，建议大家以后还是用正版软件。</p>
+</li>
+</ul>
+
         
       </div>
     
@@ -167,18 +188,24 @@
     
       <div class="post-footer">
         
+          <div class="post-tags">
+            
+              <a href="/tags/Troubleshooting/">
+                #Troubleshooting
+              </a>
+            
+          </div>
+        
 
         
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/05/06/Reading-List/">Reading List</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/02/15/春节前的那点事/">春节前的那点事</a>
+                <a href="/2015/09/24/20150925/">迟到的蜜月</a>
               
             </div>
           </div>
@@ -195,8 +222,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/02/26/warning-LF-will-be-replaced-by-CRLF/"
-             data-title="warning: LF will be replaced by CRLF" data-url="http://hsqlu.github.io/2015/02/26/warning-LF-will-be-replaced-by-CRLF/">
+        <div class="ds-thread" data-thread-key="2015/10/03/20151003/"
+             data-title="浏览器被hao123劫持" data-url="http://hsqlu.github.io/2015/10/03/20151003/">
         </div>
 
       

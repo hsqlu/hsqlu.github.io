@@ -18,19 +18,9 @@
 
 
 
+	<meta name="keywords" content="Troubleshooting," />
 
-    <meta name="keywords" content="Hexo,next" />
-
-
-
-
-
-    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.0" />
-
-
-
-
-  <title> 春节前的那点事 // 无声处 </title>
+  <title> Linux中毒（10字符文件名） // 无声处 </title>
 </head>
 
 <body>
@@ -119,7 +109,7 @@
           
           
             
-              春节前的那点事
+              Linux中毒（10字符文件名）
             
           
         </h1>
@@ -128,11 +118,30 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-02-15
+            发表于 2015-12-08
           
         </span>
 
         
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/OS/">OS</a>
+
+                
+                
+                  ， 
+                
+
+              
+                <a href="/categories/OS/Linux/">Linux</a>
+
+                
+                
+
+              
+            </span>
           
         
 
@@ -140,8 +149,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/02/15/春节前的那点事/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/15/春节前的那点事/"></span>
+            <a href="/2015/12/08/20151004/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/08/20151004/"></span>
             </a>
           </span>
           
@@ -156,7 +165,35 @@
         
 
         
-          <h2 id="Frontend">Frontend</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm init</span><br><span class="line">$ npm install grunt -g --save-dev</span><br><span class="line">$ npm install bower -g --save-dev</span><br></pre></td></tr></table></figure>
+          <h2 id="背景">背景</h2><p>对Linux本来只限于简单应用，由于现在创业公司没有运维，很多事情要自己上。昨天收到阿里云警告说我们的服务器在对外DDOS，限时解决。</p>
+<p>上去一看tomcat地下多了个A.war的项目，基本确定因为使用tomcat自带的manager调试的时候被黑了。</p>
+<h2 id="情景">情景</h2><p>实例目录下有个mg24的程序在跑，以为杀掉就可以了，我想的真的是太简单了。警告依然没有接触，而且mg24这个玩意又产生了，看了一下用户排除root被拿到，于是先改密码。</p>
+<p>检查/etc/crontab<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/<span class="number">3</span> * * * * root /etc/cron.hourly/gcc4.sh</span><br></pre></td></tr></table></figure></p>
+<p>发现cron.hourly下面有个/lib/libudev4.so的文件，按照网上说的file /lib/libudev4.so看到的确是个可执行程序，也就是病毒了。可是直接删也删不掉。init.d地下也出现了异常启动脚本，发现是/usr/bin低下的一个文件。</p>
+<p>ps也没看到异常进程，查看一下ls -lh /bin/ps 发现ps命令被黑了，同时还有netstat。网上查一下，有类似的案例，叫10字符病毒程序，参见附录。跟我的情况基本一样，我按照他的操作处理了一下发现没用。杀掉就重启，病毒文件重新生成。十字符文件还换者地方产生，chattr +i /usr/bin， 它就跑到/bin下， chattr +i /bin就跑到/tmp下，好烦。因为我是运维小白，各种网上搜索终于解决了。下面总结下:</p>
+<h2 id="解决">解决</h2><ol>
+<li><p>还原 ps netstat等所有被黑的命令， 网上说有备份(cp /usr/bin/dpkgd/<em> /sbin/ &amp;&amp; cp -f /usr/bin/dpkgd/</em> /bin/)</p>
+</li>
+<li><p>查看病毒位置，进程id等，还原rc.d下的文件，还有crontab，去掉恶意文件执行权限 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pstree</span><br><span class="line">ps -AfH</span><br><span class="line">lsof -R | grep <span class="string">"/bin"</span></span><br><span class="line">chmod <span class="number">000</span> /tmp/gates.lod /tmp/moni.lod</span><br><span class="line">chmod <span class="number">000</span> /.../conf.g</span><br><span class="line"><span class="comment">#最好/rc.d/也要加上</span></span><br><span class="line">chattr +i /etc/rc.d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要直接杀掉进程，否则会再产生(比如pid是1234)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -STOP <span class="number">1234</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清除/etc/rc.d下所以病毒文件，可能在之前杀掉进程的时候产生了很多新的病毒文件，记住都要删掉</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /etc -name <span class="string">'*gpuyxkewdofa*'</span> | xargs rm <span class="operator">-f</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这时候再杀掉病毒进程，删除病毒本体。</p>
+</li>
+</ol>
+<h2 id="总结">总结</h2><p>不懂还要多学习啊，注意安全，生产环境上不要乱搞。<br>下面参考博文里面介绍的很清楚了，有需要的直接去那儿看，谢谢前车之鉴。</p>
+<h2 id="参考">参考</h2><ul>
+<li><a href="http://www.kaisir.com/2015/07/ji-yi-ze-linux-bing-du-di-chu-li.html" target="_blank" rel="external">记一则Linux病毒的处理</a></li>
+<li><a href="http://blog.chinaunix.net/uid-20332519-id-4941140.html" target="_blank" rel="external">Linux下随机10字符病毒的清除-1</a></li>
+<li><a href="http://www.hackbase.com/article-2798-1.html" target="_blank" rel="external">Linux下随机10字符病毒的清除-2</a></li>
+<li><a href="http://www.yunlifang.cn/help/vps/207.htm" target="_blank" rel="external">WDCP被黑后查杀后门和恶意程序的方法</a></li>
+</ul>
+
         
       </div>
     
@@ -164,18 +201,24 @@
     
       <div class="post-footer">
         
+          <div class="post-tags">
+            
+              <a href="/tags/Troubleshooting/">
+                #Troubleshooting
+              </a>
+            
+          </div>
+        
 
         
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/02/26/warning-LF-will-be-replaced-by-CRLF/">warning: LF will be replaced by CRLF</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2014/12/01/hello-world/">基于Hexo & Github的Blog</a>
+                <a href="/2015/10/03/20151003/">浏览器被hao123劫持</a>
               
             </div>
           </div>
@@ -192,8 +235,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/02/15/春节前的那点事/"
-             data-title="春节前的那点事" data-url="http://hsqlu.github.io/2015/02/15/春节前的那点事/">
+        <div class="ds-thread" data-thread-key="2015/12/08/20151004/"
+             data-title="Linux中毒（10字符文件名）" data-url="http://hsqlu.github.io/2015/12/08/20151004/">
         </div>
 
       
@@ -266,7 +309,7 @@
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Frontend"><span class="nav-number">1.</span> <span class="nav-text">Frontend</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#情景"><span class="nav-number">2.</span> <span class="nav-text">情景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>

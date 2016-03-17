@@ -122,6 +122,281 @@
           
           
             
+              <a class="post-title-link" href="/2016/03/17/20160317/">
+                Codis集群搭建过程摘要
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          
+            发表于 2016-03-17
+          
+        </span>
+
+        
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/基础架构/">基础架构</a>
+
+                
+                
+
+              
+            </span>
+          
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/17/20160317/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/20160317/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          
+            <p>本文主要介绍Codis编译过程中的一些注意事项和Codis集群的搭建。</p>
+<h1 id="准备方案">准备方案</h1><h2 id="Golang环境搭建">Golang环境搭建</h2><p>环境搭建很简单，下载go1.4.2.linux-amd64.tar.gz安装包，直接解压并添加到环境变量就可以。<br>假设解压到/usr/local/go目录下<goroot>，另外需要定义一下go开发目录<gopath>，假设为/workspace/golang。<br>go开发目录下主要的子目录有：</gopath></goroot></p>
+<pre><code><span class="bullet">1. </span>src 存放源码
+<span class="bullet">2. </span>pkg 编译后生成的文件
+<span class="bullet">3. </span>bin 编译后生产的可执行文件(比如godep命令在安装后就会放在这个目录下)
+</code></pre><p>环境变量添加：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/workspace/golang</span><br><span class="line">PATH=<span class="string">".:<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin:<span class="variable">$GOPATH</span>/bin:<span class="variable">$ZOOKEEPER</span>/bin"</span></span><br></pre></td></tr></table></figure>
+<p>生效后就可以执行go version查看go的版本信息。<br>将$GOPATH/bin加入PATH是为了让一些开源的或者自己安装的go扩展命令(如godep)可以全局使用。</p>
+<h2 id="Codis下载和编译">Codis下载和编译</h2><p>最新版的Codis位于[<a href="https://github.com/CodisLabs/codis" target="_blank" rel="external">https://github.com/CodisLabs/codis</a>]<br>通过下面命令获得源码</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="built_in">get</span> -<span class="keyword">u</span> -<span class="keyword">d</span> github.<span class="keyword">com</span>/CodisLabs/codis</span><br></pre></td></tr></table></figure>
+<p>进入源码路径，执行make开始编译。</p>
+<p>Codis的编译使用了<a href="https://github.com/tools/godep" target="_blank" rel="external">godep</a>，如果没有安装的话就会报godep command not found的错误。<br>godep是golang的一个包管理工具，通过</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="built_in">get</span> github.<span class="keyword">com</span>/tools/godep</span><br></pre></td></tr></table></figure>
+<p>安装，成功后执行godep就会有对应的命令信息，如果没有可以在$GOPATH/bin目录下查找这个命令，然后就如环境变量。</p>
+<p>如果你是用golang 1.5 beta3以上的版本进行编译，还有可能出现的一个问题是</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GOPATH=godep path godep restore</span><br><span class="line"><span class="keyword">Error</span>: GO15VENDOREXPERIMENT <span class="keyword">is</span> enabled <span class="keyword">and</span> the vendor/ directory <span class="keyword">is</span> <span class="keyword">not</span> a valid Go workspace.</span><br><span class="line">godep: <span class="keyword">Error</span> restore requires GOPATH but it <span class="keyword">is</span> <span class="literal">empty</span>.</span><br><span class="line">make: *** [godep] <span class="keyword">Error</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这是因为golang 1.5 beta3之后go添加了<a href="http://tonybai.com/tag/go15vendorexperiment/" target="_blank" rel="external">GO15VENDOREXPERIMENT</a>这个特性，并在1.6默认开启，你可以参照<a href="https://github.com/CodisLabs/codis/issues/715" target="_blank" rel="external">Codis issue715</a> 里面的方案解决。<br>最简单就是在编译前</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GO15VENDOREXPERIMENT = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h2 id="编译后的文件">编译后的文件</h2><p>编译后会产生一个bin目录，下面有三个可执行文件和一个目录</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">assets          <span class="comment">//dashboard的静态文件目录</span></span><br><span class="line">codis-config    <span class="comment">//codis 命令式配置管理组件</span></span><br><span class="line">codis-proxy     <span class="comment">//codis 代理也就是核心组件</span></span><br><span class="line">codis-<span class="keyword">server</span>    <span class="comment">//codis 基于redis2.8.21的定制版redis</span></span><br></pre></td></tr></table></figure>
+<p>这就是我们最终集群部署的时候需要用到的文件，当然跨平台的话主要要交叉编译或者在特定平台下编译，不然可能无法运行。</p>
+<h2 id="集群方案">集群方案</h2><p>这里使用三台机器做一个小的集群。每台机器部署一个zookeeper实例，两个codis server实例(也就是redis server)。<br>其中两台机器部署codis proxy，另外一台开启codis dashboard。</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">host</th>
+<th style="text-align:center">ip</th>
+<th style="text-align:center">zookeeper port</th>
+<th style="text-align:center">redis server master/slave port</th>
+<th style="text-align:center">codis proxy</th>
+<th style="text-align:center">codis dashboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">slave1</td>
+<td style="text-align:center">192.168.4.124</td>
+<td style="text-align:center">2181</td>
+<td style="text-align:center">6379/6380</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">slave2</td>
+<td style="text-align:center">192.168.4.126</td>
+<td style="text-align:center">2181</td>
+<td style="text-align:center">6379/6380</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td style="text-align:left">slave3</td>
+<td style="text-align:center">192.168.4.128</td>
+<td style="text-align:center">2181</td>
+<td style="text-align:center">6379/6380</td>
+<td style="text-align:center">Y</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="集群搭建">集群搭建</h1><h2 id="zookeeper集群">zookeeper集群</h2><p>zookeeper的搭建这里就不详细介绍了，最终节点是</p>
+<pre><code>1. <span class="tag">slave1</span><span class="pseudo">:2181</span>
+2. <span class="tag">slave2</span><span class="pseudo">:2181</span>
+3. <span class="tag">slave3</span><span class="pseudo">:2181</span>
+</code></pre><p>先把zookeeper起起来</p>
+<h2 id="codis服务集群">codis服务集群</h2><h4 id="创建codis服务目录">创建codis服务目录</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="annotation">@slave</span>1]# mkdir -p <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>&#123;log,redis_conf&#125;</span><br><span class="line">[root<span class="annotation">@slave</span>1]# cp -rf bin <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span></span><br><span class="line">[root<span class="annotation">@slave</span>1]# cp config.ini <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>conf/</span><br><span class="line">[root<span class="annotation">@slave</span>1]# cp extern<span class="regexp">/redis-test/</span><span class="number">6379.</span>conf <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>redis_conf/</span><br></pre></td></tr></table></figure>
+<p>对每台机器执行以上操作</p>
+<h4 id="根据注释修改config-ini文件">根据注释修改config.ini文件</h4><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 这些配置是为dashboard和proxies服务的</span><br><span class="line"></span><br><span class="line"># zookeeper <span class="keyword">or</span> etcd</span><br><span class="line">coordinator=zookeeper</span><br><span class="line"></span><br><span class="line"># <span class="keyword">Use</span> comma <span class="string">","</span> <span class="keyword">for</span> multiple instances. <span class="keyword">If</span> you <span class="keyword">use</span> etcd, you should also <span class="keyword">use</span> this <span class="keyword">property</span>.</span><br><span class="line">zk=slave1:<span class="number">2181</span>,slave2:<span class="number">2181</span>,slave3:<span class="number">2181</span></span><br><span class="line"></span><br><span class="line"># 这个是标识zk下的命名空间，比如命名test在zookeeper会/zk/codis/db_test下</span><br><span class="line">product=test</span><br><span class="line"></span><br><span class="line"># dashboard的地址和监听端口</span><br><span class="line">dashboard_addr=<span class="number">192.168</span>.<span class="number">4.126</span>:<span class="number">18087</span></span><br><span class="line"></span><br><span class="line">password=</span><br><span class="line"></span><br><span class="line">##### 下面是proxies的配置</span><br><span class="line"></span><br><span class="line"># Proxy will ping-pong backend redis periodly <span class="keyword">to</span> keep-alive</span><br><span class="line">backend_ping_period=<span class="number">5</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">If</span> there <span class="keyword">is</span> no request from client <span class="keyword">for</span> a long <span class="typename">time</span>, the connection will be droped. Set <span class="number">0</span> <span class="keyword">to</span> disable.</span><br><span class="line">session_max_timeout=<span class="number">1800</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">Buffer</span> size <span class="keyword">for</span> each client connection.</span><br><span class="line">session_max_bufsize=<span class="number">131072</span></span><br><span class="line"></span><br><span class="line"># Number <span class="keyword">of</span> buffered requests <span class="keyword">for</span> each client connection.</span><br><span class="line"># Make sure this <span class="keyword">is</span> higher than the max number <span class="keyword">of</span> requests <span class="keyword">for</span> each pipeline request, <span class="keyword">or</span> your client may be blocked.</span><br><span class="line">session_max_pipeline=<span class="number">1024</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">If</span> proxy don<span class="attribute">'t</span> send a heartbeat <span class="keyword">in</span> timeout millisecond which <span class="keyword">is</span> usually because proxy has high load <span class="keyword">or</span> even no response, zk will mark this proxy offline.</span><br><span class="line"># A higher timeout will recude the possibility <span class="keyword">of</span> <span class="string">"session expired"</span> but clients will <span class="keyword">not</span> know the proxy has no response <span class="keyword">in</span> <span class="typename">time</span> <span class="keyword">if</span> the proxy <span class="keyword">is</span> down indeed.</span><br><span class="line"># So we highly recommend you <span class="keyword">not</span> <span class="keyword">to</span> change this <span class="keyword">default</span> timeout <span class="keyword">and</span> <span class="keyword">use</span> Jodis(https://github.com/CodisLabs/jodis)</span><br><span class="line"># which watches the available proxies <span class="keyword">and</span> will skip the offline proxy <span class="keyword">or</span> add <span class="keyword">new</span> online proxy automatically.</span><br><span class="line"># <span class="keyword">If</span> you are <span class="keyword">not</span> using Java <span class="keyword">in</span> client, you can DIY a zk watcher accourding <span class="keyword">to</span> Jodis source code.</span><br><span class="line">zk_session_timeout=<span class="number">30000</span></span><br><span class="line"></span><br><span class="line">##### 每个代理的id，不能相同 比如slave1 命名为proxy_1, slave2命名为proxy_2</span><br><span class="line">proxy_id=proxy_1</span><br></pre></td></tr></table></figure>
+<h4 id="启动dashboard">启动dashboard</h4><p>在slave2上执行 bin/codis-config dashboard, 该命令会启动 dashboard</p>
+<h4 id="初始化slots">初始化slots</h4><p>在任一机器上执行 bin/codis-config slot init，该命令会在zookeeper上创建slot相关信息</p>
+<h4 id="启动Codis_Redis">启动Codis Redis</h4><p>和官方redis的参数一下，三台机器上分别执行<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="annotation">@slave</span>1]# <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>bin<span class="regexp">/codis-server /</span>usr<span class="regexp">/local/</span>codis<span class="regexp">/redis_conf/</span><span class="number">6379.</span>conf &amp;</span><br><span class="line">[root<span class="annotation">@slave</span>1]# <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>bin<span class="regexp">/codis-server /</span>usr<span class="regexp">/local/</span>codis<span class="regexp">/redis_conf/</span><span class="number">6380.</span>conf &amp;</span><br></pre></td></tr></table></figure></p>
+<h4 id="添加Redis_Server_Group">添加Redis Server Group</h4><p>每一个 Server Group 作为一个 Redis 服务器组存在, 只允许有一个 master, 可以有多个 slave, <strong><em>group id 仅支持大于等于1的整数</em></strong></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server -h                                                                                                                                                                                                                   usage:</span><br><span class="line">	codis-config server list</span><br><span class="line">	codis-config server<span class="instruction"> add </span>&lt;group_id&gt; &lt;redis_addr&gt; &lt;role&gt;</span><br><span class="line">	codis-config server remove &lt;group_id&gt; &lt;redis_addr&gt;</span><br><span class="line">	codis-config server promote &lt;group_id&gt; &lt;redis_addr&gt;</span><br><span class="line">	codis-config server<span class="instruction"> add-group </span>&lt;group_id&gt;</span><br><span class="line">	codis-config server remove-group &lt;group_id&gt;</span><br></pre></td></tr></table></figure>
+<p>如: 添加三个 server group, 每个 group 有两个 redis 实例，group的id分别为1、2和3，<br>redis实例为一主一从。</p>
+<p>添加一个group，group的id为1， 并添加一个redis master到该group<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">1</span> slave1:<span class="number">6379</span> master</span><br></pre></td></tr></table></figure></p>
+<p>添加一个redis slave到该group<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">1</span> slave1:<span class="number">6380</span> slave</span><br></pre></td></tr></table></figure></p>
+<p>类似的，再添加group，group的id为2<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">2</span> slave2:<span class="number">6379</span> master</span><br><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">2</span> slave2:<span class="number">6380</span> slave</span><br></pre></td></tr></table></figure></p>
+<p>类似的，再添加group，group的id为3<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">3</span> slave3:<span class="number">6379</span> master</span><br><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">3</span> slave3:<span class="number">6380</span> slave</span><br></pre></td></tr></table></figure></p>
+<h4 id="设置_server_group_服务的_slot_范围">设置 server group 服务的 slot 范围</h4><p>   Codis 采用 Pre-sharding 的技术来实现数据的分片, 默认分成 1024 个 slots (0-1023), 对于每个key来说, 通过以下公式确定所属的 Slot Id : SlotId = crc32(key) % 1024<br>   每一个 slot 都会有一个且必须有一个特定的 server group id 来表示这个 slot 的数据由哪个 server group 来提供.</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config slot -h                                                                                                                                                                                                                     </span><br><span class="line">usage:</span><br><span class="line">	codis-config slot init</span><br><span class="line">	codis-config slot info <span class="variable">&lt;slot_id&gt;</span></span><br><span class="line">	codis-config slot <span class="built_in">set</span> <span class="variable">&lt;slot_id&gt;</span> <span class="variable">&lt;group_id&gt;</span> <span class="variable">&lt;status&gt;</span></span><br><span class="line">	codis-config slot range-set <span class="variable">&lt;slot_from&gt;</span> <span class="variable">&lt;slot_to&gt;</span> <span class="variable">&lt;group_id&gt;</span> <span class="variable">&lt;status&gt;</span></span><br><span class="line">	codis-config slot migrate <span class="variable">&lt;slot_from&gt;</span> <span class="variable">&lt;slot_to&gt;</span> <span class="variable">&lt;group_id&gt;</span> [--delay=<span class="variable">&lt;delay_time_in_ms&gt;</span>]</span><br></pre></td></tr></table></figure>
+<p>如: </p>
+<p>设置编号为[0, 334]的 slot 由 server group 1 提供服务, 编号 [335, 669] 的 slot 由 server group 2 提供服务, 编号 [670, 1023] 的 slot 由 server group 3 提供服务,</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config slot <span class="type">range</span>-<span class="type">set</span> <span class="number">0</span> <span class="number">334</span> <span class="number">1</span> online</span><br><span class="line">$ bin/codis-config slot <span class="type">range</span>-<span class="type">set</span> <span class="number">335</span> <span class="number">669</span> <span class="number">2</span> online</span><br><span class="line">$ bin/codis-config slot <span class="type">range</span>-<span class="type">set</span> <span class="number">670</span> <span class="number">1023</span> <span class="number">3</span> online</span><br></pre></td></tr></table></figure>
+<h4 id="启动_codis-proxy">启动 codis-proxy</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/codis-proxy -c config<span class="class">.ini</span> -L ./log/proxy<span class="class">.log</span>  --cpu=<span class="number">8</span> --addr=<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">19000</span> --http-addr=<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">11000</span></span><br></pre></td></tr></table></figure>
+<p>刚启动的 codis-proxy 默认是处于 offline状态的, 然后设置 proxy 为 online 状态, 只有处于 online 状态的 proxy 才会对外提供服务<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">bin</span>/codis-config -c config.ini proxy online &lt;proxy_name&gt;  &lt;-<span class="comment">--- proxy的id, 如 proxy_1</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="浏览器管理">浏览器管理</h4><p> 访问<a href="http://192.168.4.126:18087/admin" target="_blank" rel="external">http://192.168.4.126:18087/admin</a> ， 现在可以在浏览器里面完成各种操作了。</p>
+
+          
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Codis/">
+                #Codis
+              </a>
+            
+              <a href="/tags/Redis/">
+                #Redis
+              </a>
+            
+          </div>
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </div>
+    
+  </div>
+
+
+  
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2016/03/17/20160316/">
+                Golang开发环境摘要
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          
+            发表于 2016-03-17
+          
+        </span>
+
+        
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/Programming/">Programming</a>
+
+                
+                
+
+              
+            </span>
+          
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/17/20160316/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/20160316/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          
+            
+          
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Golang/">
+                #Golang
+              </a>
+            
+          </div>
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </div>
+    
+  </div>
+
+
+  
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/12/08/20151004/">
                 Linux中毒（10字符文件名）
               </a>
@@ -935,187 +1210,13 @@
 
 
   
-    
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/02/15/春节前的那点事/">
-                春节前的那点事
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          
-            发表于 2015-02-15
-          
-        </span>
-
-        
-          
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/02/15/春节前的那点事/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/15/春节前的那点事/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    
-      <div class="post-body">
-
-        
-        
-
-        
-          
-            <h2 id="Frontend">Frontend</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm init</span><br><span class="line">$ npm install grunt -g --save-dev</span><br><span class="line">$ npm install bower -g --save-dev</span><br></pre></td></tr></table></figure>
-          
-        
-      </div>
-    
-
-    
-      <div class="post-footer">
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </div>
-    
-  </div>
-
-
-  
-    
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/12/01/hello-world/">
-                基于Hexo & Github的Blog
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          
-            发表于 2014-12-01
-          
-        </span>
-
-        
-          
-            <span class="post-category">
-              &nbsp; | &nbsp; 分类于
-              
-                <a href="/categories/Hello-World/">Hello World</a>
-
-                
-                
-
-              
-            </span>
-          
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/12/01/hello-world/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/01/hello-world/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    
-      <div class="post-body">
-
-        
-        
-
-        
-          
-            <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      </div>
-    
-
-    
-      <div class="post-footer">
-        
-          <div class="post-tags">
-            
-              <a href="/tags/Hello/">
-                #Hello
-              </a>
-            
-              <a href="/tags/World/">
-                #World
-              </a>
-            
-          </div>
-        
-
-        
-
-        
-        
-          <div class="post-eof"></div>
-        
-      </div>
-    
-  </div>
-
-
-  
 
           </div>
 
+          
+            <div class="pagination">
+              <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+            </div>
           
         </div>
 
@@ -1141,11 +1242,11 @@
       <p class="site-description motion-element"></p>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </div>
         <div class="site-state-item site-state-tags">
-            <span class="site-state-item-count">9</span>
+            <span class="site-state-item-count">12</span>
             <span class="site-state-item-name">标签</span>
         </div>
         <div class="site-state-item site-state-pages">
@@ -1179,7 +1280,7 @@
         <div class="copyright">
   
   &copy; &nbsp; 
-  2015
+  2016
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

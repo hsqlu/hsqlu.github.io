@@ -1,0 +1,931 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-hexo-theme-next-0.4.0">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.0"/>
+
+
+
+
+	<meta name="keywords" content="Codis,Redis," />
+
+  <title> Codis集群搭建过程摘要 // 无声处 </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">无声处</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-expand">
+            
+  
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              Codis集群搭建过程摘要
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          
+            发表于 2016-03-17
+          
+        </span>
+
+        
+          
+            <span class="post-category">
+              &nbsp; | &nbsp; 分类于
+              
+                <a href="/categories/基础架构/">基础架构</a>
+
+                
+                
+
+              
+            </span>
+          
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/17/20160317/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/20160317/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <p>本文主要介绍Codis编译过程中的一些注意事项和Codis集群的搭建。</p>
+<h1 id="准备方案">准备方案</h1><h2 id="Golang环境搭建">Golang环境搭建</h2><p>环境搭建很简单，下载go1.4.2.linux-amd64.tar.gz安装包，直接解压并添加到环境变量就可以。<br>假设解压到/usr/local/go目录下<goroot>，另外需要定义一下go开发目录<gopath>，假设为/workspace/golang。<br>go开发目录下主要的子目录有：</gopath></goroot></p>
+<pre><code><span class="bullet">1. </span>src 存放源码
+<span class="bullet">2. </span>pkg 编译后生成的文件
+<span class="bullet">3. </span>bin 编译后生产的可执行文件(比如godep命令在安装后就会放在这个目录下)
+</code></pre><p>环境变量添加：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=/workspace/golang</span><br><span class="line">PATH=<span class="string">".:<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin:<span class="variable">$GOPATH</span>/bin:<span class="variable">$ZOOKEEPER</span>/bin"</span></span><br></pre></td></tr></table></figure>
+<p>生效后就可以执行go version查看go的版本信息。<br>将$GOPATH/bin加入PATH是为了让一些开源的或者自己安装的go扩展命令(如godep)可以全局使用。</p>
+<h2 id="Codis下载和编译">Codis下载和编译</h2><p>最新版的Codis位于[<a href="https://github.com/CodisLabs/codis" target="_blank" rel="external">https://github.com/CodisLabs/codis</a>]<br>通过下面命令获得源码</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="built_in">get</span> -<span class="keyword">u</span> -<span class="keyword">d</span> github.<span class="keyword">com</span>/CodisLabs/codis</span><br></pre></td></tr></table></figure>
+<p>进入源码路径，执行make开始编译。</p>
+<p>Codis的编译使用了<a href="https://github.com/tools/godep" target="_blank" rel="external">godep</a>，如果没有安装的话就会报godep command not found的错误。<br>godep是golang的一个包管理工具，通过</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="built_in">get</span> github.<span class="keyword">com</span>/tools/godep</span><br></pre></td></tr></table></figure>
+<p>安装，成功后执行godep就会有对应的命令信息，如果没有可以在$GOPATH/bin目录下查找这个命令，然后就如环境变量。</p>
+<p>如果你是用golang 1.5 beta3以上的版本进行编译，还有可能出现的一个问题是</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GOPATH=godep path godep restore</span><br><span class="line"><span class="keyword">Error</span>: GO15VENDOREXPERIMENT <span class="keyword">is</span> enabled <span class="keyword">and</span> the vendor/ directory <span class="keyword">is</span> <span class="keyword">not</span> a valid Go workspace.</span><br><span class="line">godep: <span class="keyword">Error</span> restore requires GOPATH but it <span class="keyword">is</span> <span class="literal">empty</span>.</span><br><span class="line">make: *** [godep] <span class="keyword">Error</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这是因为golang 1.5 beta3之后go添加了<a href="http://tonybai.com/tag/go15vendorexperiment/" target="_blank" rel="external">GO15VENDOREXPERIMENT</a>这个特性，并在1.6默认开启，你可以参照<a href="https://github.com/CodisLabs/codis/issues/715" target="_blank" rel="external">Codis issue715</a> 里面的方案解决。<br>最简单就是在编译前</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GO15VENDOREXPERIMENT = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h2 id="编译后的文件">编译后的文件</h2><p>编译后会产生一个bin目录，下面有三个可执行文件和一个目录</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">assets          <span class="comment">//dashboard的静态文件目录</span></span><br><span class="line">codis-config    <span class="comment">//codis 命令式配置管理组件</span></span><br><span class="line">codis-proxy     <span class="comment">//codis 代理也就是核心组件</span></span><br><span class="line">codis-<span class="keyword">server</span>    <span class="comment">//codis 基于redis2.8.21的定制版redis</span></span><br></pre></td></tr></table></figure>
+<p>这就是我们最终集群部署的时候需要用到的文件，当然跨平台的话主要要交叉编译或者在特定平台下编译，不然可能无法运行。</p>
+<h2 id="集群方案">集群方案</h2><p>这里使用三台机器做一个小的集群。每台机器部署一个zookeeper实例，两个codis server实例(也就是redis server)。<br>其中两台机器部署codis proxy，另外一台开启codis dashboard。</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">host</th>
+<th style="text-align:center">ip</th>
+<th style="text-align:center">zookeeper port</th>
+<th style="text-align:center">redis server master/slave port</th>
+<th style="text-align:center">codis proxy</th>
+<th style="text-align:center">codis dashboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">slave1</td>
+<td style="text-align:center">192.168.4.124</td>
+<td style="text-align:center">2181</td>
+<td style="text-align:center">6379/6380</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">slave2</td>
+<td style="text-align:center">192.168.4.126</td>
+<td style="text-align:center">2181</td>
+<td style="text-align:center">6379/6380</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td style="text-align:left">slave3</td>
+<td style="text-align:center">192.168.4.128</td>
+<td style="text-align:center">2181</td>
+<td style="text-align:center">6379/6380</td>
+<td style="text-align:center">Y</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="集群搭建">集群搭建</h1><h2 id="zookeeper集群">zookeeper集群</h2><p>zookeeper的搭建这里就不详细介绍了，最终节点是</p>
+<pre><code>1. <span class="tag">slave1</span><span class="pseudo">:2181</span>
+2. <span class="tag">slave2</span><span class="pseudo">:2181</span>
+3. <span class="tag">slave3</span><span class="pseudo">:2181</span>
+</code></pre><p>先把zookeeper起起来</p>
+<h2 id="codis服务集群">codis服务集群</h2><h4 id="创建codis服务目录">创建codis服务目录</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="annotation">@slave</span>1]# mkdir -p <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>&#123;log,redis_conf&#125;</span><br><span class="line">[root<span class="annotation">@slave</span>1]# cp -rf bin <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span></span><br><span class="line">[root<span class="annotation">@slave</span>1]# cp config.ini <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>conf/</span><br><span class="line">[root<span class="annotation">@slave</span>1]# cp extern<span class="regexp">/redis-test/</span><span class="number">6379.</span>conf <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>redis_conf/</span><br></pre></td></tr></table></figure>
+<p>对每台机器执行以上操作</p>
+<h4 id="根据注释修改config-ini文件">根据注释修改config.ini文件</h4><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 这些配置是为dashboard和proxies服务的</span><br><span class="line"></span><br><span class="line"># zookeeper <span class="keyword">or</span> etcd</span><br><span class="line">coordinator=zookeeper</span><br><span class="line"></span><br><span class="line"># <span class="keyword">Use</span> comma <span class="string">","</span> <span class="keyword">for</span> multiple instances. <span class="keyword">If</span> you <span class="keyword">use</span> etcd, you should also <span class="keyword">use</span> this <span class="keyword">property</span>.</span><br><span class="line">zk=slave1:<span class="number">2181</span>,slave2:<span class="number">2181</span>,slave3:<span class="number">2181</span></span><br><span class="line"></span><br><span class="line"># 这个是标识zk下的命名空间，比如命名test在zookeeper会/zk/codis/db_test下</span><br><span class="line">product=test</span><br><span class="line"></span><br><span class="line"># dashboard的地址和监听端口</span><br><span class="line">dashboard_addr=<span class="number">192.168</span>.<span class="number">4.126</span>:<span class="number">18087</span></span><br><span class="line"></span><br><span class="line">password=</span><br><span class="line"></span><br><span class="line">##### 下面是proxies的配置</span><br><span class="line"></span><br><span class="line"># Proxy will ping-pong backend redis periodly <span class="keyword">to</span> keep-alive</span><br><span class="line">backend_ping_period=<span class="number">5</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">If</span> there <span class="keyword">is</span> no request from client <span class="keyword">for</span> a long <span class="typename">time</span>, the connection will be droped. Set <span class="number">0</span> <span class="keyword">to</span> disable.</span><br><span class="line">session_max_timeout=<span class="number">1800</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">Buffer</span> size <span class="keyword">for</span> each client connection.</span><br><span class="line">session_max_bufsize=<span class="number">131072</span></span><br><span class="line"></span><br><span class="line"># Number <span class="keyword">of</span> buffered requests <span class="keyword">for</span> each client connection.</span><br><span class="line"># Make sure this <span class="keyword">is</span> higher than the max number <span class="keyword">of</span> requests <span class="keyword">for</span> each pipeline request, <span class="keyword">or</span> your client may be blocked.</span><br><span class="line">session_max_pipeline=<span class="number">1024</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">If</span> proxy don<span class="attribute">'t</span> send a heartbeat <span class="keyword">in</span> timeout millisecond which <span class="keyword">is</span> usually because proxy has high load <span class="keyword">or</span> even no response, zk will mark this proxy offline.</span><br><span class="line"># A higher timeout will recude the possibility <span class="keyword">of</span> <span class="string">"session expired"</span> but clients will <span class="keyword">not</span> know the proxy has no response <span class="keyword">in</span> <span class="typename">time</span> <span class="keyword">if</span> the proxy <span class="keyword">is</span> down indeed.</span><br><span class="line"># So we highly recommend you <span class="keyword">not</span> <span class="keyword">to</span> change this <span class="keyword">default</span> timeout <span class="keyword">and</span> <span class="keyword">use</span> Jodis(https://github.com/CodisLabs/jodis)</span><br><span class="line"># which watches the available proxies <span class="keyword">and</span> will skip the offline proxy <span class="keyword">or</span> add <span class="keyword">new</span> online proxy automatically.</span><br><span class="line"># <span class="keyword">If</span> you are <span class="keyword">not</span> using Java <span class="keyword">in</span> client, you can DIY a zk watcher accourding <span class="keyword">to</span> Jodis source code.</span><br><span class="line">zk_session_timeout=<span class="number">30000</span></span><br><span class="line"></span><br><span class="line">##### 每个代理的id，不能相同 比如slave1 命名为proxy_1, slave2命名为proxy_2</span><br><span class="line">proxy_id=proxy_1</span><br></pre></td></tr></table></figure>
+<h4 id="启动dashboard">启动dashboard</h4><p>在slave2上执行 bin/codis-config dashboard, 该命令会启动 dashboard</p>
+<h4 id="初始化slots">初始化slots</h4><p>在任一机器上执行 bin/codis-config slot init，该命令会在zookeeper上创建slot相关信息</p>
+<h4 id="启动Codis_Redis">启动Codis Redis</h4><p>和官方redis的参数一下，三台机器上分别执行<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="annotation">@slave</span>1]# <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>bin<span class="regexp">/codis-server /</span>usr<span class="regexp">/local/</span>codis<span class="regexp">/redis_conf/</span><span class="number">6379.</span>conf &amp;</span><br><span class="line">[root<span class="annotation">@slave</span>1]# <span class="regexp">/usr/</span>local<span class="regexp">/codis/</span>bin<span class="regexp">/codis-server /</span>usr<span class="regexp">/local/</span>codis<span class="regexp">/redis_conf/</span><span class="number">6380.</span>conf &amp;</span><br></pre></td></tr></table></figure></p>
+<h4 id="添加Redis_Server_Group">添加Redis Server Group</h4><p>每一个 Server Group 作为一个 Redis 服务器组存在, 只允许有一个 master, 可以有多个 slave, <strong><em>group id 仅支持大于等于1的整数</em></strong></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server -h                                                                                                                                                                                                                   usage:</span><br><span class="line">	codis-config server list</span><br><span class="line">	codis-config server<span class="instruction"> add </span>&lt;group_id&gt; &lt;redis_addr&gt; &lt;role&gt;</span><br><span class="line">	codis-config server remove &lt;group_id&gt; &lt;redis_addr&gt;</span><br><span class="line">	codis-config server promote &lt;group_id&gt; &lt;redis_addr&gt;</span><br><span class="line">	codis-config server<span class="instruction"> add-group </span>&lt;group_id&gt;</span><br><span class="line">	codis-config server remove-group &lt;group_id&gt;</span><br></pre></td></tr></table></figure>
+<p>如: 添加三个 server group, 每个 group 有两个 redis 实例，group的id分别为1、2和3，<br>redis实例为一主一从。</p>
+<p>添加一个group，group的id为1， 并添加一个redis master到该group<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">1</span> slave1:<span class="number">6379</span> master</span><br></pre></td></tr></table></figure></p>
+<p>添加一个redis slave到该group<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">1</span> slave1:<span class="number">6380</span> slave</span><br></pre></td></tr></table></figure></p>
+<p>类似的，再添加group，group的id为2<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">2</span> slave2:<span class="number">6379</span> master</span><br><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">2</span> slave2:<span class="number">6380</span> slave</span><br></pre></td></tr></table></figure></p>
+<p>类似的，再添加group，group的id为3<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">3</span> slave3:<span class="number">6379</span> master</span><br><span class="line">$ bin/codis-config server <span class="keyword">add</span> <span class="number">3</span> slave3:<span class="number">6380</span> slave</span><br></pre></td></tr></table></figure></p>
+<h4 id="设置_server_group_服务的_slot_范围">设置 server group 服务的 slot 范围</h4><p>   Codis 采用 Pre-sharding 的技术来实现数据的分片, 默认分成 1024 个 slots (0-1023), 对于每个key来说, 通过以下公式确定所属的 Slot Id : SlotId = crc32(key) % 1024<br>   每一个 slot 都会有一个且必须有一个特定的 server group id 来表示这个 slot 的数据由哪个 server group 来提供.</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config slot -h                                                                                                                                                                                                                     </span><br><span class="line">usage:</span><br><span class="line">	codis-config slot init</span><br><span class="line">	codis-config slot info <span class="variable">&lt;slot_id&gt;</span></span><br><span class="line">	codis-config slot <span class="built_in">set</span> <span class="variable">&lt;slot_id&gt;</span> <span class="variable">&lt;group_id&gt;</span> <span class="variable">&lt;status&gt;</span></span><br><span class="line">	codis-config slot range-set <span class="variable">&lt;slot_from&gt;</span> <span class="variable">&lt;slot_to&gt;</span> <span class="variable">&lt;group_id&gt;</span> <span class="variable">&lt;status&gt;</span></span><br><span class="line">	codis-config slot migrate <span class="variable">&lt;slot_from&gt;</span> <span class="variable">&lt;slot_to&gt;</span> <span class="variable">&lt;group_id&gt;</span> [--delay=<span class="variable">&lt;delay_time_in_ms&gt;</span>]</span><br></pre></td></tr></table></figure>
+<p>如: </p>
+<p>设置编号为[0, 334]的 slot 由 server group 1 提供服务, 编号 [335, 669] 的 slot 由 server group 2 提供服务, 编号 [670, 1023] 的 slot 由 server group 3 提供服务,</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bin/codis-config slot <span class="type">range</span>-<span class="type">set</span> <span class="number">0</span> <span class="number">334</span> <span class="number">1</span> online</span><br><span class="line">$ bin/codis-config slot <span class="type">range</span>-<span class="type">set</span> <span class="number">335</span> <span class="number">669</span> <span class="number">2</span> online</span><br><span class="line">$ bin/codis-config slot <span class="type">range</span>-<span class="type">set</span> <span class="number">670</span> <span class="number">1023</span> <span class="number">3</span> online</span><br></pre></td></tr></table></figure>
+<h4 id="启动_codis-proxy">启动 codis-proxy</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/codis-proxy -c config<span class="class">.ini</span> -L ./log/proxy<span class="class">.log</span>  --cpu=<span class="number">8</span> --addr=<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">19000</span> --http-addr=<span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">11000</span></span><br></pre></td></tr></table></figure>
+<p>刚启动的 codis-proxy 默认是处于 offline状态的, 然后设置 proxy 为 online 状态, 只有处于 online 状态的 proxy 才会对外提供服务<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">bin</span>/codis-config -c config.ini proxy online &lt;proxy_name&gt;  &lt;-<span class="comment">--- proxy的id, 如 proxy_1</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="浏览器管理">浏览器管理</h4><p> 访问<a href="http://192.168.4.126:18087/admin" target="_blank" rel="external">http://192.168.4.126:18087/admin</a> ， 现在可以在浏览器里面完成各种操作了。</p>
+
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Codis/">
+                #Codis
+              </a>
+            
+              <a href="/tags/Redis/">
+                #Redis
+              </a>
+            
+          </div>
+        
+
+        
+          <div class="post-nav">
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2016/03/17/20160316/">Golang开发环境摘要</a>
+              
+            </div>
+          </div>
+        
+
+        
+        
+      </div>
+    
+  </div>
+
+
+
+  
+    <div class="comments" id="comments">
+      
+        <div class="ds-thread" data-thread-key="2016/03/17/20160317/"
+             data-title="Codis集群搭建过程摘要" data-url="http://hsqlu.github.io/2016/03/17/20160317/">
+        </div>
+
+      
+    </div>
+  
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          站点概览
+        </li>
+      </ul>
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.jpg" alt="Qiannan Lu" />
+        <p class="site-author-name">Qiannan Lu</p>
+      </div>
+      <p class="site-description motion-element"></p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">12</span>
+            <span class="site-state-item-name">标签</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">3</span>
+            <span class="site-state-item-name">页面</span>
+        </div>
+      </div>
+
+      
+
+      <div class="links-of-author motion-element">
+        
+      </div>
+
+      
+      
+
+    </div>
+
+    
+      <div class="post-toc-wrap sidebar-panel-active">
+        <div class="post-toc-indicator-top post-toc-indicator"></div>
+        <div class="post-toc">
+          
+          
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备方案"><span class="nav-number">1.</span> <span class="nav-text">准备方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Golang环境搭建"><span class="nav-number">1.1.</span> <span class="nav-text">Golang环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codis下载和编译"><span class="nav-number">1.2.</span> <span class="nav-text">Codis下载和编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译后的文件"><span class="nav-number">1.3.</span> <span class="nav-text">编译后的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群方案"><span class="nav-number">1.4.</span> <span class="nav-text">集群方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群搭建"><span class="nav-number">2.</span> <span class="nav-text">集群搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper集群"><span class="nav-number">2.1.</span> <span class="nav-text">zookeeper集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#codis服务集群"><span class="nav-number">2.2.</span> <span class="nav-text">codis服务集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建codis服务目录"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">创建codis服务目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据注释修改config-ini文件"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">根据注释修改config.ini文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动dashboard"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">启动dashboard</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化slots"><span class="nav-number">2.2.0.4.</span> <span class="nav-text">初始化slots</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动Codis_Redis"><span class="nav-number">2.2.0.5.</span> <span class="nav-text">启动Codis Redis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加Redis_Server_Group"><span class="nav-number">2.2.0.6.</span> <span class="nav-text">添加Redis Server Group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置_server_group_服务的_slot_范围"><span class="nav-number">2.2.0.7.</span> <span class="nav-text">设置 server group 服务的 slot 范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动_codis-proxy"><span class="nav-number">2.2.0.8.</span> <span class="nav-text">启动 codis-proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器管理"><span class="nav-number">2.2.0.9.</span> <span class="nav-text">浏览器管理</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          
+        </div>
+        <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+      </div>
+    
+
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Qiannan Lu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hsqlu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+  
+</body>
+</html>

@@ -158,7 +158,7 @@
 
         
           <p>本文主要介绍Codis编译过程中的一些注意事项和Codis集群的搭建。</p>
-<h1 id="准备方案">准备方案</h1><h2 id="Golang环境搭建">Golang环境搭建</h2><p>环境搭建很简单，下载go1.4.2.linux-amd64.tar.gz安装包，直接解压并添加到环境变量就可以。<br>假设解压到/usr/local/go目录下<goroot>，另外需要定义一下go开发目录<gopath>，假设为/workspace/golang。<br>go开发目录下主要的子目录有：</gopath></goroot></p>
+<h1 id="准备方案">准备方案</h1><h2 id="Golang环境搭建">Golang环境搭建</h2><p>环境搭建很简单，下载go1.4.2.linux-amd64.tar.gz安装包，直接解压并添加到环境变量就可以。<br>假设解压到/usr/local/go下，这个目录就是GOROOT，另外需要定义一个go开发目录，假设为/workspace/golang。<br>go开发目录未来会产生一些主要的子目录：</p>
 <pre><code><span class="bullet">1. </span>src 存放源码
 <span class="bullet">2. </span>pkg 编译后生成的文件
 <span class="bullet">3. </span>bin 编译后生产的可执行文件(比如godep命令在安装后就会放在这个目录下)
@@ -170,7 +170,7 @@
 <p>进入源码路径，执行make开始编译。</p>
 <p>Codis的编译使用了<a href="https://github.com/tools/godep" target="_blank" rel="external">godep</a>，如果没有安装的话就会报godep command not found的错误。<br>godep是golang的一个包管理工具，通过</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="built_in">get</span> github.<span class="keyword">com</span>/tools/godep</span><br></pre></td></tr></table></figure>
-<p>安装，成功后执行godep就会有对应的命令信息，如果没有可以在$GOPATH/bin目录下查找这个命令，然后就如环境变量。</p>
+<p>安装，成功后执行godep就会有对应的命令信息，如果没有可以在$GOPATH/bin目录下查找这个命令，然后加入环境变量。</p>
 <p>如果你是用golang 1.5 beta3以上的版本进行编译，还有可能出现的一个问题是</p>
 <figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GOPATH=godep path godep restore</span><br><span class="line"><span class="keyword">Error</span>: GO15VENDOREXPERIMENT <span class="keyword">is</span> enabled <span class="keyword">and</span> the vendor/ directory <span class="keyword">is</span> <span class="keyword">not</span> a valid Go workspace.</span><br><span class="line">godep: <span class="keyword">Error</span> restore requires GOPATH but it <span class="keyword">is</span> <span class="literal">empty</span>.</span><br><span class="line">make: *** [godep] <span class="keyword">Error</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>这是因为golang 1.5 beta3之后go添加了<a href="http://tonybai.com/tag/go15vendorexperiment/" target="_blank" rel="external">GO15VENDOREXPERIMENT</a>这个特性，并在1.6默认开启，你可以参照<a href="https://github.com/CodisLabs/codis/issues/715" target="_blank" rel="external">Codis issue715</a> 里面的方案解决。<br>最简单就是在编译前</p>
@@ -273,7 +273,7 @@
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2016/03/17/20160316/">Golang开发环境摘要</a>
+                <a href="/2016/03/17/20160316/">白话Golang开发入门</a>
               
             </div>
           </div>

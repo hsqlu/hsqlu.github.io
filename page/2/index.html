@@ -59,7 +59,7 @@
       <li class="menu-item menu-item-home">
         <a href="/">
           <i class="menu-item-icon icon-home"></i> <br />
-          首页
+          Accueil
         </a>
       </li>
     
@@ -67,7 +67,7 @@
       <li class="menu-item menu-item-categories">
         <a href="/categories">
           <i class="menu-item-icon icon-categories"></i> <br />
-          分类
+          Categories
         </a>
       </li>
     
@@ -75,7 +75,7 @@
       <li class="menu-item menu-item-archives">
         <a href="/archives">
           <i class="menu-item-icon icon-archives"></i> <br />
-          归档
+          Archives
         </a>
       </li>
     
@@ -83,7 +83,7 @@
       <li class="menu-item menu-item-tags">
         <a href="/tags">
           <i class="menu-item-icon icon-tags"></i> <br />
-          标签
+          Tags
         </a>
       </li>
     
@@ -91,7 +91,7 @@
       <li class="menu-item menu-item-about">
         <a href="/about">
           <i class="menu-item-icon icon-about"></i> <br />
-          关于
+          A propos
         </a>
       </li>
     
@@ -122,6 +122,82 @@
           
           
             
+              <a class="post-title-link" href="/2015/02/26/warning-LF-will-be-replaced-by-CRLF/">
+                warning: LF will be replaced by CRLF
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          
+            Posté le 2015-02-26
+          
+        </span>
+
+        
+          
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/02/26/warning-LF-will-be-replaced-by-CRLF/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/26/warning-LF-will-be-replaced-by-CRLF/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          
+            <p>windows中的换行符为 CRLF， 而在linux下的换行符为LF，所以在执行add . 时出现提示，解决办法：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm -rf <span class="class">.git</span>  <span class="comment">// 删除.git</span></span><br><span class="line">$ git config --global core<span class="class">.autocrlf</span> false  <span class="comment">//禁用自动转换</span></span><br></pre></td></tr></table></figure>
+<p>然后重新执行：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>git init  </span><br><span class="line"><span class="variable">$ </span>git add .</span><br></pre></td></tr></table></figure>
+          
+        
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+
+        
+
+        
+        
+          <div class="post-eof"></div>
+        
+      </div>
+    
+  </div>
+
+
+  
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/02/15/春节前的那点事/">
                 春节前的那点事
               </a>
@@ -133,7 +209,7 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-02-15
+            Posté le 2015-02-15
           
         </span>
 
@@ -206,14 +282,14 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2014-12-01
+            Posté le 2014-12-01
           
         </span>
 
         
           
             <span class="post-category">
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp; In
               
                 <a href="/categories/Hello-World/">Hello World</a>
 
@@ -321,16 +397,16 @@
       <p class="site-description motion-element"></p>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">12</span>
-          <span class="site-state-item-name">日志</span>
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">articles</span>
         </div>
         <div class="site-state-item site-state-tags">
             <span class="site-state-item-count">12</span>
-            <span class="site-state-item-name">标签</span>
+            <span class="site-state-item-name">tags</span>
         </div>
         <div class="site-state-item site-state-pages">
             <span class="site-state-item-count">3</span>
-            <span class="site-state-item-name">页面</span>
+            <span class="site-state-item-name">pages</span>
         </div>
       </div>
 
@@ -367,11 +443,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主题 -
+  Thème -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>

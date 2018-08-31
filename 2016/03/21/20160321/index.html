@@ -1,133 +1,264 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-hexo-theme-next-0.4.0">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.0"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
 
-	<meta name="keywords" content="Codis,Golang," />
-
-  <title> codis-ha源码解析 // 无声处 </title>
-</head>
-
-<body>
-  <div class="container one-column page-post-detail">
-    <div class="headband"></div>
-
-    <div id="header" class="header">
-      <div class="header-inner">
-        <h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand">
-      <span class="logo">
-        <i class="icon-logo"></i>
-      </span>
-      <span class="site-title">无声处</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
 
 
-  <ul id="menu" class="menu">
-    
-      
-      <li class="menu-item menu-item-home">
-        <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
-          Accueil
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-categories">
-        <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
-          Categories
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-archives">
-        <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
-          Archives
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-tags">
-        <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
-          Tags
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-about">
-        <a href="/about">
-          <i class="menu-item-icon icon-about"></i> <br />
-          A propos
-        </a>
-      </li>
-    
-  </ul>
 
 
-      </div>
-    </div>
 
-    <div id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content">
-          
-            
-          
 
-          <div id="posts" class="posts-expand">
-            
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
   
 
-  <div class="post post-type-normal ">
-    <div class="post-header">
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang,Codis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="本文将从源码角度解析codis的主从切换服务codis-ha。读者需要对codis的架构有所了解，并且熟悉基本的golang语法。另外，本文假定读者熟悉golang一些常用包，比如flag，net/http，error等。 获取源码codis-ha的github地址为https://github.com/ngaut/codis-ha，执行go get github.com/ngaut/codis-">
+<meta name="keywords" content="Golang,Codis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="codis-ha源码解析">
+<meta property="og:url" content="http://hsqlu.github.io/2016/03/21/20160321/index.html">
+<meta property="og:site_name" content="无声处">
+<meta property="og:description" content="本文将从源码角度解析codis的主从切换服务codis-ha。读者需要对codis的架构有所了解，并且熟悉基本的golang语法。另外，本文假定读者熟悉golang一些常用包，比如flag，net/http，error等。 获取源码codis-ha的github地址为https://github.com/ngaut/codis-ha，执行go get github.com/ngaut/codis-">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-03-21T15:25:55.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="codis-ha源码解析">
+<meta name="twitter:description" content="本文将从源码角度解析codis的主从切换服务codis-ha。读者需要对codis的架构有所了解，并且熟悉基本的golang语法。另外，本文假定读者熟悉golang一些常用包，比如flag，net/http，error等。 获取源码codis-ha的github地址为https://github.com/ngaut/codis-ha，执行go get github.com/ngaut/codis-">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> codis-ha源码解析 | 无声处 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">无声处</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
 
       
-      
-        <h1 class="post-title">
-          
-          
-            
-              codis-ha源码解析
-            
-          
-        </h1>
-      
+    </ul>
+  
 
-      <div class="post-meta">
-        <span class="post-time">
-          
-            Posté le 2016-03-21
-          
-        </span>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
 
         
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                codis-ha源码解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-03-21T20:52:53+13:00" content="Mar 21 2016">
+              Mar 21 2016
+            </time>
+          </span>
+
           
-            <span class="post-category">
-              &nbsp; | &nbsp; In
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
               
-                <a href="/categories/Programming/">Programming</a>
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
 
                 
                 
@@ -135,7 +266,11 @@
                 
 
               
-                <a href="/categories/Programming/基础架构/">基础架构</a>
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/基础架构/" itemprop="url" rel="index">
+                    <span itemprop="name">基础架构</span>
+                  </a>
+                </span>
 
                 
                 
@@ -143,7 +278,11 @@
                 
 
               
-                <a href="/categories/Programming/基础架构/源码/">源码</a>
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/基础架构/源码/" itemprop="url" rel="index">
+                    <span itemprop="name">源码</span>
+                  </a>
+                </span>
 
                 
                 
@@ -151,33 +290,40 @@
               
             </span>
           
-        
 
-        
           
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/03/21/20160321/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/21/20160321/"></span>
-            </a>
-          </span>
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/21/20160321/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/21/20160321/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
-        
-      </div>
-    </div>
 
+          
+
+          
+          
+
+          
+        </div>
+      </header>
     
-      <div class="post-body">
 
-        
-        
 
-        
-          <p>本文将从源码角度解析codis的主从切换服务codis-ha。读者需要对codis的架构有所了解，并且熟悉基本的golang语法。<br>另外，本文假定读者熟悉golang一些常用包，比如flag，net/http，error等。</p>
-<h4 id="获取源码">获取源码</h4><p>codis-ha的github地址为<strong><em><a href="https://github.com/ngaut/codis-ha" target="_blank" rel="external">https://github.com/ngaut/codis-ha</a></em></strong>，执行<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> <span class="built_in">get</span> github.<span class="keyword">com</span>/ngaut/codis-<span class="keyword">ha</span></span><br></pre></td></tr></table></figure></p>
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文将从源码角度解析codis的主从切换服务codis-ha。读者需要对codis的架构有所了解，并且熟悉基本的golang语法。<br>另外，本文假定读者熟悉golang一些常用包，比如flag，net/http，error等。</p>
+<h4 id="获取源码">获取源码</h4><p>codis-ha的github地址为<strong><em><a href="https://github.com/ngaut/codis-ha" target="_blank" rel="noopener">https://github.com/ngaut/codis-ha</a></em></strong>，执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com/ngaut/codis-ha</span><br></pre></td></tr></table></figure></p>
 <p>可以将codis-ha下载到本地$GOPATH/src/github.com/ngaut/codis-ha目录下。</p>
 <p>结构为：</p>
-<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span>   <span class="comment">71</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">aliverchecker</span><span class="string">.</span><span class="comment">go</span></span><br><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span> <span class="comment">1358</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">main</span><span class="string">.</span><span class="comment">go</span></span><br><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span>  <span class="comment">260</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">README</span><span class="string">.</span><span class="comment">md</span></span><br><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span>  <span class="comment">679</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">redischecker</span><span class="string">.</span><span class="comment">go</span></span><br><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span>  <span class="comment">461</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">redischecker_test</span><span class="string">.</span><span class="comment">go</span></span><br><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span>  <span class="comment">924</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">rest</span><span class="string">.</span><span class="comment">go</span></span><br><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span> <span class="comment">3495</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">servergroup</span><span class="string">.</span><span class="comment">go</span></span><br><span class="line"><span class="literal">-</span><span class="comment">rw</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span><span class="comment">r</span><span class="literal">-</span><span class="literal">-</span> <span class="comment">1</span> <span class="comment">root</span> <span class="comment">197608</span> <span class="comment">3602</span> <span class="comment">3月</span>  <span class="comment">19</span> <span class="comment">15:16</span> <span class="comment">servergroup_test</span><span class="string">.</span><span class="comment">go</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-rw-r--r-- 1 root 197608   71 3月  19 15:16 aliverchecker.go</span><br><span class="line">-rw-r--r-- 1 root 197608 1358 3月  19 15:16 main.go</span><br><span class="line">-rw-r--r-- 1 root 197608  260 3月  19 15:16 README.md</span><br><span class="line">-rw-r--r-- 1 root 197608  679 3月  19 15:16 redischecker.go</span><br><span class="line">-rw-r--r-- 1 root 197608  461 3月  19 15:16 redischecker_test.go</span><br><span class="line">-rw-r--r-- 1 root 197608  924 3月  19 15:16 rest.go</span><br><span class="line">-rw-r--r-- 1 root 197608 3495 3月  19 15:16 servergroup.go</span><br><span class="line">-rw-r--r-- 1 root 197608 3602 3月  19 15:16 servergroup_test.go</span><br></pre></td></tr></table></figure>
 <p>核心源码共五个go文件。其中main.go为入口函数(我用函数来概称一个方法/go文件/函数/程序片段)，另外四个：</p>
 <ul>
 <li>aliverchecker.go</li>
@@ -188,174 +334,214 @@
 <p>除此之外，redischecker_test.go和servergroup_test.go分别为测试文件。<br>README.md为markdown的说明文件(这是一句废话，而且显得我很二)。</p>
 <p>解析的顺序为从局部到整体，称之为倒叙。</p>
 <h4 id="倒叙之aliverchecker-go">倒叙之aliverchecker.go</h4><p>倒叙之aliverchecker.go只定义了一个接口AliveChecker，用来抽象实现了CheckAlive() error方法的类型</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="typedef"><span class="keyword">type</span> <span class="type">AliveChecker</span> interface <span class="container">&#123;</span><br><span class="line">	<span class="type">CheckAlive</span>() <span class="title">error</span></span><br><span class="line">&#125;</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type AliveChecker interface &#123;</span><br><span class="line">	CheckAlive() error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="倒叙之redischecker-go">倒叙之redischecker.go</h4><p>redischecker.go定义了一个redisChecker的类型，它实现了ping() error和CheckAlive() error两个方法，所以它也一个AliveChecker类型。</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	_ AliveChecker = &amp;redisChecker&#123;&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> redisChecker struct &#123;</span><br><span class="line">	addr           <span class="literal">string</span></span><br><span class="line">	defaultTimeout time.Duration</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用go的redis客户端"github.com/garyburd/redigo/redis"连接一下redis server，相当于一个心跳</span></span><br><span class="line">func (r *redisChecker) ping() <span class="keyword">error</span> &#123;</span><br><span class="line">	c, <span class="keyword">err</span> := redis.DialTimeout(<span class="string">"tcp"</span>, r.addr, r.defaultTimeout, r.defaultTimeout, r.defaultTimeout)</span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">err</span> != nil &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">err</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	defer c.<span class="keyword">Close</span>()</span><br><span class="line">	_, <span class="keyword">err</span> = c.<span class="keyword">Do</span>(<span class="string">"ping"</span>)</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">err</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查redis server的存活状态，尝试ping()三次 间隔3s/次，任意一次ping通即redis server状态良好，全部失败为redis server宕机</span></span><br><span class="line">func (r *redisChecker) CheckAlive() <span class="keyword">error</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="keyword">err</span> <span class="keyword">error</span></span><br><span class="line">	<span class="keyword">for</span> i := 0; i &lt; 2; i++ &#123; <span class="comment">//try a few times</span></span><br><span class="line">		<span class="keyword">err</span> = r.ping()</span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">err</span> != nil &#123;</span><br><span class="line">			time.<span class="keyword">Sleep</span>(3 * time.Second)</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> nil</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">err</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var (</span><br><span class="line">	_ AliveChecker = &amp;redisChecker&#123;&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type redisChecker struct &#123;</span><br><span class="line">	addr           string</span><br><span class="line">	defaultTimeout time.Duration</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用go的redis客户端&quot;github.com/garyburd/redigo/redis&quot;连接一下redis server，相当于一个心跳</span><br><span class="line">func (r *redisChecker) ping() error &#123;</span><br><span class="line">	c, err := redis.DialTimeout(&quot;tcp&quot;, r.addr, r.defaultTimeout, r.defaultTimeout, r.defaultTimeout)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	defer c.Close()</span><br><span class="line">	_, err = c.Do(&quot;ping&quot;)</span><br><span class="line">	return err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 检查redis server的存活状态，尝试ping()三次 间隔3s/次，任意一次ping通即redis server状态良好，全部失败为redis server宕机</span><br><span class="line">func (r *redisChecker) CheckAlive() error &#123;</span><br><span class="line">	var err error</span><br><span class="line">	for i := 0; i &lt; 2; i++ &#123; //try a few times</span><br><span class="line">		err = r.ping()</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			time.Sleep(3 * time.Second)</span><br><span class="line">			continue</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return nil</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="倒叙之rest-go">倒叙之rest.go</h4><p>rest.go封装了一个发送http请求到codis-config(dashboard)的方法</p>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">//call http url <span class="keyword">and</span> get json, then decode to objptr</span><br><span class="line">func httpCall(objPtr <span class="keyword">interface</span>&#123;&#125;, url <span class="type">string</span>, <span class="keyword">method</span> <span class="type">string</span>, arg <span class="keyword">interface</span>&#123;&#125;) error &#123;</span><br><span class="line">    //返回一个http.<span class="type">Client</span>对象，使用http默认协议</span><br><span class="line">	client := &amp;http.<span class="type">Client</span>&#123;<span class="type">Transport</span>: http.<span class="type">DefaultTransport</span>&#125;</span><br><span class="line">    //用一个bytes.<span class="type">Buffer</span>来传输请求参数</span><br><span class="line">	rw := &amp;bytes.<span class="type">Buffer</span>&#123;&#125;</span><br><span class="line">	<span class="keyword">if</span> arg != <span class="keyword">nil</span> &#123;</span><br><span class="line">		buf, err := json.<span class="type">Marshal</span>(arg)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="keyword">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> errors.<span class="type">Trace</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">		rw.<span class="type">Write</span>(buf)</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    //返回一个http的request对象，传入<span class="keyword">method</span> url和保证的请求参数rw</span><br><span class="line">	req, err := http.<span class="type">NewRequest</span>(<span class="keyword">method</span>, url, rw)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="keyword">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.<span class="type">Trace</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	resp, err := client.<span class="type">Do</span>(req)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="keyword">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.<span class="type">Trace</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	defer resp.<span class="type">Body</span>.<span class="type">Close</span>()</span><br><span class="line">    </span><br><span class="line">    //确认返回<span class="number">2</span>**的http response status code</span><br><span class="line">	<span class="keyword">if</span> resp.<span class="type">StatusCode</span>/<span class="number">100</span> != <span class="number">2</span> &#123;</span><br><span class="line">		msg, _ := ioutil.<span class="type">ReadAll</span>(resp.<span class="type">Body</span>)</span><br><span class="line">		<span class="keyword">return</span> errors.<span class="type">Errorf</span>(<span class="string">"error: %d, message: %s"</span>, resp.<span class="type">StatusCode</span>, <span class="type">string</span>(msg))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    //用传入的objPtr类型将返回的json类型解析返回</span><br><span class="line">	<span class="keyword">if</span> objPtr != <span class="keyword">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> json.<span class="type">NewDecoder</span>(resp.<span class="type">Body</span>).<span class="type">Decode</span>(objPtr)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//call http url and get json, then decode to objptr</span><br><span class="line">func httpCall(objPtr interface&#123;&#125;, url string, method string, arg interface&#123;&#125;) error &#123;</span><br><span class="line">    //返回一个http.Client对象，使用http默认协议</span><br><span class="line">	client := &amp;http.Client&#123;Transport: http.DefaultTransport&#125;</span><br><span class="line">    //用一个bytes.Buffer来传输请求参数</span><br><span class="line">	rw := &amp;bytes.Buffer&#123;&#125;</span><br><span class="line">	if arg != nil &#123;</span><br><span class="line">		buf, err := json.Marshal(arg)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			return errors.Trace(err)</span><br><span class="line">		&#125;</span><br><span class="line">		rw.Write(buf)</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    //返回一个http的request对象，传入method url和保证的请求参数rw</span><br><span class="line">	req, err := http.NewRequest(method, url, rw)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Trace(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	resp, err := client.Do(req)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Trace(err)</span><br><span class="line">	&#125;</span><br><span class="line">	defer resp.Body.Close()</span><br><span class="line">    </span><br><span class="line">    //确认返回2**的http response status code</span><br><span class="line">	if resp.StatusCode/100 != 2 &#123;</span><br><span class="line">		msg, _ := ioutil.ReadAll(resp.Body)</span><br><span class="line">		return errors.Errorf(&quot;error: %d, message: %s&quot;, resp.StatusCode, string(msg))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    //用传入的objPtr类型将返回的json类型解析返回</span><br><span class="line">	if objPtr != nil &#123;</span><br><span class="line">		return json.NewDecoder(resp.Body).Decode(objPtr)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="倒叙之servergroup-go">倒叙之servergroup.go</h4><p>codis-ha的核心代码都在这个文件中</p>
 <p>GetServerGroups通过调用callHttp()获取codis在zookeeper上注册的server groups信息</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">GetServerGroups</span><span class="params">()</span></span> ([]models.<span class="type">ServerGroup</span>, error) &#123;</span><br><span class="line">	<span class="keyword">var</span> groups []models.<span class="type">ServerGroup</span></span><br><span class="line">	err := callHttp(&amp;groups, genUrl(*apiServer, <span class="string">"/api/server_groups"</span>), <span class="string">"GET"</span>, <span class="built_in">nil</span>)</span><br><span class="line">	<span class="keyword">return</span> groups, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>PingServer用来检测codis server也就是redis服务的状态，并将CheckAlive的结果放进一个channel<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> PingServer(checker AliveChecker, errCtx <span class="keyword">interface</span>&#123;&#125;, errCh <span class="keyword">chan</span>&lt;- <span class="keyword">interface</span>&#123;&#125;) &#123;</span><br><span class="line">	err := checker.CheckAlive()</span><br><span class="line">	log.Debugf(<span class="string">"check %+v, result:%v, errCtx:%+v"</span>, checker, err, errCtx)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">		errCh &lt;- errCtx</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	errCh &lt;- <span class="constant">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>verifyAndUpServer来确定一个offline的redis实例是存活的并将其设置为online状态<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> verifyAndUpServer(checker AliveChecker, errCtx <span class="keyword">interface</span>&#123;&#125;) &#123;</span><br><span class="line">	errCh := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">interface</span>&#123;&#125;, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> PingServer(checker, errCtx, errCh)</span><br><span class="line"></span><br><span class="line">	s := &lt;-errCh</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> s == <span class="constant">nil</span> &#123; <span class="comment">//alive</span></span><br><span class="line">		handleAddServer(errCtx.(*models.Server))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>getSlave: 当一个redis master挂掉的时候，用来获取同一个group下的slave<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">getSlave</span><span class="params">(master *models.Server)</span></span> (*models.<span class="type">Server</span>, error) &#123;</span><br><span class="line">	<span class="keyword">var</span> group models.<span class="type">ServerGroup</span></span><br><span class="line">	err := callHttp(&amp;group, genUrl(*apiServer, <span class="string">"/api/server_group/"</span>, master.<span class="type">GroupId</span>), <span class="string">"GET"</span>, <span class="built_in">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="built_in">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">nil</span>, errors.<span class="type">Trace</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> <span class="number">_</span>, s := range group.<span class="type">Servers</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> s.<span class="type">Type</span> == models.<span class="type">SERVER_TYPE_SLAVE</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> s, <span class="built_in">nil</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">nil</span>, errors.<span class="type">Errorf</span>(<span class="string">"can not find any slave in this group: %v"</span>, group)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func GetServerGroups() ([]models.ServerGroup, error) &#123;</span><br><span class="line">	var groups []models.ServerGroup</span><br><span class="line">	err := callHttp(&amp;groups, genUrl(*apiServer, &quot;/api/server_groups&quot;), &quot;GET&quot;, nil)</span><br><span class="line">	return groups, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PingServer用来检测codis server也就是redis服务的状态，并将CheckAlive的结果放进一个channel<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func PingServer(checker AliveChecker, errCtx interface&#123;&#125;, errCh chan&lt;- interface&#123;&#125;) &#123;</span><br><span class="line">	err := checker.CheckAlive()</span><br><span class="line">	log.Debugf(&quot;check %+v, result:%v, errCtx:%+v&quot;, checker, err, errCtx)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		errCh &lt;- errCtx</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line">	errCh &lt;- nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>verifyAndUpServer来确定一个offline的redis实例是存活的并将其设置为online状态<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func verifyAndUpServer(checker AliveChecker, errCtx interface&#123;&#125;) &#123;</span><br><span class="line">	errCh := make(chan interface&#123;&#125;, 100)</span><br><span class="line"></span><br><span class="line">	go PingServer(checker, errCtx, errCh)</span><br><span class="line"></span><br><span class="line">	s := &lt;-errCh</span><br><span class="line"></span><br><span class="line">	if s == nil &#123; //alive</span><br><span class="line">		handleAddServer(errCtx.(*models.Server))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>getSlave: 当一个redis master挂掉的时候，用来获取同一个group下的slave<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func getSlave(master *models.Server) (*models.Server, error) &#123;</span><br><span class="line">	var group models.ServerGroup</span><br><span class="line">	err := callHttp(&amp;group, genUrl(*apiServer, &quot;/api/server_group/&quot;, master.GroupId), &quot;GET&quot;, nil)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return nil, errors.Trace(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for _, s := range group.Servers &#123;</span><br><span class="line">		if s.Type == models.SERVER_TYPE_SLAVE &#123;</span><br><span class="line">			return s, nil</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return nil, errors.Errorf(&quot;can not find any slave in this group: %v&quot;, group)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>handleCrashedServer用来处理挂掉的redis，如果挂的redis是master则获取该codis group对应点slave并将其promote到master，其他则不作处理</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">func handleCrashedServer(s *models.Server) error &#123;</span><br><span class="line">	switch s.Type &#123;</span><br><span class="line">	case models.SERVER_TYPE_MASTER:</span><br><span class="line">		//get slave and <span class="operator"><span class="keyword">do</span> promote</span><br><span class="line">		<span class="keyword">slave</span>, err := getSlave(s)</span><br><span class="line">		<span class="keyword">if</span> err != nil &#123;</span><br><span class="line">			<span class="keyword">log</span>.Warning(<span class="keyword">errors</span>.ErrorStack(err))</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">log</span>.Infof(<span class="string">"try promote %+v"</span>, <span class="keyword">slave</span>)</span><br><span class="line">		err = callHttp(nil, genUrl(*apiServer, <span class="string">"/api/server_group/"</span>, <span class="keyword">slave</span>.GroupId, <span class="string">"/promote"</span>), <span class="string">"POST"</span>, <span class="keyword">slave</span>)</span><br><span class="line">		<span class="keyword">if</span> err != nil &#123;</span><br><span class="line">			<span class="keyword">log</span>.Errorf(<span class="string">"do promote %v failed %v"</span>, <span class="keyword">slave</span>, <span class="keyword">errors</span>.ErrorStack(err))</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">case</span> models.SERVER_TYPE_SLAVE:</span><br><span class="line">		<span class="keyword">log</span>.Errorf(<span class="string">"slave is down: %+v"</span>, s)</span><br><span class="line">	<span class="keyword">case</span> models.SERVER_TYPE_OFFLINE:</span><br><span class="line">		//<span class="keyword">no</span> need <span class="keyword">to</span> handle it</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">log</span>.Fatalf(<span class="string">"unkonwn type %+v"</span>, s)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> nil</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func handleCrashedServer(s *models.Server) error &#123;</span><br><span class="line">	switch s.Type &#123;</span><br><span class="line">	case models.SERVER_TYPE_MASTER:</span><br><span class="line">		//get slave and do promote</span><br><span class="line">		slave, err := getSlave(s)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			log.Warning(errors.ErrorStack(err))</span><br><span class="line">			return err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		log.Infof(&quot;try promote %+v&quot;, slave)</span><br><span class="line">		err = callHttp(nil, genUrl(*apiServer, &quot;/api/server_group/&quot;, slave.GroupId, &quot;/promote&quot;), &quot;POST&quot;, slave)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			log.Errorf(&quot;do promote %v failed %v&quot;, slave, errors.ErrorStack(err))</span><br><span class="line">			return err</span><br><span class="line">		&#125;</span><br><span class="line">	case models.SERVER_TYPE_SLAVE:</span><br><span class="line">		log.Errorf(&quot;slave is down: %+v&quot;, s)</span><br><span class="line">	case models.SERVER_TYPE_OFFLINE:</span><br><span class="line">		//no need to handle it</span><br><span class="line">	default:</span><br><span class="line">		log.Fatalf(&quot;unkonwn type %+v&quot;, s)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>handleAddServer将存活的redis添加其对应给group下作为slave节点 </p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">handleAddServer</span><span class="params">(s *models.Server)</span> </span>&#123;</span><br><span class="line">	s.Type = models.SERVER_TYPE_SLAVE</span><br><span class="line">	log.Infof(<span class="string">"try reusing slave %+v"</span>, s)</span><br><span class="line">	err := callHttp(nil, genUrl(*apiServer, <span class="string">"/api/server_group/"</span>, s.GroupId, <span class="string">"/addServer"</span>), <span class="string">"PUT"</span>, s)</span><br><span class="line">	log.Errorf(<span class="string">"do reusing slave %v failed %v"</span>, s, errors.ErrorStack(err))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>CheckAliveAndPromote是codis-ha的核心方法，解析见代码注释<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ping codis-server find crashed codis-server</span></span><br><span class="line"><span class="keyword">func</span> CheckAliveAndPromote(groups []models.ServerGroup) ([]models.Server, error) &#123;</span><br><span class="line">	errCh := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">interface</span>&#123;&#125;, <span class="number">100</span>)    <span class="comment">//建一个缓冲容量为100的channel</span></span><br><span class="line">	<span class="keyword">var</span> serverCnt <span class="typename">int</span>                       <span class="comment">//serverCnt用来对所有group中的redis节点计数</span></span><br><span class="line">	<span class="keyword">for</span> _, group := <span class="keyword">range</span> groups &#123; <span class="comment">//each group</span></span><br><span class="line">		<span class="keyword">for</span> _, s := <span class="keyword">range</span> group.Servers &#123; <span class="comment">//each server</span></span><br><span class="line">			serverCnt++                         <span class="comment">//发现一个redis server</span></span><br><span class="line">			rc := acf(s.Addr, <span class="number">5</span>*time.Second)    <span class="comment">//返回一个redisChecker类型对象地址，其拥有CheckAlive()方法</span></span><br><span class="line">			news := s                           <span class="comment">//复制为news</span></span><br><span class="line">			<span class="keyword">go</span> PingServer(rc, news, errCh)      <span class="comment">//检测该redis server状态，如果正常会将nil写入errCh，如果该节点挂了会将news写入errCh</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//get result</span></span><br><span class="line">	<span class="keyword">var</span> crashedServer []models.Server           <span class="comment">//crashedServer用来记录挂掉的redis server</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; serverCnt; i++ &#123;            <span class="comment">//按照所有redis server的数量进行遍历，不然s := &lt;-errCh会一直阻塞</span></span><br><span class="line">		s := &lt;-errCh                            <span class="comment">//阻塞知道errCh有内容写入</span></span><br><span class="line">		<span class="keyword">if</span> s == <span class="constant">nil</span> &#123; <span class="comment">//alive                   </span></span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		log.Warningf(<span class="string">"server maybe crashed %+v"</span>, s)</span><br><span class="line">		crashedServer = <span class="built_in">append</span>(crashedServer, *s.(*models.Server))  <span class="comment">//将挂的节点加入crashedServer   </span></span><br><span class="line"></span><br><span class="line">		err := handleCrashedServer(s.(*models.Server))  <span class="comment">//调用handleCrashedServer出来挂掉的redis server</span></span><br><span class="line">		<span class="keyword">if</span> err != <span class="constant">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> crashedServer, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> crashedServer, <span class="constant">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//ping codis-server find node up with type offine(勉为其难翻译一下：ping codis-server找到一个offline的节点并将其online)</span></span><br><span class="line"><span class="keyword">func</span> CheckOfflineAndPromoteSlave(groups []models.ServerGroup) ([]models.Server, error) &#123;</span><br><span class="line">	<span class="keyword">for</span> _, group := <span class="keyword">range</span> groups &#123; <span class="comment">//each group</span></span><br><span class="line">		<span class="keyword">for</span> _, s := <span class="keyword">range</span> group.Servers &#123; <span class="comment">//each server</span></span><br><span class="line">			rc := acf(s.Addr, <span class="number">5</span>*time.Second)</span><br><span class="line">			news := s</span><br><span class="line">			<span class="keyword">if</span> (s.Type == models.SERVER_TYPE_OFFLINE) &#123;</span><br><span class="line">				verifyAndUpServer(rc, news)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="constant">nil</span>, <span class="constant">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func handleAddServer(s *models.Server) &#123;</span><br><span class="line">	s.Type = models.SERVER_TYPE_SLAVE</span><br><span class="line">	log.Infof(&quot;try reusing slave %+v&quot;, s)</span><br><span class="line">	err := callHttp(nil, genUrl(*apiServer, &quot;/api/server_group/&quot;, s.GroupId, &quot;/addServer&quot;), &quot;PUT&quot;, s)</span><br><span class="line">	log.Errorf(&quot;do reusing slave %v failed %v&quot;, s, errors.ErrorStack(err))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>CheckAliveAndPromote是codis-ha的核心方法，解析见代码注释<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//ping codis-server find crashed codis-server</span><br><span class="line">func CheckAliveAndPromote(groups []models.ServerGroup) ([]models.Server, error) &#123;</span><br><span class="line">	errCh := make(chan interface&#123;&#125;, 100)    //建一个缓冲容量为100的channel</span><br><span class="line">	var serverCnt int                       //serverCnt用来对所有group中的redis节点计数</span><br><span class="line">	for _, group := range groups &#123; //each group</span><br><span class="line">		for _, s := range group.Servers &#123; //each server</span><br><span class="line">			serverCnt++                         //发现一个redis server</span><br><span class="line">			rc := acf(s.Addr, 5*time.Second)    //返回一个redisChecker类型对象地址，其拥有CheckAlive()方法</span><br><span class="line">			news := s                           //复制为news</span><br><span class="line">			go PingServer(rc, news, errCh)      //检测该redis server状态，如果正常会将nil写入errCh，如果该节点挂了会将news写入errCh</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//get result</span><br><span class="line">	var crashedServer []models.Server           //crashedServer用来记录挂掉的redis server</span><br><span class="line">	for i := 0; i &lt; serverCnt; i++ &#123;            //按照所有redis server的数量进行遍历，不然s := &lt;-errCh会一直阻塞</span><br><span class="line">		s := &lt;-errCh                            //阻塞知道errCh有内容写入</span><br><span class="line">		if s == nil &#123; //alive                   </span><br><span class="line">			continue</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		log.Warningf(&quot;server maybe crashed %+v&quot;, s)</span><br><span class="line">		crashedServer = append(crashedServer, *s.(*models.Server))  //将挂的节点加入crashedServer   </span><br><span class="line"></span><br><span class="line">		err := handleCrashedServer(s.(*models.Server))  //调用handleCrashedServer出来挂掉的redis server</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			return crashedServer, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return crashedServer, nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//ping codis-server find node up with type offine(勉为其难翻译一下：ping codis-server找到一个offline的节点并将其online)</span><br><span class="line">func CheckOfflineAndPromoteSlave(groups []models.ServerGroup) ([]models.Server, error) &#123;</span><br><span class="line">	for _, group := range groups &#123; //each group</span><br><span class="line">		for _, s := range group.Servers &#123; //each server</span><br><span class="line">			rc := acf(s.Addr, 5*time.Second)</span><br><span class="line">			news := s</span><br><span class="line">			if (s.Type == models.SERVER_TYPE_OFFLINE) &#123;</span><br><span class="line">				verifyAndUpServer(rc, news)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return nil, nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="最后是main-go">最后是main.go</h4><p>main.go除了程序入口外还定义了一些全局变量和一个包函数。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个fnHttpCall的函数类型，接收四个参数，返回一个error</span></span><br><span class="line"><span class="keyword">type</span> fnHttpCall <span class="keyword">func</span>(objPtr <span class="keyword">interface</span>&#123;&#125;, api <span class="typename">string</span>, method <span class="typename">string</span>, arg <span class="keyword">interface</span>&#123;&#125;) error</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个aliveCheckerFactory的函数类型，接收两个参数，返回一个AliveChecker类型。AliveChecker是一个接口类型，在aliverchecker.go中定义</span></span><br><span class="line"><span class="keyword">type</span> aliveCheckerFactory <span class="keyword">func</span>(addr <span class="typename">string</span>, defaultTimeout time.Duration) AliveChecker</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面是一组全局变量</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    <span class="comment">//调用flag的String()方法分别解析codis-ha启动时的命令行参数，并设置一个default值</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//codis-config参数，用来调用codis-cofig的api来配置codis的主从关系</span></span><br><span class="line">	apiServer   = flag.String(<span class="string">"codis-config"</span>, <span class="string">"localhost:18087"</span>, <span class="string">"api server address"</span>)</span><br><span class="line">	<span class="comment">//productName参数，用来连接zookeeper获取codis的各种注册信息</span></span><br><span class="line">	productName = flag.String(<span class="string">"productName"</span>, <span class="string">"test"</span>, <span class="string">"product name, can be found in codis-proxy's config"</span>)</span><br><span class="line">	<span class="comment">//logLevel参数，设置日志级别</span></span><br><span class="line">	logLevel    = flag.String(<span class="string">"log-level"</span>, <span class="string">"info"</span>, <span class="string">"log level"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义一个fnHttpCall类型的函数callHttp，详细实现在rest.go中</span></span><br><span class="line">	callHttp fnHttpCall          = httpCall</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义一个aliveCheckerFactory类型的函数acf，返回一个redisChecker类型实例地址，redisChecker定义在redischecker.go中</span></span><br><span class="line">	acf      aliveCheckerFactory = <span class="keyword">func</span>(addr <span class="typename">string</span>, timeout time.Duration) AliveChecker &#123;</span><br><span class="line">		<span class="keyword">return</span> &amp;redisChecker&#123;</span><br><span class="line">			addr:           addr,</span><br><span class="line">			defaultTimeout: timeout,</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 定义一个fnHttpCall的函数类型，接收四个参数，返回一个error</span><br><span class="line">type fnHttpCall func(objPtr interface&#123;&#125;, api string, method string, arg interface&#123;&#125;) error</span><br><span class="line"></span><br><span class="line">// 定义一个aliveCheckerFactory的函数类型，接收两个参数，返回一个AliveChecker类型。AliveChecker是一个接口类型，在aliverchecker.go中定义</span><br><span class="line">type aliveCheckerFactory func(addr string, defaultTimeout time.Duration) AliveChecker</span><br><span class="line"></span><br><span class="line">// 下面是一组全局变量</span><br><span class="line">var (</span><br><span class="line">    //调用flag的String()方法分别解析codis-ha启动时的命令行参数，并设置一个default值</span><br><span class="line">    </span><br><span class="line">    //codis-config参数，用来调用codis-cofig的api来配置codis的主从关系</span><br><span class="line">	apiServer   = flag.String(&quot;codis-config&quot;, &quot;localhost:18087&quot;, &quot;api server address&quot;)</span><br><span class="line">	//productName参数，用来连接zookeeper获取codis的各种注册信息</span><br><span class="line">	productName = flag.String(&quot;productName&quot;, &quot;test&quot;, &quot;product name, can be found in codis-proxy&apos;s config&quot;)</span><br><span class="line">	//logLevel参数，设置日志级别</span><br><span class="line">	logLevel    = flag.String(&quot;log-level&quot;, &quot;info&quot;, &quot;log level&quot;)</span><br><span class="line"></span><br><span class="line">    //定义一个fnHttpCall类型的函数callHttp，详细实现在rest.go中</span><br><span class="line">	callHttp fnHttpCall          = httpCall</span><br><span class="line">	</span><br><span class="line">	//定义一个aliveCheckerFactory类型的函数acf，返回一个redisChecker类型实例地址，redisChecker定义在redischecker.go中</span><br><span class="line">	acf      aliveCheckerFactory = func(addr string, timeout time.Duration) AliveChecker &#123;</span><br><span class="line">		return &amp;redisChecker&#123;</span><br><span class="line">			addr:           addr,</span><br><span class="line">			defaultTimeout: timeout,</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>总的来说，codis-ha做了下面三件事：</p>
 <pre><code>-<span class="ruby"> 获取codis server groups列表
 </span>-<span class="ruby"> 检查codis server(redis实例)的状态
 </span>-<span class="ruby"> 检查offline状态的codis server并将其上线(online)</span>
-</code></pre><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	flag.<span class="keyword">Parse</span>()                        <span class="comment">//解析命令行参数</span></span><br><span class="line">	<span class="keyword">log</span>.SetLevelByString(*logLevel)     <span class="comment">//设置日志级别</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;                                       <span class="comment">//别停</span></span><br><span class="line">		groups, <span class="keyword">err</span> := GetServerGroups()        <span class="comment">//获取codis server groups信息</span></span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">err</span> != nil &#123;</span><br><span class="line">			<span class="keyword">log</span>.<span class="keyword">Error</span>(errors.ErrorStack(<span class="keyword">err</span>))</span><br><span class="line">			<span class="literal">return</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		CheckAliveAndPromote(groups)            <span class="comment">//见CheckAliveAndPromote方法解析</span></span><br><span class="line">		CheckOfflineAndPromoteSlave(groups)     <span class="comment">//见CheckOfflineAndPromoteSlave方法解析</span></span><br><span class="line">		time.<span class="keyword">Sleep</span>(3 * time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	flag.Parse()                        //解析命令行参数</span><br><span class="line">	log.SetLevelByString(*logLevel)     //设置日志级别</span><br><span class="line"></span><br><span class="line">	for &#123;                                       //别停</span><br><span class="line">		groups, err := GetServerGroups()        //获取codis server groups信息</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			log.Error(errors.ErrorStack(err))</span><br><span class="line">			return</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		CheckAliveAndPromote(groups)            //见CheckAliveAndPromote方法解析</span><br><span class="line">		CheckOfflineAndPromoteSlave(groups)     //见CheckOfflineAndPromoteSlave方法解析</span><br><span class="line">		time.Sleep(3 * time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="后记">后记</h4><p>这篇文是我简略看过codis-ha之后写的，目的主要是学习golang的程序结构和组织。codis-ha本身也未作讨论，有问题可以一起交流。写的也匆忙，如有错误也请不吝指正。</p>
 
-        
-      </div>
-    
+      
+    </div>
 
-    
-      <div class="post-footer">
+    <div>
+      
         
-          <div class="post-tags">
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag">#Golang</a>
+          
+            <a href="/tags/Codis/" rel="tag">#Codis</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/tags/Codis/">
-                #Codis
+              <a href="/2016/03/17/20160316/" rel="next" title="白话Golang开发入门">
+                <i class="fa fa-chevron-left"></i> 白话Golang开发入门
               </a>
             
-              <a href="/tags/Golang/">
-                #Golang
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/24/20160324/" rel="prev" title="MySQL5.7安装过程中的登陆及密码修改问题">
+                MySQL5.7安装过程中的登陆及密码修改问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
-        
-
-        
-          <div class="post-nav">
-            <div class="post-nav-prev post-nav-item">
-              
-            </div>
-
-            <div class="post-nav-next post-nav-item">
-              
-                <a href="/2016/03/17/20160316/">白话Golang开发入门</a>
-              
-            </div>
-          </div>
-        
-
-        
-        
-      </div>
-    
-  </div>
-
-
-
-  
-    <div class="comments" id="comments">
-      
-        <div class="ds-thread" data-thread-key="2016/03/21/20160321/"
-             data-title="codis-ha源码解析" data-url="http://hsqlu.github.io/2016/03/21/20160321/">
         </div>
+      
 
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
       
     </div>
-  
+  </div>
+
 
           </div>
+          
 
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/21/20160321/"
+           data-title="codis-ha源码解析" data-url="http://hsqlu.github.io/2016/03/21/20160321/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="Qiannan Lu" />
+          <p class="site-author-name" itemprop="name">Qiannan Lu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
           
         </div>
 
         
-<div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
+        
 
-<div id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
+        
+        
 
-    
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-          Table Des Matières
-        </li>
-        <li class="sidebar-nav-overview" data-target="site-overview">
-          Ensemble
-        </li>
-      </ul>
-    
-
-    <div class="site-overview">
-      <div class="site-author motion-element">
-        <img class="site-author-image" src="/images/default_avatar.jpg" alt="Qiannan Lu" />
-        <p class="site-author-name">Qiannan Lu</p>
-      </div>
-      <p class="site-description motion-element"></p>
-      <div class="site-state motion-element">
-        <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">13</span>
-          <span class="site-state-item-name">articles</span>
-        </div>
-        <div class="site-state-item site-state-tags">
-            <span class="site-state-item-count">12</span>
-            <span class="site-state-item-name">tags</span>
-        </div>
-        <div class="site-state-item site-state-pages">
-            <span class="site-state-item-count">3</span>
-            <span class="site-state-item-name">pages</span>
-        </div>
-      </div>
+      </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取源码"><span class="nav-number">1.</span> <span class="nav-text">获取源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之aliverchecker-go"><span class="nav-number">2.</span> <span class="nav-text">倒叙之aliverchecker.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之redischecker-go"><span class="nav-number">3.</span> <span class="nav-text">倒叙之redischecker.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之rest-go"><span class="nav-number">4.</span> <span class="nav-text">倒叙之rest.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之servergroup-go"><span class="nav-number">5.</span> <span class="nav-text">倒叙之servergroup.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后是main-go"><span class="nav-number">6.</span> <span class="nav-text">最后是main.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后记"><span class="nav-number">7.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
-      <div class="links-of-author motion-element">
+    </div>
+  </aside>
+
+
         
       </div>
+    </main>
 
-      
-      
-
-    </div>
-
-    
-      <div class="post-toc-wrap sidebar-panel-active">
-        <div class="post-toc-indicator-top post-toc-indicator"></div>
-        <div class="post-toc">
-          
-          
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取源码"><span class="nav-number">1.</span> <span class="nav-text">获取源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之aliverchecker-go"><span class="nav-number">2.</span> <span class="nav-text">倒叙之aliverchecker.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之redischecker-go"><span class="nav-number">3.</span> <span class="nav-text">倒叙之redischecker.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之rest-go"><span class="nav-number">4.</span> <span class="nav-text">倒叙之rest.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#倒叙之servergroup-go"><span class="nav-number">5.</span> <span class="nav-text">倒叙之servergroup.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后是main-go"><span class="nav-number">6.</span> <span class="nav-text">最后是main.go</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后记"><span class="nav-number">7.</span> <span class="nav-text">后记</span></a></li></ol></div>
-          
-        </div>
-        <div class="post-toc-indicator-bottom post-toc-indicator"></div>
-      </div>
-    
-
-  </div>
-</div>
-
-
-      </div>
-    </div>
-
-    <div id="footer" class="footer">
+    <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
-  2016
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="icon-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
-  <span class="author">Qiannan Lu</span>
+  <span class="author" itemprop="copyrightHolder">Qiannan Lu</span>
 </div>
 
 <div class="powered-by">
@@ -363,517 +549,86 @@
 </div>
 
 <div class="theme-info">
-  Thème -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Mist
   </a>
 </div>
 
+        
 
-
+        
       </div>
-    </div>
+    </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
   
-  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $(".fancybox").fancybox();
-    });
-  </script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript">
-  function hasMobileUA () {
-    var nav = window.navigator;
-    var ua = nav.userAgent;
-    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-    return pa.test(ua);
-  }
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  function isDesktop () {
-    return screen.width > 991 && !hasMobileUA();
-  }
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
-  function isTablet () {
-    return screen.width < 992 && screen.width > 767 && hasMobileUA();
-  }
-
-  function isMobile () {
-    return screen.width < 767 && hasMobileUA();
-  }
-
-  function escapeSelector (selector) {
-    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
-  }
-</script>
 
   
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-  <script type="text/javascript" id="motion.global">
-  $(document).ready(function () {
-    var body = $('body');
-    var isSidebarVisible = false;
-    var sidebarToggle = $('.sidebar-toggle');
-    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
-    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
-    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
-    var sidebar = $('.sidebar');
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-    var SIDEBAR_WIDTH = '320px';
-    var SIDEBAR_DISPLAY_DURATION = 300;
-
-    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
-
-    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
-    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
-    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
-
-    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
-    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
-    var sidebarToogleLine2ndStatusClose = {opacity: 0};
-
-    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
-    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
-    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
-
-    LogoAndMenuMotion();
-    sidebatToggleMotion();
-    postsListMotion();
-    backToTopMotion();
-
-
-    $(document)
-      .on('sidebar.isShowing', function () {
-        isDesktop() && body.velocity(
-          {paddingRight: SIDEBAR_WIDTH},
-          SIDEBAR_DISPLAY_DURATION
-        );
-        sidebarContentMotion();
-      })
-      .on('sidebar.isHiding', function () {});
-
-    function LogoAndMenuMotion() {
-      $.Velocity.RunSequence([
-        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
-        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
-        
-        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
-      ]);
-      $('.menu-item').velocity('transition.slideDownIn', {display: null});
-    }
-
-
-    function backToTopMotion () {
-      var b2top = $('.back-to-top');
-      b2top.on('click', function () {
-        body.velocity('scroll');
-      });
-    }
-
-    function sidebarShowMotion () {
-
-      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
-      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
-      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
-
-      sidebar.velocity({width: SIDEBAR_WIDTH}, {
-        display: 'block',
-        duration: SIDEBAR_DISPLAY_DURATION,
-        complete: function () {
-          sidebar.addClass('sidebar-active');
-          sidebar.trigger('sidebar.didShow');
-        }
-      });
-      sidebar.trigger('sidebar.isShowing');
-    }
-
-    function sidebarHideMotion () {
-      isDesktop() && body.velocity({paddingRight: 0});
-      sidebar.velocity('reverse');
-
-      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
-      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
-      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
-
-      sidebar.removeClass('sidebar-active');
-      sidebar.trigger('sidebar.isHiding');
-    };
-
-    function sidebarContentMotion () {
-      $('.sidebar .motion-element').velocity(
-        'transition.slideRightIn',
-        {stagger: 50, drag: true}
-      );
-    }
-
-    function postsListMotion () {
-      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
-      $('.post').velocity('transition.slideDownIn', postMotionOptions);
-    }
-
-    function sidebatToggleMotion () {
-      sidebarToggle.on('click', function () {
-        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
-        isSidebarVisible = !isSidebarVisible;
-      });
-
-      sidebarToggle.hover(function () {
-        if (isSidebarVisible) {return}
-        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
-        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
-        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
-      }, function () {
-        if (isSidebarVisible) {return}
-        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
-        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
-        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
-      });
-    }
-  });
-
-</script>
-
-
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
   
   
-<script type="text/javascript" id="bootstrap.scrollspy.custom">
-  /* ========================================================================
-  * Bootstrap: scrollspy.js v3.3.2
-  * http://getbootstrap.com/javascript/#scrollspy
-  * ========================================================================
-  * Copyright 2011-2015 Twitter, Inc.
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-  * ======================================================================== */
 
-  /**
-   * Custom by iissnan
-   *
-   * - Add a `clear.bs.scrollspy` event.
-   * - Esacpe targets selector.
-   */
-
-
-  +function ($) {
-    'use strict';
-
-    // SCROLLSPY CLASS DEFINITION
-    // ==========================
-
-    function ScrollSpy(element, options) {
-      this.$body          = $(document.body)
-      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
-      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
-      this.selector       = (this.options.target || '') + ' .nav li > a'
-      this.offsets        = []
-      this.targets        = []
-      this.activeTarget   = null
-      this.scrollHeight   = 0
-
-      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
-      this.refresh()
-      this.process()
-    }
-
-    ScrollSpy.VERSION  = '3.3.2'
-
-    ScrollSpy.DEFAULTS = {
-      offset: 10
-    }
-
-    ScrollSpy.prototype.getScrollHeight = function () {
-      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
-    }
-
-    ScrollSpy.prototype.refresh = function () {
-      var that          = this
-      var offsetMethod  = 'offset'
-      var offsetBase    = 0
-
-      this.offsets      = []
-      this.targets      = []
-      this.scrollHeight = this.getScrollHeight()
-
-      if (!$.isWindow(this.$scrollElement[0])) {
-        offsetMethod = 'position'
-        offsetBase   = this.$scrollElement.scrollTop()
-      }
-
-      this.$body
-        .find(this.selector)
-        .map(function () {
-          var $el   = $(this)
-          var href  = $el.data('target') || $el.attr('href')
-          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
-
-          return ($href
-            && $href.length
-            && $href.is(':visible')
-            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
-        })
-        .sort(function (a, b) { return a[0] - b[0] })
-        .each(function () {
-          that.offsets.push(this[0])
-          that.targets.push(this[1])
-        })
-
-
-    }
-
-    ScrollSpy.prototype.process = function () {
-      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
-      var scrollHeight = this.getScrollHeight()
-      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
-      var offsets      = this.offsets
-      var targets      = this.targets
-      var activeTarget = this.activeTarget
-      var i
-
-      if (this.scrollHeight != scrollHeight) {
-        this.refresh()
-      }
-
-      if (scrollTop >= maxScroll) {
-        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
-      }
-
-      if (activeTarget && scrollTop < offsets[0]) {
-        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
-        this.activeTarget = null
-        return this.clear()
-      }
-
-      for (i = offsets.length; i--;) {
-        activeTarget != targets[i]
-          && scrollTop >= offsets[i]
-          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
-          && this.activate(targets[i])
-      }
-    }
-
-    ScrollSpy.prototype.activate = function (target) {
-      this.activeTarget = target
-
-      this.clear()
-
-      var selector = this.selector +
-        '[data-target="' + target + '"],' +
-        this.selector + '[href="' + target + '"]'
-
-      var active = $(selector)
-        .parents('li')
-        .addClass('active')
-
-      if (active.parent('.dropdown-menu').length) {
-        active = active
-          .closest('li.dropdown')
-          .addClass('active')
-      }
-
-      active.trigger('activate.bs.scrollspy')
-    }
-
-    ScrollSpy.prototype.clear = function () {
-      $(this.selector)
-        .parentsUntil(this.options.target, '.active')
-        .removeClass('active')
-    }
-
-
-    // SCROLLSPY PLUGIN DEFINITION
-    // ===========================
-
-    function Plugin(option) {
-      return this.each(function () {
-        var $this   = $(this)
-        var data    = $this.data('bs.scrollspy')
-        var options = typeof option == 'object' && option
-
-        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
-        if (typeof option == 'string') data[option]()
-      })
-    }
-
-    var old = $.fn.scrollspy
-
-    $.fn.scrollspy             = Plugin
-    $.fn.scrollspy.Constructor = ScrollSpy
-
-
-    // SCROLLSPY NO CONFLICT
-    // =====================
-
-    $.fn.scrollspy.noConflict = function () {
-      $.fn.scrollspy = old
-      return this
-    }
-
-
-    // SCROLLSPY DATA-API
-    // ==================
-
-    $(window).on('load.bs.scrollspy.data-api', function () {
-      $('[data-spy="scroll"]').each(function () {
-        var $spy = $(this)
-        Plugin.call($spy, $spy.data())
-      })
-    })
-
-  }(jQuery);
-</script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var $sidebarInner = $('.sidebar-inner');
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.didShow', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-          var self = this;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      $(indicator).velocity('stop').velocity({
-        opacity: action === 'show' ? 0.4 : 0
-      }, { duration: 100 });
-    }
-
-  });
-</script>
-
-
-  <script type="text/javascript" id="sidebar.nav">
-    $(document).ready(function () {
-      var html = $('html');
-
-      $('.sidebar-nav li').on('click', function () {
-        var item = $(this);
-        var activeTabClassName = 'sidebar-nav-active';
-        var activePanelClassName = 'sidebar-panel-active';
-        if (item.hasClass(activeTabClassName)) {
-          return;
-        }
-
-        var currentTarget = $('.' + activePanelClassName);
-        var target = $('.' + item.data('target'));
-
-        currentTarget.velocity('transition.slideUpOut', 200, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', 200)
-            .addClass(activePanelClassName);
-        });
-
-        item.siblings().removeClass(activeTabClassName);
-        item.addClass(activeTabClassName);
-      });
-
-      $('.post-toc a').on('click', function (e) {
-        e.preventDefault();
-        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        });
-      });
-
-      // Expand sidebar on post detail page by default, when post has a toc.
-      var $tocContent = $('.post-toc-content');
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
-        setTimeout(function () {
-          $('.sidebar-toggle').trigger('click');
-        }, 800);
-      }
-    });
-  </script>
-
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
 
 
 
   
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
 
   
 
@@ -886,6 +641,7 @@
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
       ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
       ds.charset = 'UTF-8';
       (document.getElementsByTagName('head')[0]
@@ -894,6 +650,20 @@
   </script>
 
   
+    
   
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
 </body>
 </html>

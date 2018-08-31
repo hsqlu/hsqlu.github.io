@@ -432,7 +432,7 @@
 <p>  tar -zxvf nginx-1.8.0.tar.gz</p>
 </li>
 <li><p>安装配置, 或者用默认配置, 我是奖Nginx安装到了/usr/local/nginx目录下</p>
-<p>  cd nginx-1.8.0<br>  ./configure —prefix=/usr/local/nginx</p>
+<p>  cd nginx-1.8.0<br>  ./configure –prefix=/usr/local/nginx</p>
 </li>
 <li><p>make 编译 &amp; 安装</p>
 <p>  make<br>  make install</p>
@@ -449,7 +449,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="Reference">Reference</h3><ul>
+<p>###Reference</p>
+<ul>
 <li><a href="http://nginx.org/en/docs/beginners_guide.html" target="_blank" rel="noopener">Nginx - Beginners Guide</a></li>
 </ul>
 
@@ -571,8 +572,10 @@
       
         
           
-            <h3 id="Backgroud">Backgroud</h3><p>计划爬一些网站数据, 请求部分使用<a href="http://www.apache.org/" target="_blank" rel="noopener">Apache</a>的<a href="http://hc.apache.org/" target="_blank" rel="noopener">HttpClient</a>, 版本为<a href="http://hc.apache.org/httpcomponents-client-4.3.x/download.html" target="_blank" rel="noopener">4.3.3</a>. </p>
-<h3 id="Description">Description</h3><p>访问url <a href="http://www.autohome.com.cn/grade/carhtml/A.html" target="_blank" rel="noopener"><em>http://www.autohome.com.cn/grade/carhtml/A.html</em></a> 的时候返回200正常, CloseableHttpResponse也正常.</p>
+            <p>###Backgroud</p>
+<p>计划爬一些网站数据, 请求部分使用<a href="http://www.apache.org/" target="_blank" rel="noopener">Apache</a>的<a href="http://hc.apache.org/" target="_blank" rel="noopener">HttpClient</a>, 版本为<a href="http://hc.apache.org/httpcomponents-client-4.3.x/download.html" target="_blank" rel="noopener">4.3.3</a>. </p>
+<p>###Description</p>
+<p>访问url <a href="http://www.autohome.com.cn/grade/carhtml/A.html" target="_blank" rel="noopener"><em>http://www.autohome.com.cn/grade/carhtml/A.html</em></a> 的时候返回200正常, CloseableHttpResponse也正常.</p>
 <p>使用</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">IOUtils.toString(httpResponse.getEntity().getContent(), charset);</span><br></pre></td></tr></table></figure>
 <p>获取http请求返回的内容时报如下Exception:</p>
@@ -581,12 +584,14 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">URL realUrl = new URL(&quot;http://www.autohome.com.cn/grade/carhtml/A.html&quot;);</span><br><span class="line">URLConnection connection = realUrl.openConnection();</span><br><span class="line">connection.connect();</span><br><span class="line">in = new BufferedReader(new InputStreamReader(connection.getInputStream(), &quot;gb2312&quot;));</span><br><span class="line">String line;</span><br><span class="line">while ((line = in.readLine()) != null) &#123;</span><br><span class="line">    result += line;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用python请求正常返回：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># -*- coding=utf-8 -*-</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line">import sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(&quot;utf-8&quot;)</span><br><span class="line"></span><br><span class="line">class spider(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        print u&apos;start to grab...&apos;</span><br><span class="line"></span><br><span class="line">    def getsource(self, url):</span><br><span class="line">        html = requests.get(url)</span><br><span class="line">        return html.text</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    url = &apos;http://www.autohome.com.cn/grade/carhtml/Z.html&apos;</span><br><span class="line">    carSpider = spider()</span><br><span class="line">    html = carSpider.getsource(url)</span><br></pre></td></tr></table></figure>
-<h3 id="Solution">Solution</h3><p>基本确定是由于请求默认返回gzip压缩过的内容, 而HttpClient的GZIPInputStream在处理流的时候意外到达末尾. </p>
+<p>###Solution</p>
+<p>基本确定是由于请求默认返回gzip压缩过的内容, 而HttpClient的GZIPInputStream在处理流的时候意外到达末尾. </p>
 <p>跟踪代码发现HttpClient对于gzip压缩内容返回的是GzipDecompressingEntity.</p>
 <p>尝试添加请求头 <strong>“Accept-Encoding: <em>/</em>“</strong> 改变返回内容压缩方式, 返回的是BasicHttpEntity, 同时能被争取读出.</p>
 <p>基本算是一个替代解决方案, 但其实没有找到最终原因. 此网站应该是一个特例, 如有空应熟悉gzip算法并跟进HttpClient源码看看.</p>
 <p>希望有高手赐教.</p>
-<h3 id="Reference">Reference</h3><ul>
+<p>###Reference</p>
+<ul>
 <li><a href="http://www.devnote.cn/article/152.html" target="_blank" rel="noopener">Httpclient gzip操作异常java.io.EOFException</a></li>
 </ul>
 
@@ -994,7 +999,7 @@
       
         
           
-            <h2 id="Frontend">Frontend</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm init</span><br><span class="line">$ npm install grunt -g --save-dev</span><br><span class="line">$ npm install bower -g --save-dev</span><br></pre></td></tr></table></figure>
+            <h2 id="Frontend"><a href="#Frontend" class="headerlink" title="Frontend"></a>Frontend</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm init</span><br><span class="line">$ npm install grunt -g --save-dev</span><br><span class="line">$ npm install bower -g --save-dev</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1114,13 +1119,13 @@
         
           
             <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           

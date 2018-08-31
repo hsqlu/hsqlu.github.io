@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="Backgroud计划爬一些网站数据, 请求部分使用Apache的HttpClient, 版本为4.3.3.  Description访问url http://www.autohome.com.cn/grade/carhtml/A.html 的时候返回200正常, CloseableHttpResponse也正常. 使用 IOUtils.toString(httpResponse.getEntit">
+<meta name="description" content="###Backgroud 计划爬一些网站数据, 请求部分使用Apache的HttpClient, 版本为4.3.3.  ###Description 访问url http://www.autohome.com.cn/grade/carhtml/A.html 的时候返回200正常, CloseableHttpResponse也正常. 使用 IOUtils.toString(httpResponse.">
 <meta name="keywords" content="Java,Spider">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[HttpClient] java.io.EOFException">
 <meta property="og:url" content="http://hsqlu.github.io/2015/09/22/20150922/index.html">
 <meta property="og:site_name" content="无声处">
-<meta property="og:description" content="Backgroud计划爬一些网站数据, 请求部分使用Apache的HttpClient, 版本为4.3.3.  Description访问url http://www.autohome.com.cn/grade/carhtml/A.html 的时候返回200正常, CloseableHttpResponse也正常. 使用 IOUtils.toString(httpResponse.getEntit">
+<meta property="og:description" content="###Backgroud 计划爬一些网站数据, 请求部分使用Apache的HttpClient, 版本为4.3.3.  ###Description 访问url http://www.autohome.com.cn/grade/carhtml/A.html 的时候返回200正常, CloseableHttpResponse也正常. 使用 IOUtils.toString(httpResponse.">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2015-09-24T09:36:57.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[HttpClient] java.io.EOFException">
-<meta name="twitter:description" content="Backgroud计划爬一些网站数据, 请求部分使用Apache的HttpClient, 版本为4.3.3.  Description访问url http://www.autohome.com.cn/grade/carhtml/A.html 的时候返回200正常, CloseableHttpResponse也正常. 使用 IOUtils.toString(httpResponse.getEntit">
+<meta name="twitter:description" content="###Backgroud 计划爬一些网站数据, 请求部分使用Apache的HttpClient, 版本为4.3.3.  ###Description 访问url http://www.autohome.com.cn/grade/carhtml/A.html 的时候返回200正常, CloseableHttpResponse也正常. 使用 IOUtils.toString(httpResponse.">
 
 
 
@@ -295,8 +295,10 @@
       
 
       
-        <h3 id="Backgroud">Backgroud</h3><p>计划爬一些网站数据, 请求部分使用<a href="http://www.apache.org/" target="_blank" rel="noopener">Apache</a>的<a href="http://hc.apache.org/" target="_blank" rel="noopener">HttpClient</a>, 版本为<a href="http://hc.apache.org/httpcomponents-client-4.3.x/download.html" target="_blank" rel="noopener">4.3.3</a>. </p>
-<h3 id="Description">Description</h3><p>访问url <a href="http://www.autohome.com.cn/grade/carhtml/A.html" target="_blank" rel="noopener"><em>http://www.autohome.com.cn/grade/carhtml/A.html</em></a> 的时候返回200正常, CloseableHttpResponse也正常.</p>
+        <p>###Backgroud</p>
+<p>计划爬一些网站数据, 请求部分使用<a href="http://www.apache.org/" target="_blank" rel="noopener">Apache</a>的<a href="http://hc.apache.org/" target="_blank" rel="noopener">HttpClient</a>, 版本为<a href="http://hc.apache.org/httpcomponents-client-4.3.x/download.html" target="_blank" rel="noopener">4.3.3</a>. </p>
+<p>###Description</p>
+<p>访问url <a href="http://www.autohome.com.cn/grade/carhtml/A.html" target="_blank" rel="noopener"><em>http://www.autohome.com.cn/grade/carhtml/A.html</em></a> 的时候返回200正常, CloseableHttpResponse也正常.</p>
 <p>使用</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">IOUtils.toString(httpResponse.getEntity().getContent(), charset);</span><br></pre></td></tr></table></figure>
 <p>获取http请求返回的内容时报如下Exception:</p>
@@ -305,12 +307,14 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">URL realUrl = new URL(&quot;http://www.autohome.com.cn/grade/carhtml/A.html&quot;);</span><br><span class="line">URLConnection connection = realUrl.openConnection();</span><br><span class="line">connection.connect();</span><br><span class="line">in = new BufferedReader(new InputStreamReader(connection.getInputStream(), &quot;gb2312&quot;));</span><br><span class="line">String line;</span><br><span class="line">while ((line = in.readLine()) != null) &#123;</span><br><span class="line">    result += line;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用python请求正常返回：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># -*- coding=utf-8 -*-</span><br><span class="line"></span><br><span class="line">import requests</span><br><span class="line">import sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(&quot;utf-8&quot;)</span><br><span class="line"></span><br><span class="line">class spider(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        print u&apos;start to grab...&apos;</span><br><span class="line"></span><br><span class="line">    def getsource(self, url):</span><br><span class="line">        html = requests.get(url)</span><br><span class="line">        return html.text</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    url = &apos;http://www.autohome.com.cn/grade/carhtml/Z.html&apos;</span><br><span class="line">    carSpider = spider()</span><br><span class="line">    html = carSpider.getsource(url)</span><br></pre></td></tr></table></figure>
-<h3 id="Solution">Solution</h3><p>基本确定是由于请求默认返回gzip压缩过的内容, 而HttpClient的GZIPInputStream在处理流的时候意外到达末尾. </p>
+<p>###Solution</p>
+<p>基本确定是由于请求默认返回gzip压缩过的内容, 而HttpClient的GZIPInputStream在处理流的时候意外到达末尾. </p>
 <p>跟踪代码发现HttpClient对于gzip压缩内容返回的是GzipDecompressingEntity.</p>
 <p>尝试添加请求头 <strong>“Accept-Encoding: <em>/</em>“</strong> 改变返回内容压缩方式, 返回的是BasicHttpEntity, 同时能被争取读出.</p>
 <p>基本算是一个替代解决方案, 但其实没有找到最终原因. 此网站应该是一个特例, 如有空应熟悉gzip算法并跟进HttpClient源码看看.</p>
 <p>希望有高手赐教.</p>
-<h3 id="Reference">Reference</h3><ul>
+<p>###Reference</p>
+<ul>
 <li><a href="http://www.devnote.cn/article/152.html" target="_blank" rel="noopener">Httpclient gzip操作异常java.io.EOFException</a></li>
 </ul>
 
@@ -473,7 +477,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Backgroud"><span class="nav-number">1.</span> <span class="nav-text">Backgroud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>

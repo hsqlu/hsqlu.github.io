@@ -307,13 +307,13 @@
       
 
       
-        <h2 id="背景">背景</h2><p>对Linux本来只限于简单应用，由于现在创业公司没有运维，很多事情要自己上。昨天收到阿里云警告说我们的服务器在对外DDOS，限时解决。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>对Linux本来只限于简单应用，由于现在创业公司没有运维，很多事情要自己上。昨天收到阿里云警告说我们的服务器在对外DDOS，限时解决。</p>
 <p>上去一看tomcat地下多了个A.war的项目，基本确定因为使用tomcat自带的manager调试的时候被黑了。</p>
-<h2 id="情景">情景</h2><p>实例目录下有个mg24的程序在跑，以为杀掉就可以了，我想的真的是太简单了。警告依然没有接触，而且mg24这个玩意又产生了，看了一下用户排除root被拿到，于是先改密码。</p>
+<h2 id="情景"><a href="#情景" class="headerlink" title="情景"></a>情景</h2><p>实例目录下有个mg24的程序在跑，以为杀掉就可以了，我想的真的是太简单了。警告依然没有接触，而且mg24这个玩意又产生了，看了一下用户排除root被拿到，于是先改密码。</p>
 <p>检查/etc/crontab<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">*/3 * * * * root /etc/cron.hourly/gcc4.sh</span><br></pre></td></tr></table></figure></p>
 <p>发现cron.hourly下面有个/lib/libudev4.so的文件，按照网上说的file /lib/libudev4.so看到的确是个可执行程序，也就是病毒了。可是直接删也删不掉。init.d地下也出现了异常启动脚本，发现是/usr/bin低下的一个文件。</p>
 <p>ps也没看到异常进程，查看一下ls -lh /bin/ps 发现ps命令被黑了，同时还有netstat。网上查一下，有类似的案例，叫10字符病毒程序，参见附录。跟我的情况基本一样，我按照他的操作处理了一下发现没用。杀掉就重启，病毒文件重新生成。十字符文件还换者地方产生，chattr +i /usr/bin， 它就跑到/bin下， chattr +i /bin就跑到/tmp下，好烦。因为我是运维小白，各种网上搜索终于解决了。下面总结下:</p>
-<h2 id="解决">解决</h2><ol>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
 <li><p>还原 ps netstat等所有被黑的命令， 网上说有备份(cp /usr/bin/dpkgd/<em> /sbin/ &amp;&amp; cp -f /usr/bin/dpkgd/</em> /bin/)</p>
 </li>
 <li><p>查看病毒位置，进程id等，还原rc.d下的文件，还有crontab，去掉恶意文件执行权限 </p>
@@ -328,8 +328,8 @@
 <li><p>这时候再杀掉病毒进程，删除病毒本体。</p>
 </li>
 </ol>
-<h2 id="总结">总结</h2><p>不懂还要多学习啊，注意安全，生产环境上不要乱搞。<br>下面参考博文里面介绍的很清楚了，有需要的直接去那儿看，谢谢前车之鉴。</p>
-<h2 id="参考">参考</h2><ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>不懂还要多学习啊，注意安全，生产环境上不要乱搞。<br>下面参考博文里面介绍的很清楚了，有需要的直接去那儿看，谢谢前车之鉴。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="http://www.kaisir.com/2015/07/ji-yi-ze-linux-bing-du-di-chu-li.html" target="_blank" rel="noopener">记一则Linux病毒的处理</a></li>
 <li><a href="http://blog.chinaunix.net/uid-20332519-id-4941140.html" target="_blank" rel="noopener">Linux下随机10字符病毒的清除-1</a></li>
 <li><a href="http://www.hackbase.com/article-2798-1.html" target="_blank" rel="noopener">Linux下随机10字符病毒的清除-2</a></li>

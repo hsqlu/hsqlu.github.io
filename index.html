@@ -331,7 +331,7 @@
               
                 
                 <a class="post-title-link" href="/2016/08/30/20160830/" itemprop="url">
-                  Untitled
+                  异常
                 </a>
               
             
@@ -344,11 +344,30 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-30T00:32:30+12:00" content="Aug 30 2016">
+            <time itemprop="dateCreated" datetime="2016-08-30T15:52:53+12:00" content="Aug 30 2016">
               Aug 30 2016
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -381,11 +400,127 @@
       
         
           
-            <p>title: “异常”<br>date: 2016-08-30 15:52:53<br>categories: </p>
-<ul>
-<li>Programming</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Aug 18, 2016 2:31:07 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: Initializing log4j from [classpath:log4j.properties]</span><br><span class="line">Aug 18, 2016 2:31:10 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: Initializing Spring FrameworkServlet &apos;SpringMVC&apos;</span><br><span class="line">Aug 18, 2016 2:31:23 PM org.apache.catalina.core.StandardWrapperValve invoke</span><br><span class="line">SEVERE: Servlet.service() for servlet [jsp] in context with path [/etl] threw exception [Unable to compile class for JSP] with root cause</span><br><span class="line">java.lang.IllegalArgumentException: Page directive: invalid value for import</span><br><span class="line">	at org.apache.jasper.compiler.Node$PageDirective.validateImport(Node.java:628)</span><br><span class="line">	at org.apache.jasper.compiler.Node$PageDirective.addImport(Node.java:611)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parsePageDirective(Parser.java:352)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parseDirective(Parser.java:473)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parseFileDirectives(Parser.java:1773)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parse(Parser.java:135)</span><br><span class="line">	at org.apache.jasper.compiler.ParserController.doParse(ParserController.java:242)</span><br><span class="line">	at org.apache.jasper.compiler.ParserController.parseDirectives(ParserController.java:119)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.generateJava(Compiler.java:194)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:374)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:354)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:341)</span><br><span class="line">	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:662)</span><br><span class="line">	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:364)</span><br><span class="line">	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:395)</span><br><span class="line">	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:339)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">	at com.fw.web.filter.EncodingFilter.doFilter(EncodingFilter.java:88)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:218)</span><br><span class="line">	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:122)</span><br><span class="line">	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:505)</span><br><span class="line">	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169)</span><br><span class="line">	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103)</span><br><span class="line">	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:956)</span><br><span class="line">	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)</span><br><span class="line">	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:442)</span><br><span class="line">	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1082)</span><br><span class="line">	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:623)</span><br><span class="line">	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:318)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)</span><br><span class="line">	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745)</span><br><span class="line"></span><br><span class="line">Aug 18, 2016 2:45:54 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: No Spring WebApplicationInitializer types detected on classpath</span><br><span class="line">Aug 18, 2016 2:45:55 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: Initializing Spring root WebApplicationContext</span><br><span class="line">Aug 18, 2016 2:46:44 PM org.apache.catalina.core.ApplicationContext log</span><br></pre></td></tr></table></figure>
+            <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Aug 18, 2016 2:31:07 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: Initializing log4j from [classpath:log4j.properties]</span><br><span class="line">Aug 18, 2016 2:31:10 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: Initializing Spring FrameworkServlet &apos;SpringMVC&apos;</span><br><span class="line">Aug 18, 2016 2:31:23 PM org.apache.catalina.core.StandardWrapperValve invoke</span><br><span class="line">SEVERE: Servlet.service() for servlet [jsp] in context with path [/etl] threw exception [Unable to compile class for JSP] with root cause</span><br><span class="line">java.lang.IllegalArgumentException: Page directive: invalid value for import</span><br><span class="line">	at org.apache.jasper.compiler.Node$PageDirective.validateImport(Node.java:628)</span><br><span class="line">	at org.apache.jasper.compiler.Node$PageDirective.addImport(Node.java:611)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parsePageDirective(Parser.java:352)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parseDirective(Parser.java:473)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parseFileDirectives(Parser.java:1773)</span><br><span class="line">	at org.apache.jasper.compiler.Parser.parse(Parser.java:135)</span><br><span class="line">	at org.apache.jasper.compiler.ParserController.doParse(ParserController.java:242)</span><br><span class="line">	at org.apache.jasper.compiler.ParserController.parseDirectives(ParserController.java:119)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.generateJava(Compiler.java:194)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:374)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:354)</span><br><span class="line">	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:341)</span><br><span class="line">	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:662)</span><br><span class="line">	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:364)</span><br><span class="line">	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:395)</span><br><span class="line">	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:339)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:731)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">	at com.fw.web.filter.EncodingFilter.doFilter(EncodingFilter.java:88)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241)</span><br><span class="line">	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208)</span><br><span class="line">	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:218)</span><br><span class="line">	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:122)</span><br><span class="line">	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:505)</span><br><span class="line">	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169)</span><br><span class="line">	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103)</span><br><span class="line">	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:956)</span><br><span class="line">	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116)</span><br><span class="line">	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:442)</span><br><span class="line">	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1082)</span><br><span class="line">	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:623)</span><br><span class="line">	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:318)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)</span><br><span class="line">	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745)</span><br><span class="line"></span><br><span class="line">Aug 18, 2016 2:45:54 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: No Spring WebApplicationInitializer types detected on classpath</span><br><span class="line">Aug 18, 2016 2:45:55 PM org.apache.catalina.core.ApplicationContext log</span><br><span class="line">INFO: Initializing Spring root WebApplicationContext</span><br><span class="line">Aug 18, 2016 2:46:44 PM org.apache.catalina.core.ApplicationContext log</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/19/20160520/" itemprop="url">
+                  Kafka客户端连接问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-06-19T23:52:53+12:00" content="Jun 19 2016">
+              Jun 19 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/基础架构/" itemprop="url" rel="index">
+                    <span itemprop="name">基础架构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/19/20160520/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/19/20160520/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本要做一个消息服务组件的选型，计划要对Kafka做下测试，各种琐事一直没有开展。晚上写一个Client的时果遇到了一些问题，结果纠结了很久。</p>
+<h4 id="Kafka介绍"><a href="#Kafka介绍" class="headerlink" title="Kafka介绍"></a>Kafka介绍</h4>
           
         
       
@@ -517,7 +652,7 @@
         
           
             <p>这次交流的主题主要围绕ETL项目开发，构建，发布过程中的一些问题进行探讨，提出一些建议。</p>
-<h3 id="项目组织">项目组织</h3><p>最初的ETL项目都是独立的maven工程，导致依赖混乱。本地环境可能要从不同的目录路径下导入各种依赖模块分别编译打包。</p>
+<h3 id="项目组织"><a href="#项目组织" class="headerlink" title="项目组织"></a>项目组织</h3><p>最初的ETL项目都是独立的maven工程，导致依赖混乱。本地环境可能要从不同的目录路径下导入各种依赖模块分别编译打包。</p>
 <p>比如ETL的依赖就包括位于不同目录下的common工程，meta工程，fw工程等。</p>
 <p>第一次重构后形成了如下的项目结构：</p>
 <ul>
@@ -556,27 +691,27 @@
 </ul>
 <p>如此一来项目的内聚性提高了，项目结构也很清晰，基础组件都提炼出来了。<br>但是对于一个拥有众多项目的公司来说还不够，如果有个新项目的需求可能就会有人写一个新的工程，抛弃这些内部的公共组件，违反一些团队内部约定。</p>
 <p>java项目可以通过基于maven的树状继承体系以及maven自定义初始化项目骨架来规范。</p>
-<h3 id="ROOT_POM定义">ROOT POM定义</h3><p>定义如下一个根POM，里面指定所有团队内java项目的一些约束，比如编译版本，encoding，maven插件版本等。同时定义了maven的profile，所以的子项目<br>遵循development, test, product的环境区分，通过构建时添加 -P test/development来制定对于的profile以区分环境相关配置。</p>
+<h3 id="ROOT-POM定义"><a href="#ROOT-POM定义" class="headerlink" title="ROOT POM定义"></a>ROOT POM定义</h3><p>定义如下一个根POM，里面指定所有团队内java项目的一些约束，比如编译版本，encoding，maven插件版本等。同时定义了maven的profile，所以的子项目<br>遵循development, test, product的环境区分，通过构建时添加 -P test/development来制定对于的profile以区分环境相关配置。</p>
 <p>下面是一个根项目结构的demo。</p>
-<h4 id="Super_Root_POM">Super Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;modules&gt;</span><br><span class="line">        &lt;module&gt;dcp-java-parent&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dcp-web-parent&lt;/module&gt;</span><br><span class="line">    &lt;/modules&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.sourceEncoding&gt;UTF-8&lt;/project.reporting.sourceEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.7&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;profiles&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;development&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;development&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">            &lt;activation&gt;</span><br><span class="line">                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">            &lt;/activation&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;test&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;test&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;product&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;product&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">    &lt;/profiles&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;pluginManagement&gt;</span><br><span class="line">            &lt;plugins&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;/version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;source&gt;$&#123;java.version&#125;&lt;/source&gt;</span><br><span class="line">                        &lt;target&gt;$&#123;java.version&#125;&lt;/target&gt;</span><br><span class="line">                    &lt;/configuration&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;/version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;nonFilteredFileExtensions&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;pdf&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;swf&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;data&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                        &lt;/nonFilteredFileExtensions&gt;</span><br><span class="line">                    &lt;/configuration&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;1.3&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.8&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.3.2&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-install-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.4&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.12.4&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.7&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-site-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">            &lt;/plugins&gt;</span><br><span class="line">        &lt;/pluginManagement&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-enforcer-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;1.4&lt;/version&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;enforce-no-snapshots&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;enforce&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                        &lt;configuration&gt;</span><br><span class="line">                            &lt;rules&gt;</span><br><span class="line">                                &lt;requireReleaseDeps&gt;</span><br><span class="line">                                    &lt;onlyWhenRelease&gt;true&lt;/onlyWhenRelease&gt;</span><br><span class="line">                                    &lt;message&gt;No Snapshots Allowed!&lt;/message&gt;</span><br><span class="line">                                &lt;/requireReleaseDeps&gt;</span><br><span class="line">                                &lt;!-- -Denforcer.skip=true --&gt;</span><br><span class="line">                                &lt;!-- &lt;requireReleaseVersion&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;message&gt;No Snapshots Allowed!&lt;/message&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;/requireReleaseVersion&gt; --&gt;</span><br><span class="line">                            &lt;/rules&gt;</span><br><span class="line">                            &lt;fail&gt;true&lt;/fail&gt;</span><br><span class="line">                        &lt;/configuration&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">        &lt;filters&gt;</span><br><span class="line">            &lt;filter&gt;src/main/filters/filter-$&#123;env&#125;.properties&lt;/filter&gt;</span><br><span class="line">        &lt;/filters&gt;</span><br><span class="line">        &lt;resources&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/filters/resources/$&#123;env&#125;&lt;/directory&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">                &lt;filtering&gt;true&lt;/filtering&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">        &lt;/resources&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">    &lt;distributionManagement&gt;</span><br><span class="line">        &lt;repository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-releases&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform releases project&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.6.13:8081/nexus/content/repositories/ltdbRepositoryReleases/&lt;/url&gt;</span><br><span class="line">        &lt;/repository&gt;</span><br><span class="line"></span><br><span class="line">        &lt;snapshotRepository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-snapshots&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform snapshots project&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.6.13:8081/nexus/content/repositories/ltdbRepository/&lt;/url&gt;</span><br><span class="line">        &lt;/snapshotRepository&gt;</span><br><span class="line">    &lt;/distributionManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="Web_Root_POM">Web Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-web-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Web :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;/junit.version&gt;</span><br><span class="line">        &lt;servlet.version&gt;3.1.0&lt;/servlet.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;servlet.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">    &lt;/dependencyManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="Java_Root_POM">Java Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-java-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.0&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Non-web :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;/junit.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">    &lt;/dependencyManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="Maven_自定义项目骨架">Maven 自定义项目骨架</h4><p>通过如下命令可以选择一个团队定义好的项目骨架。</p>
+<h4 id="Super-Root-POM"><a href="#Super-Root-POM" class="headerlink" title="Super Root POM"></a>Super Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;modules&gt;</span><br><span class="line">        &lt;module&gt;dcp-java-parent&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dcp-web-parent&lt;/module&gt;</span><br><span class="line">    &lt;/modules&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.sourceEncoding&gt;UTF-8&lt;/project.reporting.sourceEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.7&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;profiles&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;development&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;development&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">            &lt;activation&gt;</span><br><span class="line">                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">            &lt;/activation&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;test&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;test&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;product&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;product&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">    &lt;/profiles&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;pluginManagement&gt;</span><br><span class="line">            &lt;plugins&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;/version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;source&gt;$&#123;java.version&#125;&lt;/source&gt;</span><br><span class="line">                        &lt;target&gt;$&#123;java.version&#125;&lt;/target&gt;</span><br><span class="line">                    &lt;/configuration&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;/version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;nonFilteredFileExtensions&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;pdf&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;swf&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;data&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                        &lt;/nonFilteredFileExtensions&gt;</span><br><span class="line">                    &lt;/configuration&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;1.3&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.8&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.3.2&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-install-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.4&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.12.4&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.7&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-site-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">            &lt;/plugins&gt;</span><br><span class="line">        &lt;/pluginManagement&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-enforcer-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;1.4&lt;/version&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;enforce-no-snapshots&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;enforce&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                        &lt;configuration&gt;</span><br><span class="line">                            &lt;rules&gt;</span><br><span class="line">                                &lt;requireReleaseDeps&gt;</span><br><span class="line">                                    &lt;onlyWhenRelease&gt;true&lt;/onlyWhenRelease&gt;</span><br><span class="line">                                    &lt;message&gt;No Snapshots Allowed!&lt;/message&gt;</span><br><span class="line">                                &lt;/requireReleaseDeps&gt;</span><br><span class="line">                                &lt;!-- -Denforcer.skip=true --&gt;</span><br><span class="line">                                &lt;!-- &lt;requireReleaseVersion&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;message&gt;No Snapshots Allowed!&lt;/message&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;/requireReleaseVersion&gt; --&gt;</span><br><span class="line">                            &lt;/rules&gt;</span><br><span class="line">                            &lt;fail&gt;true&lt;/fail&gt;</span><br><span class="line">                        &lt;/configuration&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">        &lt;filters&gt;</span><br><span class="line">            &lt;filter&gt;src/main/filters/filter-$&#123;env&#125;.properties&lt;/filter&gt;</span><br><span class="line">        &lt;/filters&gt;</span><br><span class="line">        &lt;resources&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/filters/resources/$&#123;env&#125;&lt;/directory&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">                &lt;filtering&gt;true&lt;/filtering&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">        &lt;/resources&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">    &lt;distributionManagement&gt;</span><br><span class="line">        &lt;repository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-releases&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform releases project&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.6.13:8081/nexus/content/repositories/ltdbRepositoryReleases/&lt;/url&gt;</span><br><span class="line">        &lt;/repository&gt;</span><br><span class="line"></span><br><span class="line">        &lt;snapshotRepository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-snapshots&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform snapshots project&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.6.13:8081/nexus/content/repositories/ltdbRepository/&lt;/url&gt;</span><br><span class="line">        &lt;/snapshotRepository&gt;</span><br><span class="line">    &lt;/distributionManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Web-Root-POM"><a href="#Web-Root-POM" class="headerlink" title="Web Root POM"></a>Web Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-web-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Web :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;/junit.version&gt;</span><br><span class="line">        &lt;servlet.version&gt;3.1.0&lt;/servlet.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;servlet.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">    &lt;/dependencyManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Java-Root-POM"><a href="#Java-Root-POM" class="headerlink" title="Java Root POM"></a>Java Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-java-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.0&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Non-web :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;/junit.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">    &lt;/dependencyManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Maven-自定义项目骨架"><a href="#Maven-自定义项目骨架" class="headerlink" title="Maven 自定义项目骨架"></a>Maven 自定义项目骨架</h4><p>通过如下命令可以选择一个团队定义好的项目骨架。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mvn archetype:generate -DarchetypeCatalog=http://192.168.6.13:8081/nexus/content/repositories/ltdbRepositoryReleases</span><br></pre></td></tr></table></figure>
 <p>目录结构如下：</p>
 <pre><code>项目名称 +
-        <span class="string">|</span>
+        |
         + src   + assembly  （maven assembly插件配置目录）
-                <span class="string">|   </span>
+                |   
                 + bin       （项目启停脚本目录）              
-                <span class="string">|</span>
+                |
                 + container （内置容器，比如tomcat目录）
-                <span class="string">|</span>
+                |
                 + main      （源码目录）
-                <span class="string">|   </span>
+                |   
                 + test      （测试源码）
 </code></pre><p>以上的初始化项目骨架应在实践中持续调整。</p>
-<h3 id="CI/CD">CI/CD</h3><p>整个软件交付的周期中，通常会涉及开发人员、测试人员、运维人员分别负责研发工作、测试工作以及上线部署工作。主要问题有</p>
+<h3 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h3><p>整个软件交付的周期中，通常会涉及开发人员、测试人员、运维人员分别负责研发工作、测试工作以及上线部署工作。主要问题有</p>
 <ol>
 <li>代码构建的一致性和稳定性很难保证</li>
 <li>测试环境的版本管理复杂，易出错，难回滚</li>
@@ -584,12 +719,12 @@
 </ol>
 <p>Continuous Integration(持续集成) Continuous Deploy/Delivery(持续部署/交付)是伴随着敏捷开发而活跃起来的概念。核心是通过一些自动化的工具<br>来提高构建效率，简化测试环境管理，同时使版本升级、回滚更便捷。</p>
 <p>针对项目的情况，为了实现持续集成，目前所做的工作有：</p>
-<pre><code><span class="bullet">1. </span>使用Jenkins持续构建项目。
-<span class="bullet">2. </span>通过maven和spring的profile功能做环境区分（由测试人员维护测试环境的配置，实施人员维护生产环节的配置文件），在Jenkins上可以直接获取对应
+<pre><code>1. 使用Jenkins持续构建项目。
+2. 通过maven和spring的profile功能做环境区分（由测试人员维护测试环境的配置，实施人员维护生产环节的配置文件），在Jenkins上可以直接获取对应
 环境的最终部署文件。
-<span class="bullet">3. </span>由于目前没有使用svn， 所以的包都是从仓库分支带上不同的profile配置构建出来了，未来能用分支区分将更容易对发布版本维护。
-<span class="bullet">4. </span>通过发布包内置tomcat实现生产环境的一键部署。
-</code></pre><h4 id="代码静态检查">代码静态检查</h4><p>这里的代码静态检查包含了代码规范检查和源代码中潜在的问题。写代码的过程是一个完全主观驱动进行的存在，不可避免地会出现一些失误或者bug，代码静态检查<br>可以帮助将由于疏忽造成的bug数量减少，同时保持团队统一的代码风格以提高项目的可维护性。</p>
+3. 由于目前没有使用svn， 所以的包都是从仓库分支带上不同的profile配置构建出来了，未来能用分支区分将更容易对发布版本维护。
+4. 通过发布包内置tomcat实现生产环境的一键部署。
+</code></pre><h4 id="代码静态检查"><a href="#代码静态检查" class="headerlink" title="代码静态检查"></a>代码静态检查</h4><p>这里的代码静态检查包含了代码规范检查和源代码中潜在的问题。写代码的过程是一个完全主观驱动进行的存在，不可避免地会出现一些失误或者bug，代码静态检查<br>可以帮助将由于疏忽造成的bug数量减少，同时保持团队统一的代码风格以提高项目的可维护性。</p>
 <p>代码规范检查工具常用有checkstyle，在maven项目中使用可以通过插件的方式。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-checkstyle-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.10&lt;/version&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;checkstyle&lt;/id&gt;</span><br><span class="line">            &lt;phase&gt;validate&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;check&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;configLocation&gt;$&#123;basedir&#125;/src/config/custom_checkstyle.xml&lt;/configLocation&gt;</span><br><span class="line">                &lt;suppressionsLocation&gt;$&#123;basedir&#125;/src/config/checkstyle-suppression.xml&lt;/suppressionsLocation&gt;</span><br><span class="line">                &lt;!--&lt;outputFile&gt;target/checkstyle/*&lt;/outputFile&gt;--&gt;</span><br><span class="line">                &lt;failOnViolation&gt;true&lt;/failOnViolation&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
 <p>configLocation指定了checkstyle配置文件的路径，suppressionsLocation指定例外情况配置文件的路径。具体的配置可以参考官方文档。</p>
@@ -597,133 +732,13 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;findbugs-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.0.3&lt;/version&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
 <p>对于在IntelliJ IDEA下开发的同学，更是有findbugs的插件可以帮助提早发现代码中潜在的问题。</p>
 <p>其他的常用工具比如PMD，SonarQube等，各位可以自行搜索了解。代码的静态检查可以作为CI/CD中的一个必须步骤，通过检查失败禁止代码提交来强制开发人员规范自己的代码。</p>
-<h4 id="代码审查">代码审查</h4><p>代码审查是指Code Review，通过让其他同事或者高级人员来复查自己的代码来控制代码质量。从短期来看可能会多占用一下开发资源，但从长远看它对团队代码质量的把控，<br>可维护性的提高以及团队成员综合素质和生产力的提高是有帮助的。</p>
+<h4 id="代码审查"><a href="#代码审查" class="headerlink" title="代码审查"></a>代码审查</h4><p>代码审查是指Code Review，通过让其他同事或者高级人员来复查自己的代码来控制代码质量。从短期来看可能会多占用一下开发资源，但从长远看它对团队代码质量的把控，<br>可维护性的提高以及团队成员综合素质和生产力的提高是有帮助的。</p>
 <p>具体可以参考InfoQ上的文章<a href="http://www.infoq.com/cn/news/2013/11/code-review-why-when-how" target="_blank" rel="noopener">Code review when and how</a></p>
 <p>类似的文章还有很多，高质量的会继续添加。同样，代码审查可以作为开发流程的一个必须步骤，通过Jira等管理工具加入流程，在提交给测试人员测试之前强制执行。</p>
-<h3 id="TDD">TDD</h3><p>测试驱动开发的概念已经翻来覆去很多年了，真正的实践在大团队尤其是非敏捷的团队里还是很少见的。</p>
+<h3 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h3><p>测试驱动开发的概念已经翻来覆去很多年了，真正的实践在大团队尤其是非敏捷的团队里还是很少见的。</p>
 <p>对于我们，可以学TDD的思想来写好测试，对于开发来说，比较重要的包括单元测试，集成测试，以及E2E测试。</p>
 <p>好的测试覆盖可以帮助我们更自信的去重构，还可以降低回归测试的压力和成本。对于集成系统也可以降低模块之间联调的难度和成本。</p>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/19/20160520/" itemprop="url">
-                  Kafka客户端连接问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-06-19T23:52:53+12:00" content="Jun 19 2016">
-              Jun 19 2016
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/基础架构/" itemprop="url" rel="index">
-                    <span itemprop="name">基础架构</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/19/20160520/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/19/20160520/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本要做一个消息服务组件的选型，计划要对Kafka做下测试，各种琐事一直没有开展。晚上写一个Client的时果遇到了一些问题，结果纠结了很久。</p>
-<h4 id="Kafka介绍">Kafka介绍</h4>
           
         
       
@@ -855,11 +870,11 @@
         
           
             <p>最近在做分布式监控系统的技术选型，不少方案/工具会用到MySQL。安装MySQL5.7的时候，在登陆和修改密码部分遇到了一点问题，这里整理一下以便参考。</p>
-<h4 id="安装">安装</h4><p>系统是CentOS6.7，我还是推荐yum安装。去官方下载yum源的rpm文件并安装。<br>对于yum官方镜像安装的mysql-community-server，直接service mysqld就可以启动了。</p>
-<h4 id="登陆">登陆</h4><p>以前老的版本我记得是直接</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>系统是CentOS6.7，我还是推荐yum安装。去官方下载yum源的rpm文件并安装。<br>对于yum官方镜像安装的mysql-community-server，直接service mysqld就可以启动了。</p>
+<h4 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h4><p>以前老的版本我记得是直接</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -uroot -h localhost</span><br></pre></td></tr></table></figure>
 <p>就登录了。结果发现不行</p>
-<h4 id="修改密码">修改密码</h4>
+<h4 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h4>
           
         
       
@@ -1003,7 +1018,7 @@
         
           
             <p>本文将从源码角度解析codis的主从切换服务codis-ha。读者需要对codis的架构有所了解，并且熟悉基本的golang语法。<br>另外，本文假定读者熟悉golang一些常用包，比如flag，net/http，error等。</p>
-<h4 id="获取源码">获取源码</h4><p>codis-ha的github地址为<strong><em><a href="https://github.com/ngaut/codis-ha" target="_blank" rel="noopener">https://github.com/ngaut/codis-ha</a></em></strong>，执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com/ngaut/codis-ha</span><br></pre></td></tr></table></figure></p>
+<p>####获取源码<br>codis-ha的github地址为<strong><em><a href="https://github.com/ngaut/codis-ha" target="_blank" rel="noopener">https://github.com/ngaut/codis-ha</a></em></strong>，执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com/ngaut/codis-ha</span><br></pre></td></tr></table></figure></p>
 <p>可以将codis-ha下载到本地$GOPATH/src/github.com/ngaut/codis-ha目录下。</p>
 <p>结构为：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-rw-r--r-- 1 root 197608   71 3月  19 15:16 aliverchecker.go</span><br><span class="line">-rw-r--r-- 1 root 197608 1358 3月  19 15:16 main.go</span><br><span class="line">-rw-r--r-- 1 root 197608  260 3月  19 15:16 README.md</span><br><span class="line">-rw-r--r-- 1 root 197608  679 3月  19 15:16 redischecker.go</span><br><span class="line">-rw-r--r-- 1 root 197608  461 3月  19 15:16 redischecker_test.go</span><br><span class="line">-rw-r--r-- 1 root 197608  924 3月  19 15:16 rest.go</span><br><span class="line">-rw-r--r-- 1 root 197608 3495 3月  19 15:16 servergroup.go</span><br><span class="line">-rw-r--r-- 1 root 197608 3602 3月  19 15:16 servergroup_test.go</span><br></pre></td></tr></table></figure>
@@ -1016,13 +1031,15 @@
 </ul>
 <p>除此之外，redischecker_test.go和servergroup_test.go分别为测试文件。<br>README.md为markdown的说明文件(这是一句废话，而且显得我很二)。</p>
 <p>解析的顺序为从局部到整体，称之为倒叙。</p>
-<h4 id="倒叙之aliverchecker-go">倒叙之aliverchecker.go</h4><p>倒叙之aliverchecker.go只定义了一个接口AliveChecker，用来抽象实现了CheckAlive() error方法的类型</p>
+<p>####倒叙之aliverchecker.go<br>倒叙之aliverchecker.go只定义了一个接口AliveChecker，用来抽象实现了CheckAlive() error方法的类型</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type AliveChecker interface &#123;</span><br><span class="line">	CheckAlive() error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="倒叙之redischecker-go">倒叙之redischecker.go</h4><p>redischecker.go定义了一个redisChecker的类型，它实现了ping() error和CheckAlive() error两个方法，所以它也一个AliveChecker类型。</p>
+<p>####倒叙之redischecker.go<br>redischecker.go定义了一个redisChecker的类型，它实现了ping() error和CheckAlive() error两个方法，所以它也一个AliveChecker类型。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var (</span><br><span class="line">	_ AliveChecker = &amp;redisChecker&#123;&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type redisChecker struct &#123;</span><br><span class="line">	addr           string</span><br><span class="line">	defaultTimeout time.Duration</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用go的redis客户端&quot;github.com/garyburd/redigo/redis&quot;连接一下redis server，相当于一个心跳</span><br><span class="line">func (r *redisChecker) ping() error &#123;</span><br><span class="line">	c, err := redis.DialTimeout(&quot;tcp&quot;, r.addr, r.defaultTimeout, r.defaultTimeout, r.defaultTimeout)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	defer c.Close()</span><br><span class="line">	_, err = c.Do(&quot;ping&quot;)</span><br><span class="line">	return err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 检查redis server的存活状态，尝试ping()三次 间隔3s/次，任意一次ping通即redis server状态良好，全部失败为redis server宕机</span><br><span class="line">func (r *redisChecker) CheckAlive() error &#123;</span><br><span class="line">	var err error</span><br><span class="line">	for i := 0; i &lt; 2; i++ &#123; //try a few times</span><br><span class="line">		err = r.ping()</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			time.Sleep(3 * time.Second)</span><br><span class="line">			continue</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		return nil</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="倒叙之rest-go">倒叙之rest.go</h4><p>rest.go封装了一个发送http请求到codis-config(dashboard)的方法</p>
+<p>####倒叙之rest.go</p>
+<p>rest.go封装了一个发送http请求到codis-config(dashboard)的方法</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//call http url and get json, then decode to objptr</span><br><span class="line">func httpCall(objPtr interface&#123;&#125;, url string, method string, arg interface&#123;&#125;) error &#123;</span><br><span class="line">    //返回一个http.Client对象，使用http默认协议</span><br><span class="line">	client := &amp;http.Client&#123;Transport: http.DefaultTransport&#125;</span><br><span class="line">    //用一个bytes.Buffer来传输请求参数</span><br><span class="line">	rw := &amp;bytes.Buffer&#123;&#125;</span><br><span class="line">	if arg != nil &#123;</span><br><span class="line">		buf, err := json.Marshal(arg)</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			return errors.Trace(err)</span><br><span class="line">		&#125;</span><br><span class="line">		rw.Write(buf)</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    //返回一个http的request对象，传入method url和保证的请求参数rw</span><br><span class="line">	req, err := http.NewRequest(method, url, rw)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Trace(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	resp, err := client.Do(req)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		return errors.Trace(err)</span><br><span class="line">	&#125;</span><br><span class="line">	defer resp.Body.Close()</span><br><span class="line">    </span><br><span class="line">    //确认返回2**的http response status code</span><br><span class="line">	if resp.StatusCode/100 != 2 &#123;</span><br><span class="line">		msg, _ := ioutil.ReadAll(resp.Body)</span><br><span class="line">		return errors.Errorf(&quot;error: %d, message: %s&quot;, resp.StatusCode, string(msg))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    //用传入的objPtr类型将返回的json类型解析返回</span><br><span class="line">	if objPtr != nil &#123;</span><br><span class="line">		return json.NewDecoder(resp.Body).Decode(objPtr)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="倒叙之servergroup-go">倒叙之servergroup.go</h4><p>codis-ha的核心代码都在这个文件中</p>
+<p>####倒叙之servergroup.go</p>
+<p>codis-ha的核心代码都在这个文件中</p>
 <p>GetServerGroups通过调用callHttp()获取codis在zookeeper上注册的server groups信息</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func GetServerGroups() ([]models.ServerGroup, error) &#123;</span><br><span class="line">	var groups []models.ServerGroup</span><br><span class="line">	err := callHttp(&amp;groups, genUrl(*apiServer, &quot;/api/server_groups&quot;), &quot;GET&quot;, nil)</span><br><span class="line">	return groups, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>PingServer用来检测codis server也就是redis服务的状态，并将CheckAlive的结果放进一个channel<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func PingServer(checker AliveChecker, errCtx interface&#123;&#125;, errCh chan&lt;- interface&#123;&#125;) &#123;</span><br><span class="line">	err := checker.CheckAlive()</span><br><span class="line">	log.Debugf(&quot;check %+v, result:%v, errCtx:%+v&quot;, checker, err, errCtx)</span><br><span class="line">	if err != nil &#123;</span><br><span class="line">		errCh &lt;- errCtx</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line">	errCh &lt;- nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -1033,14 +1050,14 @@
 <p>handleAddServer将存活的redis添加其对应给group下作为slave节点 </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func handleAddServer(s *models.Server) &#123;</span><br><span class="line">	s.Type = models.SERVER_TYPE_SLAVE</span><br><span class="line">	log.Infof(&quot;try reusing slave %+v&quot;, s)</span><br><span class="line">	err := callHttp(nil, genUrl(*apiServer, &quot;/api/server_group/&quot;, s.GroupId, &quot;/addServer&quot;), &quot;PUT&quot;, s)</span><br><span class="line">	log.Errorf(&quot;do reusing slave %v failed %v&quot;, s, errors.ErrorStack(err))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>CheckAliveAndPromote是codis-ha的核心方法，解析见代码注释<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//ping codis-server find crashed codis-server</span><br><span class="line">func CheckAliveAndPromote(groups []models.ServerGroup) ([]models.Server, error) &#123;</span><br><span class="line">	errCh := make(chan interface&#123;&#125;, 100)    //建一个缓冲容量为100的channel</span><br><span class="line">	var serverCnt int                       //serverCnt用来对所有group中的redis节点计数</span><br><span class="line">	for _, group := range groups &#123; //each group</span><br><span class="line">		for _, s := range group.Servers &#123; //each server</span><br><span class="line">			serverCnt++                         //发现一个redis server</span><br><span class="line">			rc := acf(s.Addr, 5*time.Second)    //返回一个redisChecker类型对象地址，其拥有CheckAlive()方法</span><br><span class="line">			news := s                           //复制为news</span><br><span class="line">			go PingServer(rc, news, errCh)      //检测该redis server状态，如果正常会将nil写入errCh，如果该节点挂了会将news写入errCh</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//get result</span><br><span class="line">	var crashedServer []models.Server           //crashedServer用来记录挂掉的redis server</span><br><span class="line">	for i := 0; i &lt; serverCnt; i++ &#123;            //按照所有redis server的数量进行遍历，不然s := &lt;-errCh会一直阻塞</span><br><span class="line">		s := &lt;-errCh                            //阻塞知道errCh有内容写入</span><br><span class="line">		if s == nil &#123; //alive                   </span><br><span class="line">			continue</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		log.Warningf(&quot;server maybe crashed %+v&quot;, s)</span><br><span class="line">		crashedServer = append(crashedServer, *s.(*models.Server))  //将挂的节点加入crashedServer   </span><br><span class="line"></span><br><span class="line">		err := handleCrashedServer(s.(*models.Server))  //调用handleCrashedServer出来挂掉的redis server</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			return crashedServer, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return crashedServer, nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//ping codis-server find node up with type offine(勉为其难翻译一下：ping codis-server找到一个offline的节点并将其online)</span><br><span class="line">func CheckOfflineAndPromoteSlave(groups []models.ServerGroup) ([]models.Server, error) &#123;</span><br><span class="line">	for _, group := range groups &#123; //each group</span><br><span class="line">		for _, s := range group.Servers &#123; //each server</span><br><span class="line">			rc := acf(s.Addr, 5*time.Second)</span><br><span class="line">			news := s</span><br><span class="line">			if (s.Type == models.SERVER_TYPE_OFFLINE) &#123;</span><br><span class="line">				verifyAndUpServer(rc, news)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return nil, nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="最后是main-go">最后是main.go</h4><p>main.go除了程序入口外还定义了一些全局变量和一个包函数。</p>
+<p>####最后是main.go<br>main.go除了程序入口外还定义了一些全局变量和一个包函数。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 定义一个fnHttpCall的函数类型，接收四个参数，返回一个error</span><br><span class="line">type fnHttpCall func(objPtr interface&#123;&#125;, api string, method string, arg interface&#123;&#125;) error</span><br><span class="line"></span><br><span class="line">// 定义一个aliveCheckerFactory的函数类型，接收两个参数，返回一个AliveChecker类型。AliveChecker是一个接口类型，在aliverchecker.go中定义</span><br><span class="line">type aliveCheckerFactory func(addr string, defaultTimeout time.Duration) AliveChecker</span><br><span class="line"></span><br><span class="line">// 下面是一组全局变量</span><br><span class="line">var (</span><br><span class="line">    //调用flag的String()方法分别解析codis-ha启动时的命令行参数，并设置一个default值</span><br><span class="line">    </span><br><span class="line">    //codis-config参数，用来调用codis-cofig的api来配置codis的主从关系</span><br><span class="line">	apiServer   = flag.String(&quot;codis-config&quot;, &quot;localhost:18087&quot;, &quot;api server address&quot;)</span><br><span class="line">	//productName参数，用来连接zookeeper获取codis的各种注册信息</span><br><span class="line">	productName = flag.String(&quot;productName&quot;, &quot;test&quot;, &quot;product name, can be found in codis-proxy&apos;s config&quot;)</span><br><span class="line">	//logLevel参数，设置日志级别</span><br><span class="line">	logLevel    = flag.String(&quot;log-level&quot;, &quot;info&quot;, &quot;log level&quot;)</span><br><span class="line"></span><br><span class="line">    //定义一个fnHttpCall类型的函数callHttp，详细实现在rest.go中</span><br><span class="line">	callHttp fnHttpCall          = httpCall</span><br><span class="line">	</span><br><span class="line">	//定义一个aliveCheckerFactory类型的函数acf，返回一个redisChecker类型实例地址，redisChecker定义在redischecker.go中</span><br><span class="line">	acf      aliveCheckerFactory = func(addr string, timeout time.Duration) AliveChecker &#123;</span><br><span class="line">		return &amp;redisChecker&#123;</span><br><span class="line">			addr:           addr,</span><br><span class="line">			defaultTimeout: timeout,</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>总的来说，codis-ha做了下面三件事：</p>
-<pre><code>-<span class="ruby"> 获取codis server groups列表
-</span>-<span class="ruby"> 检查codis server(redis实例)的状态
-</span>-<span class="ruby"> 检查offline状态的codis server并将其上线(online)</span>
+<pre><code>- 获取codis server groups列表
+- 检查codis server(redis实例)的状态
+- 检查offline状态的codis server并将其上线(online)
 </code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	flag.Parse()                        //解析命令行参数</span><br><span class="line">	log.SetLevelByString(*logLevel)     //设置日志级别</span><br><span class="line"></span><br><span class="line">	for &#123;                                       //别停</span><br><span class="line">		groups, err := GetServerGroups()        //获取codis server groups信息</span><br><span class="line">		if err != nil &#123;</span><br><span class="line">			log.Error(errors.ErrorStack(err))</span><br><span class="line">			return</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		CheckAliveAndPromote(groups)            //见CheckAliveAndPromote方法解析</span><br><span class="line">		CheckOfflineAndPromoteSlave(groups)     //见CheckOfflineAndPromoteSlave方法解析</span><br><span class="line">		time.Sleep(3 * time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="后记">后记</h4><p>这篇文是我简略看过codis-ha之后写的，目的主要是学习golang的程序结构和组织。codis-ha本身也未作讨论，有问题可以一起交流。写的也匆忙，如有错误也请不吝指正。</p>
+<p>####后记<br>这篇文是我简略看过codis-ha之后写的，目的主要是学习golang的程序结构和组织。codis-ha本身也未作讨论，有问题可以一起交流。写的也匆忙，如有错误也请不吝指正。</p>
 
           
         
@@ -1161,27 +1178,27 @@
         
           
             <p>本文是主要介绍Golang的Hello world，不对任何语言语法层面做过多讨论。并且假设所有阅读本文的人有开发背景。</p>
-<h4 id="安装Golang开发环境">安装Golang开发环境</h4><p>要想使用go语法做开发，首先当然是要搭建go的开发环境了。到<a href="http://golang.org" target="_blank" rel="noopener">Golang官网</a>上下载go的安装包，找自己机器对应的版本。<br>当然如果你是在天朝，通常情况下被墙是不可避免的，你可以自行翻越或者到<a href="http://www.golangtc.com/" target="_blank" rel="noopener">Golang中国</a>上下载。<br>go在大中华地区还是很流行的，可能跟围棋是中国发明的有关。</p>
+<p>####安装Golang开发环境<br>要想使用go语法做开发，首先当然是要搭建go的开发环境了。到<a href="http://golang.org" target="_blank" rel="noopener">Golang官网</a>上下载go的安装包，找自己机器对应的版本。<br>当然如果你是在天朝，通常情况下被墙是不可避免的，你可以自行翻越或者到<a href="http://www.golangtc.com/" target="_blank" rel="noopener">Golang中国</a>上下载。<br>go在大中华地区还是很流行的，可能跟围棋是中国发明的有关。</p>
 <p>下载后找个顺眼的地方解压，比如/usr/local/go。进去到bin目录下执行go命令会得到如下信息：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go</span><br><span class="line">Go is a tool for managing Go source code.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">	go command [arguments]</span><br><span class="line"></span><br><span class="line">The commands are:</span><br><span class="line"></span><br><span class="line">	build       compile packages and dependencies</span><br><span class="line">	clean       remove object files</span><br><span class="line">	doc         show documentation for package or symbol</span><br><span class="line">	env         print Go environment information</span><br><span class="line">	fix         run go tool fix on packages</span><br><span class="line">	fmt         run gofmt on package sources</span><br><span class="line">	generate    generate Go files by processing source</span><br><span class="line">	get         download and install packages and dependencies</span><br><span class="line">	install     compile and install packages and dependencies</span><br><span class="line">	list        list packages</span><br><span class="line">	run         compile and run Go program</span><br><span class="line">	test        test packages</span><br><span class="line">	tool        run specified go tool</span><br><span class="line">	version     print Go version</span><br><span class="line">	vet         run go tool vet on packages</span><br><span class="line"></span><br><span class="line">Use &quot;go help [command]&quot; for more information about a command.</span><br><span class="line"></span><br><span class="line">Additional help topics:</span><br><span class="line"></span><br><span class="line">	c           calling between Go and C</span><br><span class="line">	buildmode   description of build modes</span><br><span class="line">	filetype    file types</span><br><span class="line">	gopath      GOPATH environment variable</span><br><span class="line">	environment environment variables</span><br><span class="line">	importpath  import path syntax</span><br><span class="line">	packages    description of package lists</span><br><span class="line">	testflag    description of testing flags</span><br><span class="line">	testfunc    description of testing functions</span><br><span class="line"></span><br><span class="line">Use &quot;go help [topic]&quot; for more information about that topic.</span><br></pre></td></tr></table></figure>
 <p>诺，go开发环境你就按照好了，够傻瓜吧。</p>
 <p>然而，这还不够。你一般会有一个自己写那些弱智代码的地方，称之为工作目录吧。在工作目录下怎么使用go呢？<br>这就需要把go这个命令放进环境变量，为了能完整的使用go来开发。我们需要定义一个GOROOT的环境变量，并将刚才这个bin目录放进path从而在任何地方都能使用go命令。<br>Linux下大概类似下面这样：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /etc/profile</span><br><span class="line"></span><br><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export PATH=$PATH:$GOROOT/bin</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br></pre></td></tr></table></figure>
 <p>这样你就可以为所欲为地使用go这个命令了。</p>
-<h4 id="指定GOPATH">指定GOPATH</h4><p>不过，这还没完。go这么拽的语言当然要有点拽的姿势。除了GOROOT，还要定义一个GOPATH的环境变量，用来指定go项目源码和二进制文件的目录。<br>假设如此定义：</p>
+<p>####指定GOPATH<br>不过，这还没完。go这么拽的语言当然要有点拽的姿势。除了GOROOT，还要定义一个GOPATH的环境变量，用来指定go项目源码和二进制文件的目录。<br>假设如此定义：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /etc/profile</span><br><span class="line"></span><br><span class="line">export $GOPATH=/workspace/golang:/data/go</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br></pre></td></tr></table></figure>
 <p>这里我们指定了两个GOPATH，/workspace/golang和/data/go，这样你就可以在GOPATH下执行类似</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com/tools/godep</span><br></pre></td></tr></table></figure>
 <p>这样的命令来获取一个网上go开源项目了。上面的命令是获取godep这个包管理工具的源码并安装到GOPATH的bin目录下。</p>
-<h4 id="Go项目目录结构">Go项目目录结构</h4><p>GOPATH下的目录结构通常为：</p>
+<p>####Go项目目录结构<br>GOPATH下的目录结构通常为：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|--bin</span><br><span class="line">|--pkg</span><br><span class="line">|--src</span><br></pre></td></tr></table></figure>
 <p>bin存放编译后的可执行文件，pkg存放编译过程使用的包文件，src存放项目源文件。bin和pkg目录go会自动创建。</p>
-<h4 id="Hello_world">Hello world</h4><p>至此，我们可以操手来个hello world体味一下。在GOPATH的src目录下创建main.go文件：</p>
+<p>####Hello world<br>至此，我们可以操手来个hello world体味一下。在GOPATH的src目录下创建main.go文件：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码格式自动格式化一下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go fmt main.go</span><br></pre></td></tr></table></figure></p>
 <p>哎呦，很叼噢，有木有！运行一下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go run main.go</span><br></pre></td></tr></table></figure></p>
 <p>世界都光明了。。。</p>
-<h4 id="References">References</h4><p><a href="http://godoc.golangtc.com/doc/" target="_blank" rel="noopener">The Go Programming Language</a><br><a href="http://studygolang.com/articles/3493" target="_blank" rel="noopener">GOPATH 深度解析</a></p>
+<p>####References<br><a href="http://godoc.golangtc.com/doc/" target="_blank" rel="noopener">The Go Programming Language</a><br><a href="http://studygolang.com/articles/3493" target="_blank" rel="noopener">GOPATH 深度解析</a></p>
 
           
         
@@ -1302,14 +1319,16 @@
         
           
             <p>本文主要介绍Codis编译过程中的一些注意事项和Codis集群的搭建。</p>
-<h1 id="准备方案">准备方案</h1><h2 id="Golang环境搭建">Golang环境搭建</h2><p>环境搭建很简单，下载go1.4.2.linux-amd64.tar.gz安装包，直接解压并添加到环境变量就可以。<br>假设解压到/usr/local/go下，这个目录就是GOROOT，另外需要定义一个go开发目录，假设为/workspace/golang。<br>go开发目录未来会产生一些主要的子目录：</p>
-<pre><code><span class="bullet">1. </span>src 存放源码
-<span class="bullet">2. </span>pkg 编译后生成的文件
-<span class="bullet">3. </span>bin 编译后生产的可执行文件(比如godep命令在安装后就会放在这个目录下)
+<p>#准备方案</p>
+<p>##Golang环境搭建<br>环境搭建很简单，下载go1.4.2.linux-amd64.tar.gz安装包，直接解压并添加到环境变量就可以。<br>假设解压到/usr/local/go下，这个目录就是GOROOT，另外需要定义一个go开发目录，假设为/workspace/golang。<br>go开发目录未来会产生一些主要的子目录：</p>
+<pre><code>1. src 存放源码
+2. pkg 编译后生成的文件
+3. bin 编译后生产的可执行文件(比如godep命令在安装后就会放在这个目录下)
 </code></pre><p>环境变量添加：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export GOPATH=/workspace/golang</span><br><span class="line">PATH=&quot;.:$PATH:$GOROOT/bin:$GOPATH/bin:$ZOOKEEPER/bin&quot;</span><br></pre></td></tr></table></figure>
 <p>生效后就可以执行go version查看go的版本信息。<br>将$GOPATH/bin加入PATH是为了让一些开源的或者自己安装的go扩展命令(如godep)可以全局使用。</p>
-<h2 id="Codis下载和编译">Codis下载和编译</h2><p>最新版的Codis位于[<a href="https://github.com/CodisLabs/codis" target="_blank" rel="noopener">https://github.com/CodisLabs/codis</a>]<br>通过下面命令获得源码</p>
+<p>##Codis下载和编译</p>
+<p>最新版的Codis位于[<a href="https://github.com/CodisLabs/codis]" target="_blank" rel="noopener">https://github.com/CodisLabs/codis]</a><br>通过下面命令获得源码</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get -u -d github.com/CodisLabs/codis</span><br></pre></td></tr></table></figure>
 <p>进入源码路径，执行make开始编译。</p>
 <p>Codis的编译使用了<a href="https://github.com/tools/godep" target="_blank" rel="noopener">godep</a>，如果没有安装的话就会报godep command not found的错误。<br>godep是golang的一个包管理工具，通过</p>
@@ -1319,10 +1338,10 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GOPATH=godep path godep restore</span><br><span class="line">Error: GO15VENDOREXPERIMENT is enabled and the vendor/ directory is not a valid Go workspace.</span><br><span class="line">godep: Error restore requires GOPATH but it is empty.</span><br><span class="line">make: *** [godep] Error 1</span><br></pre></td></tr></table></figure>
 <p>这是因为golang 1.5 beta3之后go添加了<a href="http://tonybai.com/tag/go15vendorexperiment/" target="_blank" rel="noopener">GO15VENDOREXPERIMENT</a>这个特性，并在1.6默认开启，你可以参照<a href="https://github.com/CodisLabs/codis/issues/715" target="_blank" rel="noopener">Codis issue715</a> 里面的方案解决。<br>最简单就是在编译前</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export GO15VENDOREXPERIMENT = 0</span><br></pre></td></tr></table></figure>
-<h2 id="编译后的文件">编译后的文件</h2><p>编译后会产生一个bin目录，下面有三个可执行文件和一个目录</p>
+<p>##编译后的文件<br>编译后会产生一个bin目录，下面有三个可执行文件和一个目录</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">assets          //dashboard的静态文件目录</span><br><span class="line">codis-config    //codis 命令式配置管理组件</span><br><span class="line">codis-proxy     //codis 代理也就是核心组件</span><br><span class="line">codis-server    //codis 基于redis2.8.21的定制版redis</span><br></pre></td></tr></table></figure>
 <p>这就是我们最终集群部署的时候需要用到的文件，当然跨平台的话主要要交叉编译或者在特定平台下编译，不然可能无法运行。</p>
-<h2 id="集群方案">集群方案</h2><p>这里使用三台机器做一个小的集群。每台机器部署一个zookeeper实例，两个codis server实例(也就是redis server)。<br>其中两台机器部署codis proxy，另外一台开启codis dashboard。</p>
+<p>##集群方案<br>这里使用三台机器做一个小的集群。每台机器部署一个zookeeper实例，两个codis server实例(也就是redis server)。<br>其中两台机器部署codis proxy，另外一台开启codis dashboard。</p>
 <hr>
 <table>
 <thead>
@@ -1362,32 +1381,36 @@
 </tbody>
 </table>
 <hr>
-<h1 id="集群搭建">集群搭建</h1><h2 id="zookeeper集群">zookeeper集群</h2><p>zookeeper的搭建这里就不详细介绍了，最终节点是</p>
-<pre><code>1. <span class="tag">slave1</span><span class="pseudo">:2181</span>
-2. <span class="tag">slave2</span><span class="pseudo">:2181</span>
-3. <span class="tag">slave3</span><span class="pseudo">:2181</span>
+<p>#集群搭建</p>
+<p>##zookeeper集群<br>zookeeper的搭建这里就不详细介绍了，最终节点是</p>
+<pre><code>1. slave1:2181
+2. slave2:2181
+3. slave3:2181
 </code></pre><p>先把zookeeper起起来</p>
-<h2 id="codis服务集群">codis服务集群</h2><h4 id="创建codis服务目录">创建codis服务目录</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@slave1]# mkdir -p /usr/local/codis/&#123;log,redis_conf&#125;</span><br><span class="line">[root@slave1]# cp -rf bin /usr/local/codis/</span><br><span class="line">[root@slave1]# cp config.ini /usr/local/codis/conf/</span><br><span class="line">[root@slave1]# cp extern/redis-test/6379.conf /usr/local/codis/redis_conf/</span><br></pre></td></tr></table></figure>
+<p>##codis服务集群</p>
+<p>####创建codis服务目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@slave1]# mkdir -p /usr/local/codis/&#123;log,redis_conf&#125;</span><br><span class="line">[root@slave1]# cp -rf bin /usr/local/codis/</span><br><span class="line">[root@slave1]# cp config.ini /usr/local/codis/conf/</span><br><span class="line">[root@slave1]# cp extern/redis-test/6379.conf /usr/local/codis/redis_conf/</span><br></pre></td></tr></table></figure>
 <p>对每台机器执行以上操作</p>
-<h4 id="根据注释修改config-ini文件">根据注释修改config.ini文件</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##### 这些配置是为dashboard和proxies服务的</span><br><span class="line"></span><br><span class="line"># zookeeper or etcd</span><br><span class="line">coordinator=zookeeper</span><br><span class="line"></span><br><span class="line"># Use comma &quot;,&quot; for multiple instances. If you use etcd, you should also use this property.</span><br><span class="line">zk=slave1:2181,slave2:2181,slave3:2181</span><br><span class="line"></span><br><span class="line"># 这个是标识zk下的命名空间，比如命名test在zookeeper会/zk/codis/db_test下</span><br><span class="line">product=test</span><br><span class="line"></span><br><span class="line"># dashboard的地址和监听端口</span><br><span class="line">dashboard_addr=192.168.4.126:18087</span><br><span class="line"></span><br><span class="line">password=</span><br><span class="line"></span><br><span class="line">##### 下面是proxies的配置</span><br><span class="line"></span><br><span class="line"># Proxy will ping-pong backend redis periodly to keep-alive</span><br><span class="line">backend_ping_period=5</span><br><span class="line"></span><br><span class="line"># If there is no request from client for a long time, the connection will be droped. Set 0 to disable.</span><br><span class="line">session_max_timeout=1800</span><br><span class="line"></span><br><span class="line"># Buffer size for each client connection.</span><br><span class="line">session_max_bufsize=131072</span><br><span class="line"></span><br><span class="line"># Number of buffered requests for each client connection.</span><br><span class="line"># Make sure this is higher than the max number of requests for each pipeline request, or your client may be blocked.</span><br><span class="line">session_max_pipeline=1024</span><br><span class="line"></span><br><span class="line"># If proxy don&apos;t send a heartbeat in timeout millisecond which is usually because proxy has high load or even no response, zk will mark this proxy offline.</span><br><span class="line"># A higher timeout will recude the possibility of &quot;session expired&quot; but clients will not know the proxy has no response in time if the proxy is down indeed.</span><br><span class="line"># So we highly recommend you not to change this default timeout and use Jodis(https://github.com/CodisLabs/jodis)</span><br><span class="line"># which watches the available proxies and will skip the offline proxy or add new online proxy automatically.</span><br><span class="line"># If you are not using Java in client, you can DIY a zk watcher accourding to Jodis source code.</span><br><span class="line">zk_session_timeout=30000</span><br><span class="line"></span><br><span class="line">##### 每个代理的id，不能相同 比如slave1 命名为proxy_1, slave2命名为proxy_2</span><br><span class="line">proxy_id=proxy_1</span><br></pre></td></tr></table></figure>
-<h4 id="启动dashboard">启动dashboard</h4><p>在slave2上执行 bin/codis-config dashboard, 该命令会启动 dashboard</p>
-<h4 id="初始化slots">初始化slots</h4><p>在任一机器上执行 bin/codis-config slot init，该命令会在zookeeper上创建slot相关信息</p>
-<h4 id="启动Codis_Redis">启动Codis Redis</h4><p>和官方redis的参数一下，三台机器上分别执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@slave1]# /usr/local/codis/bin/codis-server /usr/local/codis/redis_conf/6379.conf &amp;</span><br><span class="line">[root@slave1]# /usr/local/codis/bin/codis-server /usr/local/codis/redis_conf/6380.conf &amp;</span><br></pre></td></tr></table></figure></p>
-<h4 id="添加Redis_Server_Group">添加Redis Server Group</h4><p>每一个 Server Group 作为一个 Redis 服务器组存在, 只允许有一个 master, 可以有多个 slave, <strong><em>group id 仅支持大于等于1的整数</em></strong></p>
+<p>####根据注释修改config.ini文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##### 这些配置是为dashboard和proxies服务的</span><br><span class="line"></span><br><span class="line"># zookeeper or etcd</span><br><span class="line">coordinator=zookeeper</span><br><span class="line"></span><br><span class="line"># Use comma &quot;,&quot; for multiple instances. If you use etcd, you should also use this property.</span><br><span class="line">zk=slave1:2181,slave2:2181,slave3:2181</span><br><span class="line"></span><br><span class="line"># 这个是标识zk下的命名空间，比如命名test在zookeeper会/zk/codis/db_test下</span><br><span class="line">product=test</span><br><span class="line"></span><br><span class="line"># dashboard的地址和监听端口</span><br><span class="line">dashboard_addr=192.168.4.126:18087</span><br><span class="line"></span><br><span class="line">password=</span><br><span class="line"></span><br><span class="line">##### 下面是proxies的配置</span><br><span class="line"></span><br><span class="line"># Proxy will ping-pong backend redis periodly to keep-alive</span><br><span class="line">backend_ping_period=5</span><br><span class="line"></span><br><span class="line"># If there is no request from client for a long time, the connection will be droped. Set 0 to disable.</span><br><span class="line">session_max_timeout=1800</span><br><span class="line"></span><br><span class="line"># Buffer size for each client connection.</span><br><span class="line">session_max_bufsize=131072</span><br><span class="line"></span><br><span class="line"># Number of buffered requests for each client connection.</span><br><span class="line"># Make sure this is higher than the max number of requests for each pipeline request, or your client may be blocked.</span><br><span class="line">session_max_pipeline=1024</span><br><span class="line"></span><br><span class="line"># If proxy don&apos;t send a heartbeat in timeout millisecond which is usually because proxy has high load or even no response, zk will mark this proxy offline.</span><br><span class="line"># A higher timeout will recude the possibility of &quot;session expired&quot; but clients will not know the proxy has no response in time if the proxy is down indeed.</span><br><span class="line"># So we highly recommend you not to change this default timeout and use Jodis(https://github.com/CodisLabs/jodis)</span><br><span class="line"># which watches the available proxies and will skip the offline proxy or add new online proxy automatically.</span><br><span class="line"># If you are not using Java in client, you can DIY a zk watcher accourding to Jodis source code.</span><br><span class="line">zk_session_timeout=30000</span><br><span class="line"></span><br><span class="line">##### 每个代理的id，不能相同 比如slave1 命名为proxy_1, slave2命名为proxy_2</span><br><span class="line">proxy_id=proxy_1</span><br></pre></td></tr></table></figure>
+<p>####启动dashboard<br>在slave2上执行 bin/codis-config dashboard, 该命令会启动 dashboard</p>
+<p>####初始化slots<br>在任一机器上执行 bin/codis-config slot init，该命令会在zookeeper上创建slot相关信息</p>
+<p>####启动Codis Redis<br>和官方redis的参数一下，三台机器上分别执行<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@slave1]# /usr/local/codis/bin/codis-server /usr/local/codis/redis_conf/6379.conf &amp;</span><br><span class="line">[root@slave1]# /usr/local/codis/bin/codis-server /usr/local/codis/redis_conf/6380.conf &amp;</span><br></pre></td></tr></table></figure></p>
+<p>####添加Redis Server Group<br>每一个 Server Group 作为一个 Redis 服务器组存在, 只允许有一个 master, 可以有多个 slave, <strong><em>group id 仅支持大于等于1的整数</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bin/codis-config server -h                                                                                                                                                                                                                   usage:</span><br><span class="line">	codis-config server list</span><br><span class="line">	codis-config server add &lt;group_id&gt; &lt;redis_addr&gt; &lt;role&gt;</span><br><span class="line">	codis-config server remove &lt;group_id&gt; &lt;redis_addr&gt;</span><br><span class="line">	codis-config server promote &lt;group_id&gt; &lt;redis_addr&gt;</span><br><span class="line">	codis-config server add-group &lt;group_id&gt;</span><br><span class="line">	codis-config server remove-group &lt;group_id&gt;</span><br></pre></td></tr></table></figure>
 <p>如: 添加三个 server group, 每个 group 有两个 redis 实例，group的id分别为1、2和3，<br>redis实例为一主一从。</p>
 <p>添加一个group，group的id为1， 并添加一个redis master到该group<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bin/codis-config server add 1 slave1:6379 master</span><br></pre></td></tr></table></figure></p>
 <p>添加一个redis slave到该group<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bin/codis-config server add 1 slave1:6380 slave</span><br></pre></td></tr></table></figure></p>
 <p>类似的，再添加group，group的id为2<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bin/codis-config server add 2 slave2:6379 master</span><br><span class="line">$ bin/codis-config server add 2 slave2:6380 slave</span><br></pre></td></tr></table></figure></p>
 <p>类似的，再添加group，group的id为3<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bin/codis-config server add 3 slave3:6379 master</span><br><span class="line">$ bin/codis-config server add 3 slave3:6380 slave</span><br></pre></td></tr></table></figure></p>
-<h4 id="设置_server_group_服务的_slot_范围">设置 server group 服务的 slot 范围</h4><p>   Codis 采用 Pre-sharding 的技术来实现数据的分片, 默认分成 1024 个 slots (0-1023), 对于每个key来说, 通过以下公式确定所属的 Slot Id : SlotId = crc32(key) % 1024<br>   每一个 slot 都会有一个且必须有一个特定的 server group id 来表示这个 slot 的数据由哪个 server group 来提供.</p>
+<p>####设置 server group 服务的 slot 范围<br>   Codis 采用 Pre-sharding 的技术来实现数据的分片, 默认分成 1024 个 slots (0-1023), 对于每个key来说, 通过以下公式确定所属的 Slot Id : SlotId = crc32(key) % 1024<br>   每一个 slot 都会有一个且必须有一个特定的 server group id 来表示这个 slot 的数据由哪个 server group 来提供.</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bin/codis-config slot -h                                                                                                                                                                                                                     </span><br><span class="line">usage:</span><br><span class="line">	codis-config slot init</span><br><span class="line">	codis-config slot info &lt;slot_id&gt;</span><br><span class="line">	codis-config slot set &lt;slot_id&gt; &lt;group_id&gt; &lt;status&gt;</span><br><span class="line">	codis-config slot range-set &lt;slot_from&gt; &lt;slot_to&gt; &lt;group_id&gt; &lt;status&gt;</span><br><span class="line">	codis-config slot migrate &lt;slot_from&gt; &lt;slot_to&gt; &lt;group_id&gt; [--delay=&lt;delay_time_in_ms&gt;]</span><br></pre></td></tr></table></figure>
 <p>如: </p>
 <p>设置编号为[0, 334]的 slot 由 server group 1 提供服务, 编号 [335, 669] 的 slot 由 server group 2 提供服务, 编号 [670, 1023] 的 slot 由 server group 3 提供服务,</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ bin/codis-config slot range-set 0 334 1 online</span><br><span class="line">$ bin/codis-config slot range-set 335 669 2 online</span><br><span class="line">$ bin/codis-config slot range-set 670 1023 3 online</span><br></pre></td></tr></table></figure>
-<h4 id="启动_codis-proxy">启动 codis-proxy</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bin/codis-proxy -c config.ini -L ./log/proxy.log  --cpu=8 --addr=0.0.0.0:19000 --http-addr=0.0.0.0:11000</span><br></pre></td></tr></table></figure>
+<p>####启动 codis-proxy<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bin/codis-proxy -c config.ini -L ./log/proxy.log  --cpu=8 --addr=0.0.0.0:19000 --http-addr=0.0.0.0:11000</span><br></pre></td></tr></table></figure></p>
 <p>刚启动的 codis-proxy 默认是处于 offline状态的, 然后设置 proxy 为 online 状态, 只有处于 online 状态的 proxy 才会对外提供服务<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bin/codis-config -c config.ini proxy online &lt;proxy_name&gt;  &lt;---- proxy的id, 如 proxy_1</span><br></pre></td></tr></table></figure></p>
-<h4 id="浏览器管理">浏览器管理</h4><p> 访问<a href="http://192.168.4.126:18087/admin" target="_blank" rel="noopener">http://192.168.4.126:18087/admin</a> ， 现在可以在浏览器里面完成各种操作了。</p>
+<p>####浏览器管理<br> 访问<a href="http://192.168.4.126:18087/admin" target="_blank" rel="noopener">http://192.168.4.126:18087/admin</a> ， 现在可以在浏览器里面完成各种操作了。</p>
 
           
         
@@ -1519,13 +1542,13 @@
       
         
           
-            <h2 id="背景">背景</h2><p>对Linux本来只限于简单应用，由于现在创业公司没有运维，很多事情要自己上。昨天收到阿里云警告说我们的服务器在对外DDOS，限时解决。</p>
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>对Linux本来只限于简单应用，由于现在创业公司没有运维，很多事情要自己上。昨天收到阿里云警告说我们的服务器在对外DDOS，限时解决。</p>
 <p>上去一看tomcat地下多了个A.war的项目，基本确定因为使用tomcat自带的manager调试的时候被黑了。</p>
-<h2 id="情景">情景</h2><p>实例目录下有个mg24的程序在跑，以为杀掉就可以了，我想的真的是太简单了。警告依然没有接触，而且mg24这个玩意又产生了，看了一下用户排除root被拿到，于是先改密码。</p>
+<h2 id="情景"><a href="#情景" class="headerlink" title="情景"></a>情景</h2><p>实例目录下有个mg24的程序在跑，以为杀掉就可以了，我想的真的是太简单了。警告依然没有接触，而且mg24这个玩意又产生了，看了一下用户排除root被拿到，于是先改密码。</p>
 <p>检查/etc/crontab<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">*/3 * * * * root /etc/cron.hourly/gcc4.sh</span><br></pre></td></tr></table></figure></p>
 <p>发现cron.hourly下面有个/lib/libudev4.so的文件，按照网上说的file /lib/libudev4.so看到的确是个可执行程序，也就是病毒了。可是直接删也删不掉。init.d地下也出现了异常启动脚本，发现是/usr/bin低下的一个文件。</p>
 <p>ps也没看到异常进程，查看一下ls -lh /bin/ps 发现ps命令被黑了，同时还有netstat。网上查一下，有类似的案例，叫10字符病毒程序，参见附录。跟我的情况基本一样，我按照他的操作处理了一下发现没用。杀掉就重启，病毒文件重新生成。十字符文件还换者地方产生，chattr +i /usr/bin， 它就跑到/bin下， chattr +i /bin就跑到/tmp下，好烦。因为我是运维小白，各种网上搜索终于解决了。下面总结下:</p>
-<h2 id="解决">解决</h2><ol>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ol>
 <li><p>还原 ps netstat等所有被黑的命令， 网上说有备份(cp /usr/bin/dpkgd/<em> /sbin/ &amp;&amp; cp -f /usr/bin/dpkgd/</em> /bin/)</p>
 </li>
 <li><p>查看病毒位置，进程id等，还原rc.d下的文件，还有crontab，去掉恶意文件执行权限 </p>
@@ -1540,8 +1563,8 @@
 <li><p>这时候再杀掉病毒进程，删除病毒本体。</p>
 </li>
 </ol>
-<h2 id="总结">总结</h2><p>不懂还要多学习啊，注意安全，生产环境上不要乱搞。<br>下面参考博文里面介绍的很清楚了，有需要的直接去那儿看，谢谢前车之鉴。</p>
-<h2 id="参考">参考</h2><ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>不懂还要多学习啊，注意安全，生产环境上不要乱搞。<br>下面参考博文里面介绍的很清楚了，有需要的直接去那儿看，谢谢前车之鉴。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="http://www.kaisir.com/2015/07/ji-yi-ze-linux-bing-du-di-chu-li.html" target="_blank" rel="noopener">记一则Linux病毒的处理</a></li>
 <li><a href="http://blog.chinaunix.net/uid-20332519-id-4941140.html" target="_blank" rel="noopener">Linux下随机10字符病毒的清除-1</a></li>
 <li><a href="http://www.hackbase.com/article-2798-1.html" target="_blank" rel="noopener">Linux下随机10字符病毒的清除-2</a></li>
@@ -1689,7 +1712,8 @@
 <li><p>以上这些操作都是我在参看附录的解决办法。之前改了注册表，删了目标栏的地址，重启之后还是会有这种情况。但是又看不出什么特别启动项来做这些更改操作，所有我怀疑最后一步删除的OEM文件就是这个劫持木马的根源。被这种大公司的流氓软件搞定如此崩溃真的很痛心，建议大家以后还是用正版软件。</p>
 </li>
 </ul>
-<h3 id="Reference">Reference</h3><ul>
+<p>###Reference</p>
+<ul>
 <li><a href="http://www.techweb.com.cn/internet/2015-07-20/2177852.shtml" target="_blank" rel="noopener">hao123、hao.qquu8.com劫持IE、Chrome浏览器被的解决办法</a></li>
 </ul>
 

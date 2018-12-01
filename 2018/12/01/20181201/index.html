@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Kafka," />
+  <meta name="keywords" content="生活," />
 
 
 
@@ -80,18 +80,20 @@
 
 
 
-<meta name="description" content="本要做一个消息服务组件的选型，计划要对Kafka做下测试，各种琐事一直没有开展。晚上写一个Client的时果遇到了一些问题，结果纠结了很久。 Kafka介绍">
-<meta name="keywords" content="Kafka">
+<meta name="description" content="Mina 常抱怨我毕业后不写文章了。其实当我发现不能直视当年的作品时，已经失去了自由洒脱的人格。锅碗瓢盆的生活充满烟火气息，这时候就要少做感想，踏实奋斗，因为日子越来越复杂了。人生的前二十年都是在获得，慢慢地要学会奉献了，平衡社会关系。 有空还是要多读几本书，丰富一下自己，免得走到哪儿都是一副口若悬河的皮囊。日子嘛，可能得调整调整了，一起做些无关奋斗的有趣事情，这样闲暇的时光可以用来海阔天空地扯淡">
+<meta name="keywords" content="生活">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kafka客户端连接问题">
-<meta property="og:url" content="http://hsqlu.github.io/2016/06/19/20160520/index.html">
+<meta property="og:title" content="生活小记">
+<meta property="og:url" content="http://hsqlu.github.io/2018/12/01/20181201/index.html">
 <meta property="og:site_name" content="无声处">
-<meta property="og:description" content="本要做一个消息服务组件的选型，计划要对Kafka做下测试，各种琐事一直没有开展。晚上写一个Client的时果遇到了一些问题，结果纠结了很久。 Kafka介绍">
+<meta property="og:description" content="Mina 常抱怨我毕业后不写文章了。其实当我发现不能直视当年的作品时，已经失去了自由洒脱的人格。锅碗瓢盆的生活充满烟火气息，这时候就要少做感想，踏实奋斗，因为日子越来越复杂了。人生的前二十年都是在获得，慢慢地要学会奉献了，平衡社会关系。 有空还是要多读几本书，丰富一下自己，免得走到哪儿都是一副口若悬河的皮囊。日子嘛，可能得调整调整了，一起做些无关奋斗的有趣事情，这样闲暇的时光可以用来海阔天空地扯淡">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2016-05-19T15:57:27.752Z">
+<meta property="og:image" content="http://hsqlu.github.io/img/liverpool.JPG">
+<meta property="og:updated_time" content="2018-12-01T10:15:14.841Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kafka客户端连接问题">
-<meta name="twitter:description" content="本要做一个消息服务组件的选型，计划要对Kafka做下测试，各种琐事一直没有开展。晚上写一个Client的时果遇到了一些问题，结果纠结了很久。 Kafka介绍">
+<meta name="twitter:title" content="生活小记">
+<meta name="twitter:description" content="Mina 常抱怨我毕业后不写文章了。其实当我发现不能直视当年的作品时，已经失去了自由洒脱的人格。锅碗瓢盆的生活充满烟火气息，这时候就要少做感想，踏实奋斗，因为日子越来越复杂了。人生的前二十年都是在获得，慢慢地要学会奉献了，平衡社会关系。 有空还是要多读几本书，丰富一下自己，免得走到哪儿都是一副口若悬河的皮囊。日子嘛，可能得调整调整了，一起做些无关奋斗的有趣事情，这样闲暇的时光可以用来海阔天空地扯淡">
+<meta name="twitter:image" content="http://hsqlu.github.io/img/liverpool.JPG">
 
 
 
@@ -109,7 +111,7 @@
   };
 </script>
 
-  <title> Kafka客户端连接问题 | 无声处 </title>
+  <title> 生活小记 | 无声处 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -229,7 +231,7 @@
             
             
               
-                Kafka客户端连接问题
+                生活小记
               
             
           </h1>
@@ -241,8 +243,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-06-19T23:52:53+12:00" content="Jun 19 2016">
-              Jun 19 2016
+            <time itemprop="dateCreated" datetime="2018-12-01T19:41:31+13:00" content="Dec 1 2018">
+              Dec 1 2018
             </time>
           </span>
 
@@ -255,8 +257,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/基础架构/" itemprop="url" rel="index">
-                    <span itemprop="name">基础架构</span>
+                  <a href="/categories/生活/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
                   </a>
                 </span>
 
@@ -271,8 +273,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/19/20160520/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/19/20160520/" itemprop="commentsCount"></span>
+                <a href="/2018/12/01/20181201/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/01/20181201/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -295,8 +297,13 @@
       
 
       
-        <p>本要做一个消息服务组件的选型，计划要对Kafka做下测试，各种琐事一直没有开展。晚上写一个Client的时果遇到了一些问题，结果纠结了很久。</p>
-<h4 id="Kafka介绍"><a href="#Kafka介绍" class="headerlink" title="Kafka介绍"></a>Kafka介绍</h4>
+        <p>Mina 常抱怨我毕业后不写文章了。其实当我发现不能直视当年的作品时，已经失去了自由洒脱的人格。<br>锅碗瓢盆的生活充满烟火气息，这时候就要少做感想，踏实奋斗，因为日子越来越复杂了。人生的前二十年都是在获得，慢慢地要学会奉献了，平衡社会关系。</p>
+<p>有空还是要多读几本书，丰富一下自己，免得走到哪儿都是一副口若悬河的皮囊。日子嘛，可能得调整调整了，一起做些无关奋斗的有趣事情，这样闲暇的时光可以用来海阔天空地扯淡。</p>
+<p>三十多岁后，彷佛一眼看见了远方。从儿时的小村庄，一步步走出来，看到的世界越大，心也越大。当生活一天天好起来，时代推着我们走向另一种世界，有太多东西是需要学习去面对的。人们之间变得复杂又直接，陌生又熟悉。跟少年的世界有撕裂感，变成我从来没有想象过的一种人。</p>
+<p>我希望往后的日子，多给家人一些牵挂，多给家人一些支持。曾经一年吃一次肉的日子也不曾抱怨，我们现在也一定会健康快乐的。我希望以后对给 Mina 一些支持，帮助她过的更快乐，更有意义，成就几段不可思议的人生旅程。我也希望孩子们轻松快乐地成长，感受人生的乐趣，成为自己最想成为的人。我也希望自己能把所有的困难和不悦处理的井井有条。</p>
+<p>愿言配德兮，携手相将。</p>
+<p><img src="/img/liverpool.JPG" alt="In Liverpool"></p>
+
       
     </div>
 
@@ -317,7 +324,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Kafka/" rel="tag">#Kafka</a>
+            <a href="/tags/生活/" rel="tag">#生活</a>
           
         </div>
       
@@ -326,17 +333,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/24/20160324/" rel="next" title="MySQL5.7安装过程中的登陆及密码修改问题">
-                <i class="fa fa-chevron-left"></i> MySQL5.7安装过程中的登陆及密码修改问题
+              <a href="/2017/03/28/20170328/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/19/20160829/" rel="prev" title="20160824技术交流">
-                20160824技术交流 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -362,8 +365,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/19/20160520/"
-           data-title="Kafka客户端连接问题" data-url="http://hsqlu.github.io/2016/06/19/20160520/">
+      <div class="ds-thread" data-thread-key="2018/12/01/20181201/"
+           data-title="生活小记" data-url="http://hsqlu.github.io/2018/12/01/20181201/">
       </div>
     
   </div>
@@ -454,7 +457,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kafka介绍"><span class="nav-number">1.</span> <span class="nav-text">Kafka介绍</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
             
           </div>
         </section>

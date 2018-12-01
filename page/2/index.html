@@ -227,6 +227,152 @@
             
               
                 
+                <a class="post-title-link" href="/2015/10/03/20151003/" itemprop="url">
+                  浏览器被hao123劫持
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-10-03T19:42:53+13:00" content="Oct 3 2015">
+              Oct 3 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/03/20151003/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/03/20151003/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>生产电脑最近加了个固体硬盘，心想Win10可以免费升级了就装了个盗版的Win7专业版。提示激活的时候网上下载了一个工具，结果激活完了浏览器就被hao123劫持了。不是直接用 <a href="http://www.hao123.com" target="_blank" rel="noopener">http://www.hao123.com</a> 这个域名劫持，而是用 <a href="http://hao.qquu8.com" target="_blank" rel="noopener">http://hao.qquu8.com</a> 然后再跳转到 <a href="http://www.hao123.com" target="_blank" rel="noopener">http://www.hao123.com</a> ，真是费劲心机。想尽各种办法今天晚上才算基本解决，不知道有没有后遗症。</p>
+<ul>
+<li><p>首先在桌面和开始菜单里查看所有IE、Chrome浏览器快捷方式属性，把目标栏里的 <a href="http://hao.qquu8.com" target="_blank" rel="noopener">http://hao.qquu8.com</a> 删掉。</p>
+</li>
+<li><p>进入C:\Users\你的用户名\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch文件夹，同样是查看IE和Chrome的属性，然后把其中的 <a href="http://hao.qquu8.com" target="_blank" rel="noopener">http://hao.qquu8.com</a> 删掉。</p>
+</li>
+<li><p>打开注册表，依次定位到：</p>
+<ul>
+<li><p>HKEY_CURRENT_USER\Software\Policies\Microsoft</p>
+<p>展开Microsoft，查看其下是否包含子项 Internet Explorer 若有，删除（右击Internet Explorer，选择“删除”）。</p>
+<p>然后再依次定位到以下3个注册表项。单击Main，查看右边细节窗口中[Default_Page_URL]值和[Start Page]值是否有异常。如果被修改了，请根据自己的需要改回（右击键值，选择“修改”进行更改）。</p>
+</li>
+<li><p>HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\Main</p>
+</li>
+<li>HKEY_ LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main</li>
+<li>HKEY_USERS\Default\Software\Microsoft\Internet Explorer\Main</li>
+</ul>
+</li>
+<li><p>将系统设置为“显示隐藏的文件、文件夹”，然后在C:\Windows目录下找到OEM文件（或文件夹），将他们删除。<br>  <img src="/img/oem.png" alt="我的OEM文件夹"></p>
+</li>
+<li><p>以上这些操作都是我在参看附录的解决办法。之前改了注册表，删了目标栏的地址，重启之后还是会有这种情况。但是又看不出什么特别启动项来做这些更改操作，所有我怀疑最后一步删除的OEM文件就是这个劫持木马的根源。被这种大公司的流氓软件搞定如此崩溃真的很痛心，建议大家以后还是用正版软件。</p>
+</li>
+</ul>
+<p>###Reference</p>
+<ul>
+<li><a href="http://www.techweb.com.cn/internet/2015-07-20/2177852.shtml" target="_blank" rel="noopener">hao123、hao.qquu8.com劫持IE、Chrome浏览器被的解决办法</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/24/20150925/" itemprop="url">
                   迟到的蜜月
                 </a>
@@ -1200,7 +1346,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1208,7 +1354,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">categories</span>
               
             </div>
@@ -1217,7 +1363,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

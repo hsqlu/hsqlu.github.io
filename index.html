@@ -1107,147 +1107,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/17/20160316/" itemprop="url">
-                  白话Golang开发入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-03-17T10:52:53+13:00" content="Mar 17 2016">
-              Mar 17 2016
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Programming/" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/17/20160316/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/20160316/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本文是主要介绍Golang的Hello world，不对任何语言语法层面做过多讨论。并且假设所有阅读本文的人有开发背景。</p>
-<p>####安装Golang开发环境<br>要想使用go语法做开发，首先当然是要搭建go的开发环境了。到<a href="http://golang.org" target="_blank" rel="noopener">Golang官网</a>上下载go的安装包，找自己机器对应的版本。<br>当然如果你是在天朝，通常情况下被墙是不可避免的，你可以自行翻越或者到<a href="http://www.golangtc.com/" target="_blank" rel="noopener">Golang中国</a>上下载。<br>go在大中华地区还是很流行的，可能跟围棋是中国发明的有关。</p>
-<p>下载后找个顺眼的地方解压，比如/usr/local/go。进去到bin目录下执行go命令会得到如下信息：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go</span><br><span class="line">Go is a tool for managing Go source code.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">	go command [arguments]</span><br><span class="line"></span><br><span class="line">The commands are:</span><br><span class="line"></span><br><span class="line">	build       compile packages and dependencies</span><br><span class="line">	clean       remove object files</span><br><span class="line">	doc         show documentation for package or symbol</span><br><span class="line">	env         print Go environment information</span><br><span class="line">	fix         run go tool fix on packages</span><br><span class="line">	fmt         run gofmt on package sources</span><br><span class="line">	generate    generate Go files by processing source</span><br><span class="line">	get         download and install packages and dependencies</span><br><span class="line">	install     compile and install packages and dependencies</span><br><span class="line">	list        list packages</span><br><span class="line">	run         compile and run Go program</span><br><span class="line">	test        test packages</span><br><span class="line">	tool        run specified go tool</span><br><span class="line">	version     print Go version</span><br><span class="line">	vet         run go tool vet on packages</span><br><span class="line"></span><br><span class="line">Use &quot;go help [command]&quot; for more information about a command.</span><br><span class="line"></span><br><span class="line">Additional help topics:</span><br><span class="line"></span><br><span class="line">	c           calling between Go and C</span><br><span class="line">	buildmode   description of build modes</span><br><span class="line">	filetype    file types</span><br><span class="line">	gopath      GOPATH environment variable</span><br><span class="line">	environment environment variables</span><br><span class="line">	importpath  import path syntax</span><br><span class="line">	packages    description of package lists</span><br><span class="line">	testflag    description of testing flags</span><br><span class="line">	testfunc    description of testing functions</span><br><span class="line"></span><br><span class="line">Use &quot;go help [topic]&quot; for more information about that topic.</span><br></pre></td></tr></table></figure>
-<p>诺，go开发环境你就按照好了，够傻瓜吧。</p>
-<p>然而，这还不够。你一般会有一个自己写那些弱智代码的地方，称之为工作目录吧。在工作目录下怎么使用go呢？<br>这就需要把go这个命令放进环境变量，为了能完整的使用go来开发。我们需要定义一个GOROOT的环境变量，并将刚才这个bin目录放进path从而在任何地方都能使用go命令。<br>Linux下大概类似下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /etc/profile</span><br><span class="line"></span><br><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export PATH=$PATH:$GOROOT/bin</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br></pre></td></tr></table></figure>
-<p>这样你就可以为所欲为地使用go这个命令了。</p>
-<p>####指定GOPATH<br>不过，这还没完。go这么拽的语言当然要有点拽的姿势。除了GOROOT，还要定义一个GOPATH的环境变量，用来指定go项目源码和二进制文件的目录。<br>假设如此定义：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /etc/profile</span><br><span class="line"></span><br><span class="line">export $GOPATH=/workspace/golang:/data/go</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br></pre></td></tr></table></figure>
-<p>这里我们指定了两个GOPATH，/workspace/golang和/data/go，这样你就可以在GOPATH下执行类似</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com/tools/godep</span><br></pre></td></tr></table></figure>
-<p>这样的命令来获取一个网上go开源项目了。上面的命令是获取godep这个包管理工具的源码并安装到GOPATH的bin目录下。</p>
-<p>####Go项目目录结构<br>GOPATH下的目录结构通常为：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|--bin</span><br><span class="line">|--pkg</span><br><span class="line">|--src</span><br></pre></td></tr></table></figure>
-<p>bin存放编译后的可执行文件，pkg存放编译过程使用的包文件，src存放项目源文件。bin和pkg目录go会自动创建。</p>
-<p>####Hello world<br>至此，我们可以操手来个hello world体味一下。在GOPATH的src目录下创建main.go文件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码格式自动格式化一下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go fmt main.go</span><br></pre></td></tr></table></figure></p>
-<p>哎呦，很叼噢，有木有！运行一下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go run main.go</span><br></pre></td></tr></table></figure></p>
-<p>世界都光明了。。。</p>
-<p>####References<br><a href="http://godoc.golangtc.com/doc/" target="_blank" rel="noopener">The Go Programming Language</a><br><a href="http://studygolang.com/articles/3493" target="_blank" rel="noopener">GOPATH 深度解析</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/03/17/20160317/" itemprop="url">
                   Codis集群搭建过程摘要
                 </a>
@@ -1411,6 +1270,147 @@
 <p>####启动 codis-proxy<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bin/codis-proxy -c config.ini -L ./log/proxy.log  --cpu=8 --addr=0.0.0.0:19000 --http-addr=0.0.0.0:11000</span><br></pre></td></tr></table></figure></p>
 <p>刚启动的 codis-proxy 默认是处于 offline状态的, 然后设置 proxy 为 online 状态, 只有处于 online 状态的 proxy 才会对外提供服务<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bin/codis-config -c config.ini proxy online &lt;proxy_name&gt;  &lt;---- proxy的id, 如 proxy_1</span><br></pre></td></tr></table></figure></p>
 <p>####浏览器管理<br> 访问<a href="http://192.168.4.126:18087/admin" target="_blank" rel="noopener">http://192.168.4.126:18087/admin</a> ， 现在可以在浏览器里面完成各种操作了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/17/20160316/" itemprop="url">
+                  白话Golang开发入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-03-17T10:52:53+13:00" content="Mar 17 2016">
+              Mar 17 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/20160316/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/20160316/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文是主要介绍Golang的Hello world，不对任何语言语法层面做过多讨论。并且假设所有阅读本文的人有开发背景。</p>
+<p>####安装Golang开发环境<br>要想使用go语法做开发，首先当然是要搭建go的开发环境了。到<a href="http://golang.org" target="_blank" rel="noopener">Golang官网</a>上下载go的安装包，找自己机器对应的版本。<br>当然如果你是在天朝，通常情况下被墙是不可避免的，你可以自行翻越或者到<a href="http://www.golangtc.com/" target="_blank" rel="noopener">Golang中国</a>上下载。<br>go在大中华地区还是很流行的，可能跟围棋是中国发明的有关。</p>
+<p>下载后找个顺眼的地方解压，比如/usr/local/go。进去到bin目录下执行go命令会得到如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go</span><br><span class="line">Go is a tool for managing Go source code.</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">	go command [arguments]</span><br><span class="line"></span><br><span class="line">The commands are:</span><br><span class="line"></span><br><span class="line">	build       compile packages and dependencies</span><br><span class="line">	clean       remove object files</span><br><span class="line">	doc         show documentation for package or symbol</span><br><span class="line">	env         print Go environment information</span><br><span class="line">	fix         run go tool fix on packages</span><br><span class="line">	fmt         run gofmt on package sources</span><br><span class="line">	generate    generate Go files by processing source</span><br><span class="line">	get         download and install packages and dependencies</span><br><span class="line">	install     compile and install packages and dependencies</span><br><span class="line">	list        list packages</span><br><span class="line">	run         compile and run Go program</span><br><span class="line">	test        test packages</span><br><span class="line">	tool        run specified go tool</span><br><span class="line">	version     print Go version</span><br><span class="line">	vet         run go tool vet on packages</span><br><span class="line"></span><br><span class="line">Use &quot;go help [command]&quot; for more information about a command.</span><br><span class="line"></span><br><span class="line">Additional help topics:</span><br><span class="line"></span><br><span class="line">	c           calling between Go and C</span><br><span class="line">	buildmode   description of build modes</span><br><span class="line">	filetype    file types</span><br><span class="line">	gopath      GOPATH environment variable</span><br><span class="line">	environment environment variables</span><br><span class="line">	importpath  import path syntax</span><br><span class="line">	packages    description of package lists</span><br><span class="line">	testflag    description of testing flags</span><br><span class="line">	testfunc    description of testing functions</span><br><span class="line"></span><br><span class="line">Use &quot;go help [topic]&quot; for more information about that topic.</span><br></pre></td></tr></table></figure>
+<p>诺，go开发环境你就按照好了，够傻瓜吧。</p>
+<p>然而，这还不够。你一般会有一个自己写那些弱智代码的地方，称之为工作目录吧。在工作目录下怎么使用go呢？<br>这就需要把go这个命令放进环境变量，为了能完整的使用go来开发。我们需要定义一个GOROOT的环境变量，并将刚才这个bin目录放进path从而在任何地方都能使用go命令。<br>Linux下大概类似下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /etc/profile</span><br><span class="line"></span><br><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export PATH=$PATH:$GOROOT/bin</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br></pre></td></tr></table></figure>
+<p>这样你就可以为所欲为地使用go这个命令了。</p>
+<p>####指定GOPATH<br>不过，这还没完。go这么拽的语言当然要有点拽的姿势。除了GOROOT，还要定义一个GOPATH的环境变量，用来指定go项目源码和二进制文件的目录。<br>假设如此定义：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># vim /etc/profile</span><br><span class="line"></span><br><span class="line">export $GOPATH=/workspace/golang:/data/go</span><br><span class="line"></span><br><span class="line"># source /etc/profile</span><br></pre></td></tr></table></figure>
+<p>这里我们指定了两个GOPATH，/workspace/golang和/data/go，这样你就可以在GOPATH下执行类似</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go get github.com/tools/godep</span><br></pre></td></tr></table></figure>
+<p>这样的命令来获取一个网上go开源项目了。上面的命令是获取godep这个包管理工具的源码并安装到GOPATH的bin目录下。</p>
+<p>####Go项目目录结构<br>GOPATH下的目录结构通常为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">|--bin</span><br><span class="line">|--pkg</span><br><span class="line">|--src</span><br></pre></td></tr></table></figure>
+<p>bin存放编译后的可执行文件，pkg存放编译过程使用的包文件，src存放项目源文件。bin和pkg目录go会自动创建。</p>
+<p>####Hello world<br>至此，我们可以操手来个hello world体味一下。在GOPATH的src目录下创建main.go文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码格式自动格式化一下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go fmt main.go</span><br></pre></td></tr></table></figure></p>
+<p>哎呦，很叼噢，有木有！运行一下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go run main.go</span><br></pre></td></tr></table></figure></p>
+<p>世界都光明了。。。</p>
+<p>####References<br><a href="http://godoc.golangtc.com/doc/" target="_blank" rel="noopener">The Go Programming Language</a><br><a href="http://studygolang.com/articles/3493" target="_blank" rel="noopener">GOPATH 深度解析</a></p>
 
           
         

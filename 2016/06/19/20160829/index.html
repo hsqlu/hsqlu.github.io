@@ -1,310 +1,244 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion">
+<!DOCTYPE html>
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://hsqlu.github.io').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
 
-
-
-
-
-
-
-
-
-
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="CI,CD," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="这次交流的主题主要围绕ETL项目开发，构建，发布过程中的一些问题进行探讨，提出一些建议。 项目组织最初的ETL项目都是独立的maven工程，导致依赖混乱。本地环境可能要从不同的目录路径下导入各种依赖模块分别编译打包。 比如ETL的依赖就包括位于不同目录下的common工程，meta工程，fw工程等。 第一次重构后形成了如下的项目结构：  etl etl-app etl-core etl-contr">
-<meta name="keywords" content="CI,CD">
+  <meta name="description" content="这次交流的主题主要围绕ETL项目开发，构建，发布过程中的一些问题进行探讨，提出一些建议。 项目组织最初的ETL项目都是独立的maven工程，导致依赖混乱。本地环境可能要从不同的目录路径下导入各种依赖模块分别编译打包。 比如ETL的依赖就包括位于不同目录下的common工程，meta工程，fw工程等。 第一次重构后形成了如下的项目结构：  etl etl-app etl-core etl-contr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="20160824技术交流">
 <meta property="og:url" content="http://hsqlu.github.io/2016/06/19/20160829/index.html">
 <meta property="og:site_name" content="无声处">
 <meta property="og:description" content="这次交流的主题主要围绕ETL项目开发，构建，发布过程中的一些问题进行探讨，提出一些建议。 项目组织最初的ETL项目都是独立的maven工程，导致依赖混乱。本地环境可能要从不同的目录路径下导入各种依赖模块分别编译打包。 比如ETL的依赖就包括位于不同目录下的common工程，meta工程，fw工程等。 第一次重构后形成了如下的项目结构：  etl etl-app etl-core etl-contr">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2016-08-29T12:30:25.240Z">
+<meta property="article:published_time" content="2016-06-19T11:52:53.000Z">
+<meta property="article:modified_time" content="2019-12-26T14:20:14.871Z">
+<meta property="article:author" content="Qiannan Lyu">
+<meta property="article:tag" content="CI">
+<meta property="article:tag" content="CD">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="20160824技术交流">
-<meta name="twitter:description" content="这次交流的主题主要围绕ETL项目开发，构建，发布过程中的一些问题进行探讨，提出一些建议。 项目组织最初的ETL项目都是独立的maven工程，导致依赖混乱。本地环境可能要从不同的目录路径下导入各种依赖模块分别编译打包。 比如ETL的依赖就包括位于不同目录下的common工程，meta工程，fw工程等。 第一次重构后形成了如下的项目结构：  etl etl-app etl-core etl-contr">
+
+<link rel="canonical" href="http://hsqlu.github.io/2016/06/19/20160829/">
 
 
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: 'Author'
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title> 20160824技术交流 | 无声处 </title>
+  <title>20160824技术交流 | 无声处</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">无声处</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">无声处</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
   </div>
-  <p class="site-subtitle"></p>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
 
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
 
-  
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
 </nav>
-
- </div>
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://hsqlu.github.io/2016/06/19/20160829/">
 
-  
-  
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Qiannan Lyu">
+      <meta itemprop="description" content="">
+    </span>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无声处">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                20160824技术交流
-              
-            
-          </h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          20160824技术交流
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-06-19T23:52:53+12:00" content="Jun 19 2016">
-              Jun 19 2016
-            </time>
-          </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
+              <time title="Created: Jun 19 2016 23:52:53" itemprop="dateCreated datePublished" datetime="2016-06-19T23:52:53+12:00">Jun 19 2016</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: Dec 27 2019 3:20:14" itemprop="dateModified" datetime="2019-12-27T03:20:14+13:00">Dec 27 2019</time>
+              </span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/项目管理/" itemprop="url" rel="index">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index">
                     <span itemprop="name">项目管理</span>
                   </a>
                 </span>
-
-                
-                
                   , 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/项目管理/开发管理/" itemprop="url" rel="index">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86/" itemprop="url" rel="index">
                     <span itemprop="name">开发管理</span>
                   </a>
                 </span>
-
-                
-                
-
-              
             </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/19/20160829/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/19/20160829/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
 
           
 
-          
-          
-
-          
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>这次交流的主题主要围绕ETL项目开发，构建，发布过程中的一些问题进行探讨，提出一些建议。</p>
@@ -349,11 +283,15 @@
 <p>java项目可以通过基于maven的树状继承体系以及maven自定义初始化项目骨架来规范。</p>
 <h3 id="ROOT-POM定义"><a href="#ROOT-POM定义" class="headerlink" title="ROOT POM定义"></a>ROOT POM定义</h3><p>定义如下一个根POM，里面指定所有团队内java项目的一些约束，比如编译版本，encoding，maven插件版本等。同时定义了maven的profile，所以的子项目<br>遵循development, test, product的环境区分，通过构建时添加 -P test/development来制定对于的profile以区分环境相关配置。</p>
 <p>下面是一个根项目结构的demo。</p>
-<h4 id="Super-Root-POM"><a href="#Super-Root-POM" class="headerlink" title="Super Root POM"></a>Super Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;modules&gt;</span><br><span class="line">        &lt;module&gt;dcp-java-parent&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dcp-web-parent&lt;/module&gt;</span><br><span class="line">    &lt;/modules&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.sourceEncoding&gt;UTF-8&lt;/project.reporting.sourceEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.7&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;profiles&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;development&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;development&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">            &lt;activation&gt;</span><br><span class="line">                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">            &lt;/activation&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;test&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;test&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;product&lt;/id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;product&lt;/env&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br><span class="line">    &lt;/profiles&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;pluginManagement&gt;</span><br><span class="line">            &lt;plugins&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;/version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;source&gt;$&#123;java.version&#125;&lt;/source&gt;</span><br><span class="line">                        &lt;target&gt;$&#123;java.version&#125;&lt;/target&gt;</span><br><span class="line">                    &lt;/configuration&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;/version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;nonFilteredFileExtensions&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;pdf&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;swf&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;data&lt;/nonFilteredFileExtension&gt;</span><br><span class="line">                        &lt;/nonFilteredFileExtensions&gt;</span><br><span class="line">                    &lt;/configuration&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-antrun-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;1.3&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.8&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.3.2&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-install-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.4&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.12.4&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.7&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-site-plugin&lt;/artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;/version&gt;</span><br><span class="line">                &lt;/plugin&gt;</span><br><span class="line">            &lt;/plugins&gt;</span><br><span class="line">        &lt;/pluginManagement&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-enforcer-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;1.4&lt;/version&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;enforce-no-snapshots&lt;/id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;enforce&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                        &lt;configuration&gt;</span><br><span class="line">                            &lt;rules&gt;</span><br><span class="line">                                &lt;requireReleaseDeps&gt;</span><br><span class="line">                                    &lt;onlyWhenRelease&gt;true&lt;/onlyWhenRelease&gt;</span><br><span class="line">                                    &lt;message&gt;No Snapshots Allowed!&lt;/message&gt;</span><br><span class="line">                                &lt;/requireReleaseDeps&gt;</span><br><span class="line">                                &lt;!-- -Denforcer.skip=true --&gt;</span><br><span class="line">                                &lt;!-- &lt;requireReleaseVersion&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;message&gt;No Snapshots Allowed!&lt;/message&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;/requireReleaseVersion&gt; --&gt;</span><br><span class="line">                            &lt;/rules&gt;</span><br><span class="line">                            &lt;fail&gt;true&lt;/fail&gt;</span><br><span class="line">                        &lt;/configuration&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">        &lt;filters&gt;</span><br><span class="line">            &lt;filter&gt;src/main/filters/filter-$&#123;env&#125;.properties&lt;/filter&gt;</span><br><span class="line">        &lt;/filters&gt;</span><br><span class="line">        &lt;resources&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/filters/resources/$&#123;env&#125;&lt;/directory&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">                &lt;filtering&gt;true&lt;/filtering&gt;</span><br><span class="line">            &lt;/resource&gt;</span><br><span class="line">        &lt;/resources&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"></span><br><span class="line">    &lt;distributionManagement&gt;</span><br><span class="line">        &lt;repository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-releases&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform releases project&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.6.13:8081/nexus/content/repositories/ltdbRepositoryReleases/&lt;/url&gt;</span><br><span class="line">        &lt;/repository&gt;</span><br><span class="line"></span><br><span class="line">        &lt;snapshotRepository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-snapshots&lt;/id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform snapshots project&lt;/name&gt;</span><br><span class="line">            &lt;url&gt;http://192.168.6.13:8081/nexus/content/repositories/ltdbRepository/&lt;/url&gt;</span><br><span class="line">        &lt;/snapshotRepository&gt;</span><br><span class="line">    &lt;/distributionManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="Web-Root-POM"><a href="#Web-Root-POM" class="headerlink" title="Web Root POM"></a>Web Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-web-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Web :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;/junit.version&gt;</span><br><span class="line">        &lt;servlet.version&gt;3.1.0&lt;/servlet.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;servlet.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">    &lt;/dependencyManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="Java-Root-POM"><a href="#Java-Root-POM" class="headerlink" title="Java Root POM"></a>Java Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath&gt;../pom.xml&lt;/relativePath&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-java-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.0&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Non-web :: Parent&lt;/description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;/junit.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;/version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">            &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">    &lt;/dependencyManagement&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Super-Root-POM"><a href="#Super-Root-POM" class="headerlink" title="Super Root POM"></a>Super Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot; xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">    &lt;groupId&gt;com.dragonsoft.code&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;&#x2F;packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Parent&lt;&#x2F;description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;modules&gt;</span><br><span class="line">        &lt;module&gt;dcp-java-parent&lt;&#x2F;module&gt;</span><br><span class="line">        &lt;module&gt;dcp-web-parent&lt;&#x2F;module&gt;</span><br><span class="line">    &lt;&#x2F;modules&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.sourceEncoding&gt;UTF-8&lt;&#x2F;project.reporting.sourceEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.7&lt;&#x2F;java.version&gt;</span><br><span class="line">    &lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;profiles&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;development&lt;&#x2F;id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;development&lt;&#x2F;env&gt;</span><br><span class="line">            &lt;&#x2F;properties&gt;</span><br><span class="line">            &lt;activation&gt;</span><br><span class="line">                &lt;activeByDefault&gt;true&lt;&#x2F;activeByDefault&gt;</span><br><span class="line">            &lt;&#x2F;activation&gt;</span><br><span class="line">        &lt;&#x2F;profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;test&lt;&#x2F;id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;test&lt;&#x2F;env&gt;</span><br><span class="line">            &lt;&#x2F;properties&gt;</span><br><span class="line">        &lt;&#x2F;profile&gt;</span><br><span class="line">        &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;product&lt;&#x2F;id&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;env&gt;product&lt;&#x2F;env&gt;</span><br><span class="line">            &lt;&#x2F;properties&gt;</span><br><span class="line">        &lt;&#x2F;profile&gt;</span><br><span class="line">    &lt;&#x2F;profiles&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;pluginManagement&gt;</span><br><span class="line">            &lt;plugins&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-war-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-compiler-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;&#x2F;version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;source&gt;$&#123;java.version&#125;&lt;&#x2F;source&gt;</span><br><span class="line">                        &lt;target&gt;$&#123;java.version&#125;&lt;&#x2F;target&gt;</span><br><span class="line">                    &lt;&#x2F;configuration&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-resources-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;&#x2F;version&gt;</span><br><span class="line">                    &lt;configuration&gt;</span><br><span class="line">                        &lt;nonFilteredFileExtensions&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;pdf&lt;&#x2F;nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;swf&lt;&#x2F;nonFilteredFileExtension&gt;</span><br><span class="line">                            &lt;nonFilteredFileExtension&gt;data&lt;&#x2F;nonFilteredFileExtension&gt;</span><br><span class="line">                        &lt;&#x2F;nonFilteredFileExtensions&gt;</span><br><span class="line">                    &lt;&#x2F;configuration&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-antrun-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;1.3&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-assembly-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.6&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-dependency-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.8&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-release-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.3.2&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-clean-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-install-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.4&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-surefire-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.12.4&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-jar-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.5&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-deploy-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;2.7&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">                &lt;plugin&gt;</span><br><span class="line">                    &lt;artifactId&gt;maven-site-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                    &lt;version&gt;3.3&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;&#x2F;plugin&gt;</span><br><span class="line">            &lt;&#x2F;plugins&gt;</span><br><span class="line">        &lt;&#x2F;pluginManagement&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-enforcer-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">                &lt;version&gt;1.4&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;id&gt;enforce-no-snapshots&lt;&#x2F;id&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;enforce&lt;&#x2F;goal&gt;</span><br><span class="line">                        &lt;&#x2F;goals&gt;</span><br><span class="line">                        &lt;configuration&gt;</span><br><span class="line">                            &lt;rules&gt;</span><br><span class="line">                                &lt;requireReleaseDeps&gt;</span><br><span class="line">                                    &lt;onlyWhenRelease&gt;true&lt;&#x2F;onlyWhenRelease&gt;</span><br><span class="line">                                    &lt;message&gt;No Snapshots Allowed!&lt;&#x2F;message&gt;</span><br><span class="line">                                &lt;&#x2F;requireReleaseDeps&gt;</span><br><span class="line">                                &lt;!-- -Denforcer.skip&#x3D;true --&gt;</span><br><span class="line">                                &lt;!-- &lt;requireReleaseVersion&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;message&gt;No Snapshots Allowed!&lt;&#x2F;message&gt; --&gt;</span><br><span class="line">                                &lt;!-- &lt;&#x2F;requireReleaseVersion&gt; --&gt;</span><br><span class="line">                            &lt;&#x2F;rules&gt;</span><br><span class="line">                            &lt;fail&gt;true&lt;&#x2F;fail&gt;</span><br><span class="line">                        &lt;&#x2F;configuration&gt;</span><br><span class="line">                    &lt;&#x2F;execution&gt;</span><br><span class="line">                &lt;&#x2F;executions&gt;</span><br><span class="line">            &lt;&#x2F;plugin&gt;</span><br><span class="line">        &lt;&#x2F;plugins&gt;</span><br><span class="line">        &lt;filters&gt;</span><br><span class="line">            &lt;filter&gt;src&#x2F;main&#x2F;filters&#x2F;filter-$&#123;env&#125;.properties&lt;&#x2F;filter&gt;</span><br><span class="line">        &lt;&#x2F;filters&gt;</span><br><span class="line">        &lt;resources&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src&#x2F;main&#x2F;filters&#x2F;resources&#x2F;$&#123;env&#125;&lt;&#x2F;directory&gt;</span><br><span class="line">            &lt;&#x2F;resource&gt;</span><br><span class="line">            &lt;resource&gt;</span><br><span class="line">                &lt;directory&gt;src&#x2F;main&#x2F;resources&lt;&#x2F;directory&gt;</span><br><span class="line">                &lt;filtering&gt;true&lt;&#x2F;filtering&gt;</span><br><span class="line">            &lt;&#x2F;resource&gt;</span><br><span class="line">        &lt;&#x2F;resources&gt;</span><br><span class="line">    &lt;&#x2F;build&gt;</span><br><span class="line"></span><br><span class="line">    &lt;distributionManagement&gt;</span><br><span class="line">        &lt;repository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-releases&lt;&#x2F;id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform releases project&lt;&#x2F;name&gt;</span><br><span class="line">            &lt;url&gt;http:&#x2F;&#x2F;192.168.6.13:8081&#x2F;nexus&#x2F;content&#x2F;repositories&#x2F;ltdbRepositoryReleases&#x2F;&lt;&#x2F;url&gt;</span><br><span class="line">        &lt;&#x2F;repository&gt;</span><br><span class="line"></span><br><span class="line">        &lt;snapshotRepository&gt;</span><br><span class="line">            &lt;id&gt;ltdb-snapshots&lt;&#x2F;id&gt;</span><br><span class="line">            &lt;name&gt;DragonSoft code platform snapshots project&lt;&#x2F;name&gt;</span><br><span class="line">            &lt;url&gt;http:&#x2F;&#x2F;192.168.6.13:8081&#x2F;nexus&#x2F;content&#x2F;repositories&#x2F;ltdbRepository&#x2F;&lt;&#x2F;url&gt;</span><br><span class="line">        &lt;&#x2F;snapshotRepository&gt;</span><br><span class="line">    &lt;&#x2F;distributionManagement&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Web-Root-POM"><a href="#Web-Root-POM" class="headerlink" title="Web Root POM"></a>Web Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;</span><br><span class="line">         xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;&#x2F;groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;relativePath&gt;..&#x2F;pom.xml&lt;&#x2F;relativePath&gt;</span><br><span class="line">    &lt;&#x2F;parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-web-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;&#x2F;packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Web :: Parent&lt;&#x2F;description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;&#x2F;junit.version&gt;</span><br><span class="line">        &lt;servlet.version&gt;3.1.0&lt;&#x2F;servlet.version&gt;</span><br><span class="line">    &lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;javax.servlet-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;servlet.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">            &lt;&#x2F;dependency&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;&#x2F;scope&gt;</span><br><span class="line">            &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;&#x2F;dependencies&gt;</span><br><span class="line">    &lt;&#x2F;dependencyManagement&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Java-Root-POM"><a href="#Java-Root-POM" class="headerlink" title="Java Root POM"></a>Java Root POM</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;</span><br><span class="line">         xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.dragonsoft.code&lt;&#x2F;groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;dcp-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0.0&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;relativePath&gt;..&#x2F;pom.xml&lt;&#x2F;relativePath&gt;</span><br><span class="line">    &lt;&#x2F;parent&gt;</span><br><span class="line">    &lt;artifactId&gt;dcp-java-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.0&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;&#x2F;packaging&gt;</span><br><span class="line">    &lt;description&gt;Code :: Platform :: Non-web :: Parent&lt;&#x2F;description&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;junit.version&gt;4.12&lt;&#x2F;junit.version&gt;</span><br><span class="line">    &lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencyManagement&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">            &lt;dependency&gt;</span><br><span class="line">                &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;</span><br><span class="line">                &lt;version&gt;$&#123;junit.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">                &lt;scope&gt;test&lt;&#x2F;scope&gt;</span><br><span class="line">            &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;&#x2F;dependencies&gt;</span><br><span class="line">    &lt;&#x2F;dependencyManagement&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Maven-自定义项目骨架"><a href="#Maven-自定义项目骨架" class="headerlink" title="Maven 自定义项目骨架"></a>Maven 自定义项目骨架</h4><p>通过如下命令可以选择一个团队定义好的项目骨架。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mvn archetype:generate -DarchetypeCatalog=http://192.168.6.13:8081/nexus/content/repositories/ltdbRepositoryReleases</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mvn archetype:generate -DarchetypeCatalog&#x3D;http:&#x2F;&#x2F;192.168.6.13:8081&#x2F;nexus&#x2F;content&#x2F;repositories&#x2F;ltdbRepositoryReleases</span><br></pre></td></tr></table></figure>
+
 <p>目录结构如下：</p>
 <pre><code>项目名称 +
         |
@@ -365,8 +303,7 @@
                 |
                 + main      （源码目录）
                 |   
-                + test      （测试源码）
-</code></pre><p>以上的初始化项目骨架应在实践中持续调整。</p>
+                + test      （测试源码）</code></pre><p>以上的初始化项目骨架应在实践中持续调整。</p>
 <h3 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h3><p>整个软件交付的周期中，通常会涉及开发人员、测试人员、运维人员分别负责研发工作、测试工作以及上线部署工作。主要问题有</p>
 <ol>
 <li>代码构建的一致性和稳定性很难保证</li>
@@ -374,18 +311,15 @@
 <li>生产部署环境多，配置麻烦</li>
 </ol>
 <p>Continuous Integration(持续集成) Continuous Deploy/Delivery(持续部署/交付)是伴随着敏捷开发而活跃起来的概念。核心是通过一些自动化的工具<br>来提高构建效率，简化测试环境管理，同时使版本升级、回滚更便捷。</p>
-<p>针对项目的情况，为了实现持续集成，目前所做的工作有：</p>
-<pre><code>1. 使用Jenkins持续构建项目。
-2. 通过maven和spring的profile功能做环境区分（由测试人员维护测试环境的配置，实施人员维护生产环节的配置文件），在Jenkins上可以直接获取对应
-环境的最终部署文件。
-3. 由于目前没有使用svn， 所以的包都是从仓库分支带上不同的profile配置构建出来了，未来能用分支区分将更容易对发布版本维护。
-4. 通过发布包内置tomcat实现生产环境的一键部署。
-</code></pre><h4 id="代码静态检查"><a href="#代码静态检查" class="headerlink" title="代码静态检查"></a>代码静态检查</h4><p>这里的代码静态检查包含了代码规范检查和源代码中潜在的问题。写代码的过程是一个完全主观驱动进行的存在，不可避免地会出现一些失误或者bug，代码静态检查<br>可以帮助将由于疏忽造成的bug数量减少，同时保持团队统一的代码风格以提高项目的可维护性。</p>
+<p>针对项目的情况，为了实现持续集成，目前所做的工作有：<br>    1. 使用Jenkins持续构建项目。<br>    2. 通过maven和spring的profile功能做环境区分（由测试人员维护测试环境的配置，实施人员维护生产环节的配置文件），在Jenkins上可以直接获取对应<br>    环境的最终部署文件。<br>    3. 由于目前没有使用svn， 所以的包都是从仓库分支带上不同的profile配置构建出来了，未来能用分支区分将更容易对发布版本维护。<br>    4. 通过发布包内置tomcat实现生产环境的一键部署。</p>
+<h4 id="代码静态检查"><a href="#代码静态检查" class="headerlink" title="代码静态检查"></a>代码静态检查</h4><p>这里的代码静态检查包含了代码规范检查和源代码中潜在的问题。写代码的过程是一个完全主观驱动进行的存在，不可避免地会出现一些失误或者bug，代码静态检查<br>可以帮助将由于疏忽造成的bug数量减少，同时保持团队统一的代码风格以提高项目的可维护性。</p>
 <p>代码规范检查工具常用有checkstyle，在maven项目中使用可以通过插件的方式。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-checkstyle-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.10&lt;/version&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;checkstyle&lt;/id&gt;</span><br><span class="line">            &lt;phase&gt;validate&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;check&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;configLocation&gt;$&#123;basedir&#125;/src/config/custom_checkstyle.xml&lt;/configLocation&gt;</span><br><span class="line">                &lt;suppressionsLocation&gt;$&#123;basedir&#125;/src/config/checkstyle-suppression.xml&lt;/suppressionsLocation&gt;</span><br><span class="line">                &lt;!--&lt;outputFile&gt;target/checkstyle/*&lt;/outputFile&gt;--&gt;</span><br><span class="line">                &lt;failOnViolation&gt;true&lt;/failOnViolation&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-checkstyle-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.10&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;checkstyle&lt;&#x2F;id&gt;</span><br><span class="line">            &lt;phase&gt;validate&lt;&#x2F;phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;check&lt;&#x2F;goal&gt;</span><br><span class="line">            &lt;&#x2F;goals&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;configLocation&gt;$&#123;basedir&#125;&#x2F;src&#x2F;config&#x2F;custom_checkstyle.xml&lt;&#x2F;configLocation&gt;</span><br><span class="line">                &lt;suppressionsLocation&gt;$&#123;basedir&#125;&#x2F;src&#x2F;config&#x2F;checkstyle-suppression.xml&lt;&#x2F;suppressionsLocation&gt;</span><br><span class="line">                &lt;!--&lt;outputFile&gt;target&#x2F;checkstyle&#x2F;*&lt;&#x2F;outputFile&gt;--&gt;</span><br><span class="line">                &lt;failOnViolation&gt;true&lt;&#x2F;failOnViolation&gt;</span><br><span class="line">            &lt;&#x2F;configuration&gt;</span><br><span class="line">        &lt;&#x2F;execution&gt;</span><br><span class="line">    &lt;&#x2F;executions&gt;</span><br><span class="line">&lt;&#x2F;plugin&gt;</span><br></pre></td></tr></table></figure>
+
 <p>configLocation指定了checkstyle配置文件的路径，suppressionsLocation指定例外情况配置文件的路径。具体的配置可以参考官方文档。</p>
 <p>findbugs是另外一个常用的代码静态检查工具，同样可以通过maven插件配置使用。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;findbugs-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.0.3&lt;/version&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.codehaus.mojo&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;findbugs-maven-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.0.3&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;plugin&gt;</span><br></pre></td></tr></table></figure>
+
 <p>对于在IntelliJ IDEA下开发的同学，更是有findbugs的插件可以帮助提早发现代码中潜在的问题。</p>
 <p>其他的常用工具比如PMD，SonarQube等，各位可以自行搜索了解。代码的静态检查可以作为CI/CD中的一个必须步骤，通过检查失败禁止代码提交来强制开发人员规范自己的代码。</p>
 <h4 id="代码审查"><a href="#代码审查" class="headerlink" title="代码审查"></a>代码审查</h4><p>代码审查是指Code Review，通过让其他同事或者高级人员来复查自己的代码来控制代码质量。从短期来看可能会多占用一下开发资源，但从长远看它对团队代码质量的把控，<br>可维护性的提高以及团队成员综合素质和生产力的提高是有帮助的。</p>
@@ -395,221 +329,201 @@
 <p>对于我们，可以学TDD的思想来写好测试，对于开发来说，比较重要的包括单元测试，集成测试，以及E2E测试。</p>
 <p>好的测试覆盖可以帮助我们更自信的去重构，还可以降低回归测试的压力和成本。对于集成系统也可以降低模块之间联调的难度和成本。</p>
 
-      
     </div>
 
-    <div>
-      
-        
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/CI/" rel="tag">#CI</a>
-          
-            <a href="/tags/CD/" rel="tag">#CD</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/03/24/20160324/" rel="next" title="MySQL5.7安装过程中的登陆及密码修改问题">
-                <i class="fa fa-chevron-left"></i> MySQL5.7安装过程中的登陆及密码修改问题
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CI/" rel="tag"># CI</a>
+              <a href="/tags/CD/" rel="tag"># CD</a>
           </div>
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/19/20160520/" rel="prev" title="Kafka客户端连接问题">
-                Kafka客户端连接问题 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
+        
 
-      
-      
-    </footer>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/03/24/20160324/" rel="prev" title="MySQL5.7安装过程中的登陆及密码修改问题">
+      <i class="fa fa-chevron-left"></i> MySQL5.7安装过程中的登陆及密码修改问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/06/19/20160520/" rel="next" title="Kafka客户端连接问题">
+      Kafka客户端连接问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/06/19/20160829/"
-           data-title="20160824技术交流" data-url="http://hsqlu.github.io/2016/06/19/20160829/">
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/default_avatar.jpg"
-               alt="Qiannan Lu" />
-          <p class="site-author-name" itemprop="name">Qiannan Lu</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">19</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">categories</span>
-              
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">17</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目组织"><span class="nav-number">1.</span> <span class="nav-text">项目组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROOT-POM定义"><span class="nav-number">2.</span> <span class="nav-text">ROOT POM定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Super-Root-POM"><span class="nav-number">2.1.</span> <span class="nav-text">Super Root POM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-Root-POM"><span class="nav-number">2.2.</span> <span class="nav-text">Web Root POM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-Root-POM"><span class="nav-number">2.3.</span> <span class="nav-text">Java Root POM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven-自定义项目骨架"><span class="nav-number">2.4.</span> <span class="nav-text">Maven 自定义项目骨架</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CI-CD"><span class="nav-number">3.</span> <span class="nav-text">CI/CD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码静态检查"><span class="nav-number">3.1.</span> <span class="nav-text">代码静态检查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码审查"><span class="nav-number">3.2.</span> <span class="nav-text">代码审查</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TDD"><span class="nav-number">4.</span> <span class="nav-text">TDD</span></a></li></ol></div>
-            
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Qiannan Lu</span>
-</div>
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目组织"><span class="nav-number">1.</span> <span class="nav-text">项目组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROOT-POM定义"><span class="nav-number">2.</span> <span class="nav-text">ROOT POM定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Super-Root-POM"><span class="nav-number">2.1.</span> <span class="nav-text">Super Root POM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-Root-POM"><span class="nav-number">2.2.</span> <span class="nav-text">Web Root POM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-Root-POM"><span class="nav-number">2.3.</span> <span class="nav-text">Java Root POM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven-自定义项目骨架"><span class="nav-number">2.4.</span> <span class="nav-text">Maven 自定义项目骨架</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CI-CD"><span class="nav-number">3.</span> <span class="nav-text">CI&#x2F;CD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码静态检查"><span class="nav-number">3.1.</span> <span class="nav-text">代码静态检查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码审查"><span class="nav-number">3.2.</span> <span class="nav-text">代码审查</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TDD"><span class="nav-number">4.</span> <span class="nav-text">TDD</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Qiannan Lyu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hsqlu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hsqlu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lvqiannan@gmail.com" title="E-Mail → mailto:lvqiannan@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qiannan Lyu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 
@@ -620,86 +534,27 @@
 
   
 
-
-
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"hsqlu"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-  
-
-
-
-
-
-  
-  
-  
-
-  
-
-  
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '19c7e8b0722653caa885',
+      clientSecret: '6c3523fc9d282a632f0ec79dfa64323aa014a5ea',
+      repo: 'blog',
+      owner: 'hsqlu',
+      admin: ['hsqlu'],
+      id: 'b36156e30004638a627b99e8450f42ab',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
